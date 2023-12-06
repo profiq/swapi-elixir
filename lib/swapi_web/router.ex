@@ -7,6 +7,15 @@ defmodule SWAPIWeb.Router do
 
   scope "/api", SWAPIWeb do
     pipe_through :api
+
+    get "/", RootController, :index
+
+    resources "/people", PersonController, except: [:new, :edit]
+    resources "/films", FilmController, except: [:new, :edit]
+    resources "/starships", StarshipController, except: [:new, :edit]
+    resources "/vehicles", VehicleController, except: [:new, :edit]
+    resources "/species", SpeciesController, except: [:new, :edit]
+    resources "/planets", PlanetController, except: [:new, :edit]
   end
 
   # Enable LiveDashboard and Swoosh mailbox preview in development
