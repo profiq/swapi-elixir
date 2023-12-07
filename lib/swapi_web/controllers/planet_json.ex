@@ -7,15 +7,18 @@ defmodule SWAPIWeb.PlanetJSON do
   Renders a list of planets.
   """
   def index(%{planets: planets}) do
-    %{data: for(planet <- planets, do: data(planet))}
+    %{
+      count: length(planets),
+      next: nil,
+      previous: nil,
+      results: for(planet <- planets, do: data(planet))
+    }
   end
 
   @doc """
   Renders a single planet.
   """
-  def show(%{planet: planet}) do
-    %{data: data(planet)}
-  end
+  def show(%{planet: planet}), do: data(planet)
 
   defp data(%Planet{} = planet) do
     %{

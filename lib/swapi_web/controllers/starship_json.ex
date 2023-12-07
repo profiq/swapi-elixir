@@ -8,15 +8,18 @@ defmodule SWAPIWeb.StarshipJSON do
   Renders a list of starships.
   """
   def index(%{starships: starships}) do
-    %{data: for(starship <- starships, do: data(starship))}
+    %{
+      count: length(starships),
+      next: nil,
+      previous: nil,
+      results: for(starship <- starships, do: data(starship))
+    }
   end
 
   @doc """
   Renders a single starship.
   """
-  def show(%{starship: starship}) do
-    %{data: data(starship)}
-  end
+  def show(%{starship: starship}), do: data(starship)
 
   defp data(%Starship{transport: %Transport{} = transport} = starship) do
     %{

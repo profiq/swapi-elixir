@@ -5,13 +5,13 @@ defmodule SWAPIWeb.RootJSON do
   Renders a list of available resources.
   """
   def index(_) do
-    %{data: %{
+    %{
       films: url(~p"/api/films"),
       people: url(~p"/api/people"),
       planets: url(~p"/api/planets"),
       species: url(~p"/api/species"),
       starships: url(~p"/api/starships"),
       vehicles: url(~p"/api/vehicles")
-    }}
+    }
   end
 end

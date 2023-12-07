@@ -8,15 +8,18 @@ defmodule SWAPIWeb.VehicleJSON do
   Renders a list of vehicles.
   """
   def index(%{vehicles: vehicles}) do
-    %{data: for(vehicle <- vehicles, do: data(vehicle))}
+    %{
+      count: length(vehicles),
+      next: nil,
+      previous: nil,
+      results: for(vehicle <- vehicles, do: data(vehicle))
+    }
   end
 
   @doc """
   Renders a single vehicle.
   """
-  def show(%{vehicle: vehicle}) do
-    %{data: data(vehicle)}
-  end
+  def show(%{vehicle: vehicle}), do: data(vehicle)
 
   defp data(%Vehicle{transport: %Transport{} = transport} = vehicle) do
     %{

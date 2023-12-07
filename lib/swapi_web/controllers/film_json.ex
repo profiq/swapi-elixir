@@ -7,15 +7,18 @@ defmodule SWAPIWeb.FilmJSON do
   Renders a list of films.
   """
   def index(%{films: films}) do
-    %{data: for(film <- films, do: data(film))}
+    %{
+      count: length(films),
+      next: nil,
+      previous: nil,
+      results: for(film <- films, do: data(film))
+    }
   end
 
   @doc """
   Renders a single film.
   """
-  def show(%{film: film}) do
-    %{data: data(film)}
-  end
+  def show(%{film: film}), do: data(film)
 
   defp data(%Film{} = film) do
     %{

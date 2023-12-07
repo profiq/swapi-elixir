@@ -7,15 +7,18 @@ defmodule SWAPIWeb.SpeciesJSON do
   Renders a list of species.
   """
   def index(%{species: species}) do
-    %{data: for(species_item <- species, do: data(species_item))}
+    %{
+      count: length(species),
+      next: nil,
+      previous: nil,
+      results: for(species_item <- species, do: data(species_item))
+    }
   end
 
   @doc """
   Renders a single species.
   """
-  def show(%{species: species}) do
-    %{data: data(species)}
-  end
+  def show(%{species: species}), do: data(species)
 
   defp data(%Species{} = species) do
     %{

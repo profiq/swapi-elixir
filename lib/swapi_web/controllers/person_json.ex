@@ -7,15 +7,18 @@ defmodule SWAPIWeb.PersonJSON do
   Renders a list of people.
   """
   def index(%{people: people}) do
-    %{data: for(person <- people, do: data(person))}
+    %{
+      count: length(people),
+      next: nil,
+      previous: nil,
+      results: for(person <- people, do: data(person))
+    }
   end
 
   @doc """
   Renders a single person.
   """
-  def show(%{person: person}) do
-    %{data: data(person)}
-  end
+  def show(%{person: person}), do: data(person)
 
   defp data(%Person{} = person) do
     %{
