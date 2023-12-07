@@ -6,9 +6,10 @@ defmodule SWAPIWeb.PlanetController do
 
   action_fallback SWAPIWeb.FallbackController
 
-  def index(conn, _params) do
-    planets = Planets.list_planets()
-    render(conn, :index, planets: planets)
+  def index(conn, params) do
+    with {:ok, {planets, meta}} <- Planets.list_planets(params) do
+      render(conn, :index, planets: planets, meta: meta)
+    end
   end
 
   def create(conn, %{"planet" => planet_params}) do

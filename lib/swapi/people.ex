@@ -23,6 +23,13 @@ defmodule SWAPI.People do
     |> Repo.preload([:films, :species, :starships, :vehicles])
   end
 
+  def list_people(params) do
+    with {:ok, {people, meta}} = Flop.validate_and_run(Person, params) do
+      people = Repo.preload(people, [:films, :species, :starships, :vehicles])
+      {:ok, {people, meta}}
+    end
+  end
+
   @doc """
   Gets a single person.
 

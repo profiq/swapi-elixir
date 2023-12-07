@@ -23,6 +23,13 @@ defmodule SWAPI.Planets do
     |> Repo.preload([:residents, :films])
   end
 
+  def list_planets(params) do
+    with {:ok, {planets, meta}} = Flop.validate_and_run(Planet, params) do
+      planets = Repo.preload(planets, [:residents, :films])
+      {:ok, {planets, meta}}
+    end
+  end
+
   @doc """
   Gets a single planet.
 

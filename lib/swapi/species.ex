@@ -23,6 +23,13 @@ defmodule SWAPI.Species do
     |> Repo.preload([:homeworld, :people, :films])
   end
 
+  def list_species(params) do
+    with {:ok, {species, meta}} = Flop.validate_and_run(Species, params) do
+      species = Repo.preload(species, [:homeworld, :people, :films])
+      {:ok, {species, meta}}
+    end
+  end
+
   @doc """
   Gets a single species.
 

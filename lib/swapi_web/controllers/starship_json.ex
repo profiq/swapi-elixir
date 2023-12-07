@@ -2,16 +2,18 @@ defmodule SWAPIWeb.StarshipJSON do
   alias SWAPI.Schemas.Starship
   alias SWAPI.Schemas.Transport
 
+  import SWAPIWeb.Util
+
   use Phoenix.VerifiedRoutes, endpoint: SWAPIWeb.Endpoint, router: SWAPIWeb.Router
 
   @doc """
   Renders a list of starships.
   """
-  def index(%{starships: starships}) do
+  def index(%{starships: starships, meta: meta, conn: conn}) do
     %{
-      count: length(starships),
-      next: nil,
-      previous: nil,
+      count: meta.total_count,
+      next: if(meta.next_page, do: append_query(conn, "page=#{meta.next_page}")),
+      previous: if(meta.previous_page, do: append_query(conn, "page=#{meta.previous_page}")),
       results: for(starship <- starships, do: data(starship))
     }
   end

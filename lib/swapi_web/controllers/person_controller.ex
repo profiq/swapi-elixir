@@ -6,9 +6,10 @@ defmodule SWAPIWeb.PersonController do
 
   action_fallback SWAPIWeb.FallbackController
 
-  def index(conn, _params) do
-    people = People.list_people()
-    render(conn, :index, people: people)
+  def index(conn, params) do
+    with {:ok, {people, meta}} <- People.list_people(params) do
+      render(conn, :index, people: people, meta: meta)
+    end
   end
 
   def create(conn, %{"person" => person_params}) do

@@ -6,9 +6,10 @@ defmodule SWAPIWeb.SpeciesController do
 
   action_fallback SWAPIWeb.FallbackController
 
-  def index(conn, _params) do
-    species = SpeciesContext.list_species()
-    render(conn, :index, species: species)
+  def index(conn, params) do
+    with {:ok, {species, meta}} <- SpeciesContext.list_species(params) do
+      render(conn, :index, species: species, meta: meta)
+    end
   end
 
   def create(conn, %{"species" => species_params}) do

@@ -1,16 +1,18 @@
 defmodule SWAPIWeb.SpeciesJSON do
   alias SWAPI.Schemas.Species
 
+  import SWAPIWeb.Util
+
   use Phoenix.VerifiedRoutes, endpoint: SWAPIWeb.Endpoint, router: SWAPIWeb.Router
 
   @doc """
   Renders a list of species.
   """
-  def index(%{species: species}) do
+  def index(%{species: species, meta: meta, conn: conn}) do
     %{
-      count: length(species),
-      next: nil,
-      previous: nil,
+      count: meta.total_count,
+      next: if(meta.next_page, do: append_query(conn, "page=#{meta.next_page}")),
+      previous: if(meta.previous_page, do: append_query(conn, "page=#{meta.previous_page}")),
       results: for(species_item <- species, do: data(species_item))
     }
   end

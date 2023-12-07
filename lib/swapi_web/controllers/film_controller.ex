@@ -6,9 +6,10 @@ defmodule SWAPIWeb.FilmController do
 
   action_fallback SWAPIWeb.FallbackController
 
-  def index(conn, _params) do
-    films = Films.list_films()
-    render(conn, :index, films: films)
+  def index(conn, params) do
+    with {:ok, {films, meta}} <- Films.list_films(params) do
+      render(conn, :index, films: films, meta: meta)
+    end
   end
 
   def create(conn, %{"film" => film_params}) do

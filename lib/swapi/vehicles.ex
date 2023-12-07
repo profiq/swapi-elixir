@@ -23,6 +23,13 @@ defmodule SWAPI.Vehicles do
     |> Repo.preload([:transport, :films, :pilots])
   end
 
+  def list_vehicles(params) do
+    with {:ok, {vehicles, meta}} = Flop.validate_and_run(Vehicle, params) do
+      vehicles = Repo.preload(vehicles, [:transport, :films, :pilots])
+      {:ok, {vehicles, meta}}
+    end
+  end
+
   @doc """
   Gets a single vehicle.
 

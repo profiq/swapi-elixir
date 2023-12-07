@@ -6,9 +6,10 @@ defmodule SWAPIWeb.StarshipController do
 
   action_fallback SWAPIWeb.FallbackController
 
-  def index(conn, _params) do
-    starships = Starships.list_starships()
-    render(conn, :index, starships: starships)
+  def index(conn, params) do
+    with {:ok, {starships, meta}} <- Starships.list_starships(params) do
+      render(conn, :index, starships: starships, meta: meta)
+    end
   end
 
   def create(conn, %{"starship" => starship_params}) do

@@ -6,9 +6,10 @@ defmodule SWAPIWeb.VehicleController do
 
   action_fallback SWAPIWeb.FallbackController
 
-  def index(conn, _params) do
-    vehicles = Vehicles.list_vehicles()
-    render(conn, :index, vehicles: vehicles)
+  def index(conn, params) do
+    with {:ok, {vehicles, meta}} <- Vehicles.list_vehicles(params) do
+      render(conn, :index, vehicles: vehicles, meta: meta)
+    end
   end
 
   def create(conn, %{"vehicle" => vehicle_params}) do

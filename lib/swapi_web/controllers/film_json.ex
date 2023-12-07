@@ -1,16 +1,18 @@
 defmodule SWAPIWeb.FilmJSON do
   alias SWAPI.Schemas.Film
 
+  import SWAPIWeb.Util
+
   use Phoenix.VerifiedRoutes, endpoint: SWAPIWeb.Endpoint, router: SWAPIWeb.Router
 
   @doc """
   Renders a list of films.
   """
-  def index(%{films: films}) do
+  def index(%{films: films, meta: meta, conn: conn}) do
     %{
-      count: length(films),
-      next: nil,
-      previous: nil,
+      count: meta.total_count,
+      next: if(meta.next_page, do: append_query(conn, "page=#{meta.next_page}")),
+      previous: if(meta.previous_page, do: append_query(conn, "page=#{meta.previous_page}")),
       results: for(film <- films, do: data(film))
     }
   end

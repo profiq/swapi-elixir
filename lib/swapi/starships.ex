@@ -23,6 +23,13 @@ defmodule SWAPI.Starships do
     |> Repo.preload([:transport, :films, :pilots])
   end
 
+  def list_starships(params) do
+    with {:ok, {starships, meta}} = Flop.validate_and_run(Starship, params) do
+      starships = Repo.preload(starships, [:transport, :films, :pilots])
+      {:ok, {starships, meta}}
+    end
+  end
+
   @doc """
   Gets a single starship.
 

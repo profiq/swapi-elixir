@@ -1,16 +1,18 @@
 defmodule SWAPIWeb.PlanetJSON do
   alias SWAPI.Schemas.Planet
 
+  import SWAPIWeb.Util
+
   use Phoenix.VerifiedRoutes, endpoint: SWAPIWeb.Endpoint, router: SWAPIWeb.Router
 
   @doc """
   Renders a list of planets.
   """
-  def index(%{planets: planets}) do
+  def index(%{planets: planets, meta: meta, conn: conn}) do
     %{
-      count: length(planets),
-      next: nil,
-      previous: nil,
+      count: meta.total_count,
+      next: if(meta.next_page, do: append_query(conn, "page=#{meta.next_page}")),
+      previous: if(meta.previous_page, do: append_query(conn, "page=#{meta.previous_page}")),
       results: for(planet <- planets, do: data(planet))
     }
   end
