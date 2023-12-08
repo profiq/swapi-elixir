@@ -23,11 +23,23 @@ defmodule SWAPI.People do
     |> Repo.preload([:films, :species, :starships, :vehicles])
   end
 
-  def list_people(params) do
-    with {:ok, {people, meta}} = Flop.validate_and_run(Person, params) do
+  def list_people(params), do: paginate(Person, params)
+
+  defp paginate(query, params) do
+    with {:ok, {people, meta}} = Flop.validate_and_run(query, params) do
       people = Repo.preload(people, [:films, :species, :starships, :vehicles])
       {:ok, {people, meta}}
     end
+  end
+
+  def search_people(terms, params) do
+    people =
+      Enum.reduce(terms, Person, fn term, query ->
+        query
+        |> where([p], ilike(p.name, ^"%#{term}%"))
+      end)
+
+    paginate(people, params)
   end
 
   @doc """

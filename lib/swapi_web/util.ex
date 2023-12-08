@@ -9,4 +9,10 @@ defmodule SWAPIWeb.Util do
     |> URI.append_query(query_string)
     |> URI.to_string()
   end
+
+  def parse_search_query(query) do
+    ~r/"([^"]+)"|([^\s,"]+)/
+    |> Regex.scan(query)
+    |> Enum.map(&List.last/1)
+  end
 end

@@ -23,11 +23,23 @@ defmodule SWAPI.Films do
     |> Repo.preload([:species, :starships, :vehicles, :characters, :planets])
   end
 
-  def list_films(params) do
-    with {:ok, {films, meta}} = Flop.validate_and_run(Film, params) do
+  def list_films(params), do: paginate(Film, params)
+
+  defp paginate(query, params) do
+    with {:ok, {films, meta}} = Flop.validate_and_run(query, params) do
       films = Repo.preload(films, [:species, :starships, :vehicles, :characters, :planets])
       {:ok, {films, meta}}
     end
+  end
+
+  def search_films(terms, params) do
+    films =
+      Enum.reduce(terms, Film, fn term, query ->
+        query
+        |> where([f], ilike(f.title, ^"%#{term}%"))
+      end)
+
+    paginate(films, params)
   end
 
   @doc """

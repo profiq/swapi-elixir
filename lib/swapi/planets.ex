@@ -23,11 +23,23 @@ defmodule SWAPI.Planets do
     |> Repo.preload([:residents, :films])
   end
 
-  def list_planets(params) do
-    with {:ok, {planets, meta}} = Flop.validate_and_run(Planet, params) do
+  def list_planets(params), do: paginate(Planet, params)
+
+  defp paginate(query, params) do
+    with {:ok, {planets, meta}} = Flop.validate_and_run(query, params) do
       planets = Repo.preload(planets, [:residents, :films])
       {:ok, {planets, meta}}
     end
+  end
+
+  def search_planets(terms, params) do
+    planets =
+      Enum.reduce(terms, Planet, fn term, query ->
+        query
+        |> where([p], ilike(p.name, ^"%#{term}%"))
+      end)
+
+    paginate(planets, params)
   end
 
   @doc """

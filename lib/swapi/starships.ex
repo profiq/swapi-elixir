@@ -7,6 +7,7 @@ defmodule SWAPI.Starships do
   alias SWAPI.Repo
 
   alias SWAPI.Schemas.Starship
+  alias SWAPI.Schemas.Transport
 
   @doc """
   Returns the list of starships.
@@ -23,11 +24,27 @@ defmodule SWAPI.Starships do
     |> Repo.preload([:transport, :films, :pilots])
   end
 
-  def list_starships(params) do
-    with {:ok, {starships, meta}} = Flop.validate_and_run(Starship, params) do
+  def list_starships(params), do: paginate(Starship, params)
+
+  defp paginate(query, params) do
+    with {:ok, {starships, meta}} = Flop.validate_and_run(query, params) do
       starships = Repo.preload(starships, [:transport, :films, :pilots])
       {:ok, {starships, meta}}
     end
+  end
+
+  def search_starships(terms, params) do
+    query =
+      Starship
+      |> join(:left, [v], t in Transport, on: v.id == t.id)
+
+    starships =
+      Enum.reduce(terms, query, fn term, query ->
+        query
+        |> where([s], ilike(s.name, ^"%#{term}%") or ilike(s.model, ^"%#{term}%"))
+      end)
+
+    paginate(starships, params)
   end
 
   @doc """

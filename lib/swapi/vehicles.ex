@@ -6,6 +6,7 @@ defmodule SWAPI.Vehicles do
   import Ecto.Query, warn: false
   alias SWAPI.Repo
 
+  alias SWAPI.Schemas.Transport
   alias SWAPI.Schemas.Vehicle
 
   @doc """
@@ -23,11 +24,27 @@ defmodule SWAPI.Vehicles do
     |> Repo.preload([:transport, :films, :pilots])
   end
 
-  def list_vehicles(params) do
-    with {:ok, {vehicles, meta}} = Flop.validate_and_run(Vehicle, params) do
+  def list_vehicles(params), do: paginate(Vehicle, params)
+
+  defp paginate(query, params) do
+    with {:ok, {vehicles, meta}} = Flop.validate_and_run(query, params) do
       vehicles = Repo.preload(vehicles, [:transport, :films, :pilots])
       {:ok, {vehicles, meta}}
     end
+  end
+
+  def search_vehicles(terms, params) do
+    query =
+      Vehicle
+      |> join(:left, [v], t in Transport, on: v.id == t.id)
+
+    vehicles =
+      Enum.reduce(terms, query, fn term, query ->
+        query
+        |> where([v, t], ilike(t.name, ^"%#{term}%") or ilike(t.model, ^"%#{term}%"))
+      end)
+
+    paginate(vehicles, params)
   end
 
   @doc """

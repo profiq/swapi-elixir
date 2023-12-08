@@ -23,11 +23,23 @@ defmodule SWAPI.Species do
     |> Repo.preload([:homeworld, :people, :films])
   end
 
-  def list_species(params) do
-    with {:ok, {species, meta}} = Flop.validate_and_run(Species, params) do
+  def list_species(params), do: paginate(Species, params)
+
+  defp paginate(query, params) do
+    with {:ok, {species, meta}} = Flop.validate_and_run(query, params) do
       species = Repo.preload(species, [:homeworld, :people, :films])
       {:ok, {species, meta}}
     end
+  end
+
+  def search_species(terms, params) do
+    species =
+      Enum.reduce(terms, Species, fn term, query ->
+        query
+        |> where([s], ilike(s.name, ^"%#{term}%"))
+      end)
+
+    paginate(species, params)
   end
 
   @doc """

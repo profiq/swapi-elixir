@@ -4,7 +4,17 @@ defmodule SWAPIWeb.VehicleController do
   alias SWAPI.Vehicles
   alias SWAPI.Schemas.Vehicle
 
+  import SWAPIWeb.Util
+
   action_fallback SWAPIWeb.FallbackController
+
+  def index(conn, %{"search" => query} = params) do
+    query = parse_search_query(query)
+
+    with {:ok, {vehicles, meta}} <- Vehicles.search_vehicles(query, params) do
+      render(conn, :index, vehicles: vehicles, meta: meta)
+    end
+  end
 
   def index(conn, params) do
     with {:ok, {vehicles, meta}} <- Vehicles.list_vehicles(params) do

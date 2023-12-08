@@ -4,7 +4,17 @@ defmodule SWAPIWeb.SpeciesController do
   alias SWAPI.Species, as: SpeciesContext
   alias SWAPI.Schemas.Species
 
+  import SWAPIWeb.Util
+
   action_fallback SWAPIWeb.FallbackController
+
+  def index(conn, %{"search" => query} = params) do
+    query = parse_search_query(query)
+
+    with {:ok, {species, meta}} <- SpeciesContext.search_species(query, params) do
+      render(conn, :index, species: species, meta: meta)
+    end
+  end
 
   def index(conn, params) do
     with {:ok, {species, meta}} <- SpeciesContext.list_species(params) do
