@@ -11,8 +11,8 @@ defmodule SWAPIWeb.PersonJSON do
   def index(%{people: people, meta: meta, conn: conn}) do
     %{
       count: meta.total_count,
-      next: if(meta.next_page, do: append_query(conn, "page=#{meta.next_page}")),
-      previous: if(meta.previous_page, do: append_query(conn, "page=#{meta.previous_page}")),
+      next: page_url(conn, meta.next_page),
+      previous: page_url(conn, meta.previous_page),
       results: for(person <- people, do: data(person))
     }
   end
