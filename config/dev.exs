@@ -2,10 +2,7 @@ import Config
 
 # Configure your database
 config :swapi, SWAPI.Repo,
-  username: "postgres",
-  password: "postgres",
-  hostname: "localhost",
-  database: "swapi_dev",
+  database: Path.expand("../swapi_dev.db", __DIR__),
   stacktrace: true,
   show_sensitive_data_on_connection_error: true,
   pool_size: 10

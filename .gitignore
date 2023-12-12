@@ -35,3 +35,6 @@ swapi-*.tar
 npm-debug.log
 /assets/node_modules/
 
+# SQLite3 database files.
+*.db
+*.db-*
