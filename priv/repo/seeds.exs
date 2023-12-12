@@ -85,13 +85,13 @@ defmodule SWAPI.Repo.Seeds do
   end
 
   def run() do
-    insert_table("priv/repo/fixtures/planets.json", &insert_planet/1)
-    insert_table("priv/repo/fixtures/people.json", &insert_person/1)
-    insert_table("priv/repo/fixtures/species.json", &insert_species/1)
-    insert_table("priv/repo/fixtures/transport.json", &insert_transport/1)
-    insert_table("priv/repo/fixtures/starships.json", &insert_starship/1)
-    insert_table("priv/repo/fixtures/vehicles.json", &insert_vehicle/1)
-    insert_table("priv/repo/fixtures/films.json", &insert_film/1)
+    insert_table("#{__DIR__}/fixtures/planets.json", &insert_planet/1)
+    insert_table("#{__DIR__}/fixtures/people.json", &insert_person/1)
+    insert_table("#{__DIR__}/fixtures/species.json", &insert_species/1)
+    insert_table("#{__DIR__}/fixtures/transport.json", &insert_transport/1)
+    insert_table("#{__DIR__}/fixtures/starships.json", &insert_starship/1)
+    insert_table("#{__DIR__}/fixtures/vehicles.json", &insert_vehicle/1)
+    insert_table("#{__DIR__}/fixtures/films.json", &insert_film/1)
   end
 end
 

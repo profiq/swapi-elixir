@@ -10,9 +10,9 @@ kill_signal = "SIGTERM"
 [build]
 
 [deploy]
-  release_command = "/app/bin/migrate"
 
 [env]
+  DATABASE_PATH = "/app/swapi.db"
   PHX_HOST = "swapi-elixir.fly.dev"
   PORT = "8080"
 

@@ -61,6 +61,12 @@ RUN mix compile
 COPY config/runtime.exs config/
 
 COPY rel rel
+
+# hack: build database in rel/overlays so it's included in the release
+ENV SECRET_KEY_BASE="dummy"
+ENV DATABASE_PATH="/app/rel/overlays/swapi.db"
+RUN mix ecto.setup
+
 RUN mix release
 
 # start a new build stage so that the final image will only contain
