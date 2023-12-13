@@ -10,12 +10,12 @@ defmodule SWAPIWeb.Router do
 
     get "/", RootController, :index
 
-    resources "/people", PersonController, except: [:new, :edit]
-    resources "/films", FilmController, except: [:new, :edit]
-    resources "/starships", StarshipController, except: [:new, :edit]
-    resources "/vehicles", VehicleController, except: [:new, :edit]
-    resources "/species", SpeciesController, except: [:new, :edit]
-    resources "/planets", PlanetController, except: [:new, :edit]
+    resources "/people", PersonController, only: [:index, :show]
+    resources "/films", FilmController, only: [:index, :show]
+    resources "/starships", StarshipController, only: [:index, :show]
+    resources "/vehicles", VehicleController, only: [:index, :show]
+    resources "/species", SpeciesController, only: [:index, :show]
+    resources "/planets", PlanetController, only: [:index, :show]
   end
 
   # Enable LiveDashboard and Swoosh mailbox preview in development
