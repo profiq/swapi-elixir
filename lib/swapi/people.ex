@@ -69,6 +69,14 @@ defmodule SWAPI.People do
     |> preload(:all)
   end
 
+  def get_person(id) do
+    with %Person{} = person <- Repo.get(Person, id) do
+      {:ok, preload(person, :all)}
+    else
+      _ -> {:error, :not_found}
+    end
+  end
+
   @doc """
   Creates a person.
 

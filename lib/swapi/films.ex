@@ -69,6 +69,14 @@ defmodule SWAPI.Films do
     |> preload(:all)
   end
 
+  def get_film(id) do
+    with %Film{} = film <- Repo.get(Film, id) do
+      {:ok, preload(film, :all)}
+    else
+      _ -> {:error, :not_found}
+    end
+  end
+
   @doc """
   Creates a film.
 

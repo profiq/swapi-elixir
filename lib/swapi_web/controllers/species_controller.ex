@@ -44,7 +44,8 @@ defmodule SWAPIWeb.SpeciesController do
     ]
 
   def show(conn, %{"id" => id}) do
-    species = Species.get_species!(id)
-    render(conn, :show, species: species)
+    with {:ok, species} <- Species.get_species(id) do
+      render(conn, :show, species: species)
+    end
   end
 end

@@ -44,7 +44,8 @@ defmodule SWAPIWeb.FilmController do
     ]
 
   def show(conn, %{"id" => id}) do
-    film = Films.get_film!(id)
-    render(conn, :show, film: film)
+    with {:ok, film} <- Films.get_film(id) do
+      render(conn, :show, film: film)
+    end
   end
 end

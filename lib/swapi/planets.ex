@@ -69,6 +69,14 @@ defmodule SWAPI.Planets do
     |> preload(:all)
   end
 
+  def get_planet(id) do
+    with %Planet{} = planet <- Repo.get(Planet, id) do
+      {:ok, preload(planet, :all)}
+    else
+      _ -> {:error, :not_found}
+    end
+  end
+
   @doc """
   Creates a planet.
 

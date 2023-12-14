@@ -69,6 +69,14 @@ defmodule SWAPI.Species do
     |> preload(:all)
   end
 
+  def get_species(id) do
+    with %Species{} = species <- Repo.get(Species, id) do
+      {:ok, preload(species, :all)}
+    else
+      _ -> {:error, :not_found}
+    end
+  end
+
   @doc """
   Creates a species.
 

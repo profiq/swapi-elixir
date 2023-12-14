@@ -44,7 +44,8 @@ defmodule SWAPIWeb.PlanetController do
     ]
 
   def show(conn, %{"id" => id}) do
-    planet = Planets.get_planet!(id)
-    render(conn, :show, planet: planet)
+    with {:ok, planet} <- Planets.get_planet(id) do
+      render(conn, :show, planet: planet)
+    end
   end
 end

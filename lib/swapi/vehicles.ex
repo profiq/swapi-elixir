@@ -74,6 +74,14 @@ defmodule SWAPI.Vehicles do
     |> preload(:all)
   end
 
+  def get_vehicle(id) do
+    with %Vehicle{} = vehicle <- Repo.get(Vehicle, id) do
+      {:ok, preload(vehicle, :all)}
+    else
+      _ -> {:error, :not_found}
+    end
+  end
+
   @doc """
   Creates a vehicle.
 

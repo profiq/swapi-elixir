@@ -74,6 +74,14 @@ defmodule SWAPI.Starships do
     |> preload(:all)
   end
 
+  def get_starship(id) do
+    with %Starship{} = starship <- Repo.get(Starship, id) do
+      {:ok, preload(starship, :all)}
+    else
+      _ -> {:error, :not_found}
+    end
+  end
+
   @doc """
   Creates a starship.
 

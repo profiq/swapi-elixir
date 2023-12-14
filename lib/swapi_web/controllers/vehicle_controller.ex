@@ -44,7 +44,8 @@ defmodule SWAPIWeb.VehicleController do
     ]
 
   def show(conn, %{"id" => id}) do
-    vehicle = Vehicles.get_vehicle!(id)
-    render(conn, :show, vehicle: vehicle)
+    with {:ok, vehicle} <- Vehicles.get_vehicle(id) do
+      render(conn, :show, vehicle: vehicle)
+    end
   end
 end

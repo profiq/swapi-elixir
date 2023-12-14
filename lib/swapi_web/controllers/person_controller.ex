@@ -44,7 +44,8 @@ defmodule SWAPIWeb.PersonController do
     ]
 
   def show(conn, %{"id" => id}) do
-    person = People.get_person!(id)
-    render(conn, :show, person: person)
+    with {:ok, person} <- People.get_person(id) do
+      render(conn, :show, person: person)
+    end
   end
 end

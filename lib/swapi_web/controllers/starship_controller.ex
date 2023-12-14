@@ -44,7 +44,8 @@ defmodule SWAPIWeb.StarshipController do
     ]
 
   def show(conn, %{"id" => id}) do
-    starship = Starships.get_starship!(id)
-    render(conn, :show, starship: starship)
+    with {:ok, starship} <- Starships.get_starship(id) do
+      render(conn, :show, starship: starship)
+    end
   end
 end
