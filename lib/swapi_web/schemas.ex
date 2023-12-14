@@ -81,6 +81,21 @@ defmodule SWAPIWeb.Schemas do
     })
   end
 
+  defmodule Error do
+    require OpenApiSpex
+    alias OpenApiSpex.Schema
+
+    OpenApiSpex.schema(%{
+      type: :object,
+      properties: %{
+        detail: %Schema{
+          type: :string,
+          description: "Error message"
+        }
+      }
+    })
+  end
+
   defmodule Film do
     require OpenApiSpex
     alias OpenApiSpex.Schema
