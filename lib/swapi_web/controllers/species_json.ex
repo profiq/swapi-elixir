@@ -33,7 +33,7 @@ defmodule SWAPIWeb.SpeciesJSON do
       hair_colors: species.hair_colors,
       skin_colors: species.skin_colors,
       language: species.language,
-      homeworld: url(~p"/api/planets/#{species.homeworld_id}"),
+      homeworld: if(species.homeworld_id, do: url(~p"/api/planets/#{species.homeworld_id}")),
       people: for(person <- species.people, do: url(~p"/api/people/#{person.id}")),
       films: for(film <- species.films, do: url(~p"/api/films/#{film.id}")),
       url: url(~p"/api/species/#{species.id}"),

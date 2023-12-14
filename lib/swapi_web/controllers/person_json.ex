@@ -32,7 +32,7 @@ defmodule SWAPIWeb.PersonJSON do
       height: person.height,
       mass: person.mass,
       skin_color: person.skin_color,
-      homeworld: url(~p"/api/planets/#{person.homeworld_id}"),
+      homeworld: if(person.homeworld_id, do: url(~p"/api/planets/#{person.homeworld_id}")),
       films: for(film <- person.films, do: url(~p"/api/films/#{film.id}")),
       species: for(species <- person.species, do: url(~p"/api/species/#{species.id}")),
       vehicles: for(vehicle <- person.vehicles, do: url(~p"/api/vehicles/#{vehicle.id}")),
