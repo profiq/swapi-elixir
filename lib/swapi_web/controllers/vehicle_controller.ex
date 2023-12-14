@@ -1,11 +1,24 @@
 defmodule SWAPIWeb.VehicleController do
   use SWAPIWeb, :controller
+  use OpenApiSpex.ControllerSpecs
 
   alias SWAPI.Vehicles
 
   import SWAPIWeb.Util
 
   action_fallback SWAPIWeb.FallbackController
+
+  tags ["vehicles"]
+
+  operation :index,
+    summary: "Get all vehicle resources",
+    parameters: [
+      search: [in: :query, description: "Search query", type: :string],
+      page: [in: :query, description: "Page number", type: :integer]
+    ],
+    responses: [
+      ok: {"List of vehicles", "application/json", SWAPIWeb.Schemas.VehicleList}
+    ]
 
   def index(conn, %{"search" => query} = params) do
     query = parse_search_query(query)
@@ -20,6 +33,15 @@ defmodule SWAPIWeb.VehicleController do
       render(conn, :index, vehicles: vehicles, meta: meta)
     end
   end
+
+  operation :show,
+    summary: "Get a specific vehicle resource",
+    parameters: [
+      id: [in: :path, description: "Vehicle ID", type: :integer]
+    ],
+    responses: [
+      ok: {"A vehicle", "application/json", SWAPIWeb.Schemas.Vehicle}
+    ]
 
   def show(conn, %{"id" => id}) do
     vehicle = Vehicles.get_vehicle!(id)

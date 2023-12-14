@@ -1,11 +1,37 @@
 defmodule SWAPIWeb.Router do
   use SWAPIWeb, :router
 
+  alias SWAPIWeb.{
+    RootController,
+    PersonController,
+    FilmController,
+    StarshipController,
+    VehicleController,
+    SpeciesController,
+    PlanetController
+  }
+
   pipeline :api do
     plug :accepts, ["json"]
+    plug OpenApiSpex.Plug.PutApiSpec, module: SWAPIWeb.ApiSpec
   end
 
-  scope "/api", SWAPIWeb do
+  pipeline :browser do
+    plug :accepts, ["html"]
+    plug :fetch_session
+    #plug :fetch_live_flash
+    #plug :put_root_layout, html: {SWAPIWeb.Layouts, :root}
+    plug :protect_from_forgery
+    plug :put_secure_browser_headers
+  end
+
+  scope "/" do
+    pipe_through :browser
+
+    get "/swaggerui", OpenApiSpex.Plug.SwaggerUI, path: "/api/openapi"
+  end
+
+  scope "/api" do
     pipe_through :api
 
     get "/", RootController, :index
@@ -16,6 +42,8 @@ defmodule SWAPIWeb.Router do
     resources "/vehicles", VehicleController, only: [:index, :show]
     resources "/species", SpeciesController, only: [:index, :show]
     resources "/planets", PlanetController, only: [:index, :show]
+
+    get "/openapi", OpenApiSpex.Plug.RenderSpec, []
   end
 
   # Enable LiveDashboard and Swoosh mailbox preview in development
