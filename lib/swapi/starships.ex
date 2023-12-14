@@ -3,11 +3,19 @@ defmodule SWAPI.Starships do
   The Starships context.
   """
 
-  import Ecto.Query, warn: false
+  import Ecto.Query, warn: false, except: [preload: 2]
   alias SWAPI.Repo
 
   alias SWAPI.Schemas.Starship
   alias SWAPI.Schemas.Transport
+
+  def preload(starship, :all) do
+    Repo.preload(starship, [:transport, :films, :pilots])
+  end
+
+  def preload(starship, associations) do
+    Repo.preload(starship, associations)
+  end
 
   @doc """
   Returns the list of starships.
@@ -21,15 +29,14 @@ defmodule SWAPI.Starships do
   def list_starships do
     Starship
     |> Repo.all()
-    |> Repo.preload([:transport, :films, :pilots])
+    |> preload(:all)
   end
 
   def list_starships(params), do: paginate(Starship, params)
 
   defp paginate(query, params) do
     with {:ok, {starships, meta}} = Flop.validate_and_run(query, params) do
-      starships = Repo.preload(starships, [:transport, :films, :pilots])
-      {:ok, {starships, meta}}
+      {:ok, {preload(starships, :all), meta}}
     end
   end
 
@@ -64,7 +71,7 @@ defmodule SWAPI.Starships do
   def get_starship!(id) do
     Starship
     |> Repo.get!(id)
-    |> Repo.preload([:transport, :films, :pilots])
+    |> preload(:all)
   end
 
   @doc """

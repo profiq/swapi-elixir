@@ -3,10 +3,18 @@ defmodule SWAPI.Species do
   The Species context.
   """
 
-  import Ecto.Query, warn: false
+  import Ecto.Query, warn: false, except: [preload: 2]
   alias SWAPI.Repo
 
   alias SWAPI.Schemas.Species
+
+  def preload(species, :all) do
+    Repo.preload(species, [:homeworld, :people, :films])
+  end
+
+  def preload(species, associations) do
+    Repo.preload(species, associations)
+  end
 
   @doc """
   Returns the list of species.
@@ -20,15 +28,14 @@ defmodule SWAPI.Species do
   def list_species do
     Species
     |> Repo.all()
-    |> Repo.preload([:homeworld, :people, :films])
+    |> preload(:all)
   end
 
   def list_species(params), do: paginate(Species, params)
 
   defp paginate(query, params) do
     with {:ok, {species, meta}} = Flop.validate_and_run(query, params) do
-      species = Repo.preload(species, [:homeworld, :people, :films])
-      {:ok, {species, meta}}
+      {:ok, {preload(species, :all), meta}}
     end
   end
 
@@ -59,7 +66,7 @@ defmodule SWAPI.Species do
   def get_species!(id) do
     Species
     |> Repo.get!(id)
-    |> Repo.preload([:homeworld, :people, :films])
+    |> preload(:all)
   end
 
   @doc """

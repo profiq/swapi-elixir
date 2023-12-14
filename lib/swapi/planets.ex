@@ -3,10 +3,18 @@ defmodule SWAPI.Planets do
   The Planets context.
   """
 
-  import Ecto.Query, warn: false
+  import Ecto.Query, warn: false, except: [preload: 2]
   alias SWAPI.Repo
 
   alias SWAPI.Schemas.Planet
+
+  def preload(planet, :all) do
+    Repo.preload(planet, [:residents, :films])
+  end
+
+  def preload(planet, associations) do
+    Repo.preload(planet, associations)
+  end
 
   @doc """
   Returns the list of planets.
@@ -20,15 +28,14 @@ defmodule SWAPI.Planets do
   def list_planets do
     Planet
     |> Repo.all()
-    |> Repo.preload([:residents, :films])
+    |> preload(:all)
   end
 
   def list_planets(params), do: paginate(Planet, params)
 
   defp paginate(query, params) do
     with {:ok, {planets, meta}} = Flop.validate_and_run(query, params) do
-      planets = Repo.preload(planets, [:residents, :films])
-      {:ok, {planets, meta}}
+      {:ok, {preload(planets, :all), meta}}
     end
   end
 
@@ -59,7 +66,7 @@ defmodule SWAPI.Planets do
   def get_planet!(id) do
     Planet
     |> Repo.get!(id)
-    |> Repo.preload([:residents, :films])
+    |> preload(:all)
   end
 
   @doc """

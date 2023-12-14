@@ -3,10 +3,18 @@ defmodule SWAPI.People do
   The People context.
   """
 
-  import Ecto.Query, warn: false
+  import Ecto.Query, warn: false, except: [preload: 2]
   alias SWAPI.Repo
 
   alias SWAPI.Schemas.Person
+
+  def preload(person, :all) do
+    Repo.preload(person, [:films, :species, :starships, :vehicles])
+  end
+
+  def preload(person, associations) do
+    Repo.preload(person, associations)
+  end
 
   @doc """
   Returns the list of people.
@@ -20,15 +28,14 @@ defmodule SWAPI.People do
   def list_people do
     Person
     |> Repo.all()
-    |> Repo.preload([:films, :species, :starships, :vehicles])
+    |> preload(:all)
   end
 
   def list_people(params), do: paginate(Person, params)
 
   defp paginate(query, params) do
     with {:ok, {people, meta}} = Flop.validate_and_run(query, params) do
-      people = Repo.preload(people, [:films, :species, :starships, :vehicles])
-      {:ok, {people, meta}}
+      {:ok, {preload(people, :all), meta}}
     end
   end
 
@@ -59,7 +66,7 @@ defmodule SWAPI.People do
   def get_person!(id) do
     Person
     |> Repo.get!(id)
-    |> Repo.preload([:films, :species, :starships, :vehicles])
+    |> preload(:all)
   end
 
   @doc """
