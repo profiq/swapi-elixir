@@ -25,5 +25,6 @@ defmodule SWAPI.Schemas.Transport do
     transport
     |> cast(attrs, @required_fields ++ @optional_fields)
     |> validate_required(@required_fields)
+    |> unique_constraint(:id)
   end
 end

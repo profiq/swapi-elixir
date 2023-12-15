@@ -33,5 +33,9 @@ defmodule SWAPI.Schemas.Species do
     species
     |> cast(attrs, @required_fields ++ @optional_fields)
     |> validate_required(@required_fields)
+    |> cast_assoc(:homeworld)
+    |> cast_assoc(:people)
+    |> cast_assoc(:films)
+    |> unique_constraint(:id)
   end
 end

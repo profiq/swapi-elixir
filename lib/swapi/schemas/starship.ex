@@ -6,7 +6,8 @@ defmodule SWAPI.Schemas.Starship do
   alias SWAPI.Schemas.Person
   alias SWAPI.Schemas.Transport
 
-  @required_fields [:id, :starship_class, :hyperdrive_rating, :mglt]
+  @required_fields [:starship_class, :hyperdrive_rating, :mglt]
+  @optional_fields [:id]
 
   @primary_key false
 
@@ -24,8 +25,9 @@ defmodule SWAPI.Schemas.Starship do
   @doc false
   def changeset(starship, attrs) do
     starship
-    |> cast(attrs, @required_fields)
+    |> cast(attrs, @required_fields ++ @optional_fields)
     |> validate_required(@required_fields)
+    |> cast_assoc(:transport)
     |> foreign_key_constraint(:id)
   end
 end

@@ -36,5 +36,11 @@ defmodule SWAPI.Schemas.Person do
     person
     |> cast(attrs, @required_fields ++ @optional_fields)
     |> validate_required(@required_fields)
+    |> cast_assoc(:homeworld)
+    |> cast_assoc(:films)
+    |> cast_assoc(:species)
+    |> cast_assoc(:starships)
+    |> cast_assoc(:vehicles)
+    |> unique_constraint(:id)
   end
 end

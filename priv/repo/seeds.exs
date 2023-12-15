@@ -18,14 +18,16 @@ defmodule SWAPI.Repo.Seeds do
   import Ecto.Query
 
   defp insert_film(film) do
+    {assocs, fields} = Map.split(film["fields"], ["characters", "planets", "species", "starships", "vehicles"])
+
     %Film{}
     |> change(id: film["pk"])
-    |> Film.changeset(film["fields"])
-    |> put_assoc(:characters, Repo.all(from x in Person, where: x.id in ^film["fields"]["characters"]))
-    |> put_assoc(:planets, Repo.all(from x in Planet, where: x.id in ^film["fields"]["planets"]))
-    |> put_assoc(:species, Repo.all(from x in Species, where: x.id in ^film["fields"]["species"]))
-    |> put_assoc(:starships, Repo.all(from x in Starship, where: x.id in ^film["fields"]["starships"]))
-    |> put_assoc(:vehicles, Repo.all(from x in Vehicle, where: x.id in ^film["fields"]["vehicles"]))
+    |> Film.changeset(fields)
+    |> put_assoc(:characters, Repo.all(from x in Person, where: x.id in ^assocs["characters"]))
+    |> put_assoc(:planets, Repo.all(from x in Planet, where: x.id in ^assocs["planets"]))
+    |> put_assoc(:species, Repo.all(from x in Species, where: x.id in ^assocs["species"]))
+    |> put_assoc(:starships, Repo.all(from x in Starship, where: x.id in ^assocs["starships"]))
+    |> put_assoc(:vehicles, Repo.all(from x in Vehicle, where: x.id in ^assocs["vehicles"]))
     |> Repo.insert!()
   end
 
@@ -37,28 +39,31 @@ defmodule SWAPI.Repo.Seeds do
   end
 
   defp insert_person(person) do
+    {homeworld_id, fields} = Map.pop(person["fields"], "homeworld")
+
     %Person{}
-    |> change(id: person["pk"], homeworld_id: person["fields"]["homeworld"])
-    |> Person.changeset(person["fields"])
-    |> delete_change(:homeworld)
+    |> change(id: person["pk"], homeworld_id: homeworld_id)
+    |> Person.changeset(fields)
     |> Repo.insert!()
   end
 
   defp insert_species(species) do
+    {assocs, fields} = Map.split(species["fields"], ["homeworld", "people"])
+
     %Species{}
-    |> change(id: species["pk"], homeworld_id: species["fields"]["homeworld"])
-    |> Species.changeset(species["fields"])
-    |> delete_change(:homeworld)
-    |> put_assoc(:people, Repo.all(from x in Person, where: x.id in ^species["fields"]["people"]))
+    |> change(id: species["pk"], homeworld_id: assocs["homeworld"])
+    |> Species.changeset(fields)
+    |> put_assoc(:people, Repo.all(from x in Person, where: x.id in ^assocs["people"]))
     |> Repo.insert!()
   end
 
   defp insert_starship(starship) do
+    {pilots, fields} = Map.pop(starship["fields"], "pilots", [])
+
     %Starship{}
-    |> change(id: starship["pk"])
-    |> change(mglt: starship["fields"]["MGLT"])
+    |> change(id: starship["pk"], mglt: starship["fields"]["MGLT"])
     |> Starship.changeset(starship["fields"])
-    |> put_assoc(:pilots, Repo.all(from x in Person, where: x.id in ^starship["fields"]["pilots"]))
+    |> put_assoc(:pilots, Repo.all(from x in Person, where: x.id in ^pilots))
     |> Repo.insert!()
   end
 
@@ -70,10 +75,12 @@ defmodule SWAPI.Repo.Seeds do
   end
 
   defp insert_vehicle(vehicle) do
+    {pilots, fields} = Map.pop(vehicle["fields"], "pilots", [])
+
     %Vehicle{}
     |> change(id: vehicle["pk"])
-    |> Vehicle.changeset(vehicle["fields"])
-    |> put_assoc(:pilots, Repo.all(from x in Person, where: x.id in ^vehicle["fields"]["pilots"]))
+    |> Vehicle.changeset(fields)
+    |> put_assoc(:pilots, Repo.all(from x in Person, where: x.id in ^pilots))
     |> Repo.insert!()
   end
 

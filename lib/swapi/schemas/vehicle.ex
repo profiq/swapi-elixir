@@ -6,7 +6,8 @@ defmodule SWAPI.Schemas.Vehicle do
   alias SWAPI.Schemas.Person
   alias SWAPI.Schemas.Transport
 
-  @required_fields [:id, :vehicle_class]
+  @required_fields [:vehicle_class]
+  @optional_fields [:id]
 
   @primary_key false
 
@@ -22,8 +23,9 @@ defmodule SWAPI.Schemas.Vehicle do
   @doc false
   def changeset(vehicle, params \\ %{}) do
     vehicle
-    |> cast(params, @required_fields)
+    |> cast(params, @required_fields ++ @optional_fields)
     |> validate_required(@required_fields)
+    #|> cast_assoc(:transport)
     |> foreign_key_constraint(:id)
   end
 end

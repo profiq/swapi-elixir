@@ -33,5 +33,11 @@ defmodule SWAPI.Schemas.Film do
     film
     |> cast(attrs, @required_fields ++ @optional_fields)
     |> validate_required(@required_fields)
+    |> cast_assoc(:species)
+    |> cast_assoc(:starships)
+    |> cast_assoc(:vehicles)
+    |> cast_assoc(:characters)
+    |> cast_assoc(:planets)
+    |> unique_constraint(:id)
   end
 end

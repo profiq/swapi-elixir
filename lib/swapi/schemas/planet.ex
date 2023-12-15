@@ -31,5 +31,8 @@ defmodule SWAPI.Schemas.Planet do
     planet
     |> cast(attrs, @required_fields ++ @optional_fields)
     |> validate_required(@required_fields)
+    |> cast_assoc(:residents)
+    |> cast_assoc(:films)
+    |> unique_constraint(:id)
   end
 end
