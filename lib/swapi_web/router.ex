@@ -28,6 +28,7 @@ defmodule SWAPIWeb.Router do
   scope "/" do
     pipe_through :browser
 
+    get "/", SWAPIWeb.IndexController, :index
     get "/swaggerui", OpenApiSpex.Plug.SwaggerUI, path: "/api/openapi"
   end
 
