@@ -1,0 +1,11 @@
+version: "3.3"
+name: swapi-elixir
+services:
+  swapi:
+    build:
+      context: ../
+      dockerfile: dev/Dockerfile
+    environment:
+      - DATABASE_PATH=/app/swapi_dev.db
+    ports:
+      - "127.0.0.1:4000:4000"
