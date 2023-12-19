@@ -17,7 +17,7 @@ config :swapi, SWAPIWeb.Endpoint,
   url: [host: "localhost"],
   adapter: Phoenix.Endpoint.Cowboy2Adapter,
   render_errors: [
-    formats: [json: SWAPIWeb.ErrorJSON],
+    formats: [json: SWAPIWeb.ErrorJSON, html: SWAPIWeb.ErrorHTML],
     layout: false
   ],
   pubsub_server: SWAPI.PubSub,
