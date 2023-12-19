@@ -1,10 +1,10 @@
 defmodule SWAPIWeb.StarshipJSON do
+  use SWAPIWeb, :verified_routes
+
   alias SWAPI.Schemas.Starship
   alias SWAPI.Schemas.Transport
 
   import SWAPIWeb.Util
-
-  use Phoenix.VerifiedRoutes, endpoint: SWAPIWeb.Endpoint, router: SWAPIWeb.Router
 
   @doc """
   Renders a list of starships.

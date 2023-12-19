@@ -1,9 +1,9 @@
 defmodule SWAPIWeb.PersonJSON do
+  use SWAPIWeb, :verified_routes
+
   alias SWAPI.Schemas.Person
 
   import SWAPIWeb.Util
-
-  use Phoenix.VerifiedRoutes, endpoint: SWAPIWeb.Endpoint, router: SWAPIWeb.Router
 
   @doc """
   Renders a list of people.

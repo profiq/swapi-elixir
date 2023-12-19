@@ -1,5 +1,5 @@
 defmodule SWAPIWeb.RootJSON do
-  use Phoenix.VerifiedRoutes, endpoint: SWAPIWeb.Endpoint, router: SWAPIWeb.Router
+  use SWAPIWeb, :verified_routes
 
   @doc """
   Renders a list of available resources.

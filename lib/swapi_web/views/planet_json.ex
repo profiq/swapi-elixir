@@ -1,9 +1,9 @@
 defmodule SWAPIWeb.PlanetJSON do
+  use SWAPIWeb, :verified_routes
+
   alias SWAPI.Schemas.Planet
 
   import SWAPIWeb.Util
-
-  use Phoenix.VerifiedRoutes, endpoint: SWAPIWeb.Endpoint, router: SWAPIWeb.Router
 
   @doc """
   Renders a list of planets.

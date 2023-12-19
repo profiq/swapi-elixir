@@ -1,9 +1,9 @@
 defmodule SWAPIWeb.SpeciesJSON do
+  use SWAPIWeb, :verified_routes
+
   alias SWAPI.Schemas.Species
 
   import SWAPIWeb.Util
-
-  use Phoenix.VerifiedRoutes, endpoint: SWAPIWeb.Endpoint, router: SWAPIWeb.Router
 
   @doc """
   Renders a list of species.
