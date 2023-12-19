@@ -2,6 +2,7 @@ defmodule SWAPIWeb.Router do
   use SWAPIWeb, :router
 
   alias SWAPIWeb.{
+    PageController,
     RootController,
     PersonController,
     FilmController,
@@ -19,8 +20,8 @@ defmodule SWAPIWeb.Router do
   pipeline :browser do
     plug :accepts, ["html"]
     plug :fetch_session
-    #plug :fetch_live_flash
-    #plug :put_root_layout, html: {SWAPIWeb.Layouts, :root}
+    plug :fetch_live_flash
+    plug :put_root_layout, html: {SWAPIWeb.Layouts, :root}
     plug :protect_from_forgery
     plug :put_secure_browser_headers
   end
@@ -28,7 +29,7 @@ defmodule SWAPIWeb.Router do
   scope "/" do
     pipe_through :browser
 
-    get "/", SWAPIWeb.IndexController, :index
+    get "/", PageController, :home
     get "/swaggerui", OpenApiSpex.Plug.SwaggerUI, path: "/api/openapi"
   end
 
