@@ -597,6 +597,39 @@ defmodule SWAPIWeb.CoreComponents do
     """
   end
 
+  @doc """
+  Renders a navbar.
+  """
+  slot :logo
+  slot :link do
+    attr :to, :string, required: true
+    attr :label, :string, required: true
+  end
+
+  def navbar(assigns) do
+    ~H"""
+    <nav class="navbar navbar-expand-lg">
+      <div class="container-md">
+        <a class="navbar-brand" href="#">
+          <%= render_slot(@logo) %>
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <%= for link <- @link do %>
+              <li class="nav-item">
+                <a class="nav-link" href={link.to}><%= link.label %></a>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    """
+  end
+
   ## JS Commands
 
   def show(js \\ %JS{}, selector) do

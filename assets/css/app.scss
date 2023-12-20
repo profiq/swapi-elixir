@@ -1,3 +1,29 @@
+/* This file is for your main application CSS */
+
+$profiq-blue: #002c62;
+$profiq-green: #8ec549;
+$profiq-gray: #c3c6c8;
+
+$primary: $profiq-green;
+
+$body-bg-dark: $profiq-blue;
+$link-color: white;
+
 @import "../node_modules/bootstrap/scss/bootstrap";
 
-/* This file is for your main application CSS */
+body {
+    font-family: "Roboto Slab", sans-serif;
+}
+
+h1, h3 {
+    font-weight: bold;
+    color: $primary;
+}
+
+.navbar-brand {
+    font-weight: bold;
+}
+
+a {
+    color: $primary;
+}
