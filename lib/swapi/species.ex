@@ -43,7 +43,7 @@ defmodule SWAPI.Species do
     species =
       Enum.reduce(terms, Species, fn term, query ->
         query
-        |> where([s], ilike(s.name, ^"%#{term}%"))
+        |> where([s], like(s.name, ^"%#{term}%"))
       end)
 
     paginate(species, params)

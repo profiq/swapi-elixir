@@ -43,7 +43,7 @@ defmodule SWAPI.Planets do
     planets =
       Enum.reduce(terms, Planet, fn term, query ->
         query
-        |> where([p], ilike(p.name, ^"%#{term}%"))
+        |> where([p], like(p.name, ^"%#{term}%"))
       end)
 
     paginate(planets, params)

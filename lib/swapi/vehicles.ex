@@ -48,7 +48,7 @@ defmodule SWAPI.Vehicles do
     vehicles =
       Enum.reduce(terms, query, fn term, query ->
         query
-        |> where([v, t], ilike(t.name, ^"%#{term}%") or ilike(t.model, ^"%#{term}%"))
+        |> where([v, t], like(t.name, ^"%#{term}%") or like(t.model, ^"%#{term}%"))
       end)
 
     paginate(vehicles, params)

@@ -43,7 +43,7 @@ defmodule SWAPI.Films do
     films =
       Enum.reduce(terms, Film, fn term, query ->
         query
-        |> where([f], ilike(f.title, ^"%#{term}%"))
+        |> where([f], like(f.title, ^"%#{term}%"))
       end)
 
     paginate(films, params)

@@ -43,7 +43,7 @@ defmodule SWAPI.People do
     people =
       Enum.reduce(terms, Person, fn term, query ->
         query
-        |> where([p], ilike(p.name, ^"%#{term}%"))
+        |> where([p], like(p.name, ^"%#{term}%"))
       end)
 
     paginate(people, params)

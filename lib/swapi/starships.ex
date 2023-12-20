@@ -48,7 +48,7 @@ defmodule SWAPI.Starships do
     starships =
       Enum.reduce(terms, query, fn term, query ->
         query
-        |> where([s], ilike(s.name, ^"%#{term}%") or ilike(s.model, ^"%#{term}%"))
+        |> where([s], like(s.name, ^"%#{term}%") or like(s.model, ^"%#{term}%"))
       end)
 
     paginate(starships, params)
