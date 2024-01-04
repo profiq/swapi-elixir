@@ -497,7 +497,7 @@ defmodule SWAPIWeb.CoreComponents do
     ~H"""
     <nav class="navbar navbar-expand-lg">
       <div class="container-md">
-        <a class="navbar-brand" href="#">
+        <a class="navbar-brand" href="/">
           <%= render_slot(@logo) %>
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
