@@ -4,7 +4,7 @@ defmodule SWAPIWeb.RequesterLive do
 
   def render(assigns) do
     ~H"""
-    <.form for={@form} phx-submit="request">
+    <.form for={@form} phx-change="change" phx-submit="request">
       <div class="input-group">
         <span class="input-group-text"><%= url(~p"/api/") %></span>
         <.input type="text" class="form-control" field={@form[:url]} />
@@ -27,6 +27,10 @@ defmodule SWAPIWeb.RequesterLive do
       |> assign(:result, nil),
       layout: false
     }
+  end
+
+  def handle_event("change", %{"url" => url}, socket) do
+    {:noreply, assign(socket, :form, to_form(%{"url" => url}))}
   end
 
   def handle_event("request", %{"url" => url}, socket) do
