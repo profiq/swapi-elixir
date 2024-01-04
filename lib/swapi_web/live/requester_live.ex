@@ -11,9 +11,11 @@ defmodule SWAPIWeb.RequesterLive do
         <button class="btn btn-primary">&#x25B6;</button>
       </div>
     </.form>
-    <div class="border rounded">
+    <%= if @result do %>
+    <div class={"border rounded mt-2"}>
       <pre class="m-2"><%= @result %></pre>
     </div>
+    <% end %>
     """
   end
 
@@ -22,7 +24,7 @@ defmodule SWAPIWeb.RequesterLive do
       :ok,
       socket
       |> assign(:form, to_form(%{"url" => ""}))
-      |> assign(:result, ""),
+      |> assign(:result, nil),
       layout: false
     }
   end
