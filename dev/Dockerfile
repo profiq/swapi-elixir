@@ -14,11 +14,21 @@
 ARG ELIXIR_VERSION=1.15.7
 ARG OTP_VERSION=26.1.1
 ARG DEBIAN_VERSION=bullseye-20230612-slim
+ARG NODE_VERSION=20
 
-ARG BUILDER_IMAGE="hexpm/elixir:${ELIXIR_VERSION}-erlang-${OTP_VERSION}-debian-${DEBIAN_VERSION}"
+ARG ELIXIR_BUILDER_IMAGE="hexpm/elixir:${ELIXIR_VERSION}-erlang-${OTP_VERSION}-debian-${DEBIAN_VERSION}"
+ARG YARN_BUILDER_IMAGE="node:${NODE_VERSION}-bullseye-slim"
 ARG RUNNER_IMAGE="debian:${DEBIAN_VERSION}"
 
-FROM ${BUILDER_IMAGE} as builder
+FROM ${YARN_BUILDER_IMAGE} as yarn-builder
+
+WORKDIR /app
+
+COPY /assets/package.json /assets/yarn.lock ./
+
+RUN yarn install --frozen-lockfile
+
+FROM ${ELIXIR_BUILDER_IMAGE} as elixir-builder
 
 # install build dependencies
 RUN apt-get update -y && apt-get install -y build-essential git \
@@ -50,6 +60,8 @@ COPY priv priv
 COPY lib lib
 
 COPY assets assets
+
+COPY --from=yarn-builder /app/node_modules ./assets/node_modules
 
 # compile assets
 RUN mix assets.deploy
