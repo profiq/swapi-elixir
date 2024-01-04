@@ -12,9 +12,7 @@ defmodule SWAPIWeb.RequesterLive do
       </div>
     </.form>
     <div class="border rounded">
-      <pre>
-        <%= @result %>
-      </pre>
+      <pre class="m-2"><%= @result %></pre>
     </div>
     """
   end
