@@ -61,6 +61,10 @@ if config_env() == :prod do
     ],
     secret_key_base: secret_key_base
 
+  # Enable Cloudflare analytics
+  config :swapi, :cloudflare_web_analytics_enabled, true
+  config :swapi, :cloudflare_web_analytics_token, System.get_env("CLOUDFLARE_WEB_ANALYTICS_TOKEN")
+
   # ## SSL Support
   #
   # To get SSL working, you will need to add the `https` key

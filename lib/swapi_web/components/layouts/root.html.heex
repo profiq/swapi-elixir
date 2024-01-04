@@ -11,6 +11,11 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto%20Slab">
     <script defer phx-track-static type="text/javascript" src={~p"/assets/app.js"}>
     </script>
+    <%= if Application.get_env(:swapi, :cloudflare_web_analytics_enabled) do %>
+    <!-- Cloudflare Web Analytics -->
+    <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon={"{\"token\": \"#{Application.get_env(:swapi, :cloudflare_web_analytics_token)}\"}"}></script>
+    <!-- End Cloudflare Web Analytics -->
+    <% end %>
   </head>
   <body>
     <.navbar>
