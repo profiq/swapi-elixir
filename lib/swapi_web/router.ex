@@ -14,6 +14,7 @@ defmodule SWAPIWeb.Router do
 
   pipeline :api do
     plug :accepts, ["json"]
+    plug :put_cache_control_header, "public, max-age=86400, s-max-age=172800, stale-while-revalidate=2678400"
     plug OpenApiSpex.Plug.PutApiSpec, module: SWAPIWeb.ApiSpec
   end
 
@@ -23,6 +24,7 @@ defmodule SWAPIWeb.Router do
     plug :fetch_live_flash
     plug :protect_from_forgery
     plug :put_secure_browser_headers
+    plug :put_cache_control_header, "public, max-age=86400, s-max-age=172800, stale-while-revalidate=2678400"
   end
 
   scope "/" do
@@ -62,5 +64,9 @@ defmodule SWAPIWeb.Router do
       live_dashboard "/dashboard", metrics: SWAPIWeb.Telemetry
       forward "/mailbox", Plug.Swoosh.MailboxPreview
     end
+  end
+
+  defp put_cache_control_header(conn, value) do
+    Plug.Conn.put_resp_header(conn, "cache-control", value)
   end
 end
