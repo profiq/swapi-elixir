@@ -19,4 +19,4 @@ To start the server locally, follow these steps:
 Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
 
 ### Docker
-The server can also be started under Docker by running `docker compose -f dev/docker-compose.yml`. When started, the API will be accessible under the same port as when running locally ([`localhost:4000`](http://localhost:4000)).
+The server can also be started under Docker by running `docker compose -f dev/docker-compose.yml up`. When started, the API will be accessible under the same port as when running locally ([`localhost:4000`](http://localhost:4000)).
