@@ -11,6 +11,7 @@ defmodule SWAPIWeb.ApiSpec do
       ],
       info: %Info{
         title: "Elixir SWAPI",
+        description: "The Star Wars API, reimplemented in Elixir",
         version: "0.1.0"
       },
       paths: Paths.from_router(Router)
