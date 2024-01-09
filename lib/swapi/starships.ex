@@ -43,12 +43,12 @@ defmodule SWAPI.Starships do
   def search_starships(terms, params) do
     query =
       Starship
-      |> join(:left, [v], t in Transport, on: v.id == t.id)
+      |> join(:left, [s], t in Transport, on: s.id == t.id)
 
     starships =
       Enum.reduce(terms, query, fn term, query ->
         query
-        |> where([s], like(s.name, ^"%#{term}%") or like(s.model, ^"%#{term}%"))
+        |> where([s, t], like(t.name, ^"%#{term}%") or like(t.model, ^"%#{term}%"))
       end)
 
     paginate(starships, params)
