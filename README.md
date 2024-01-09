@@ -1,4 +1,7 @@
 # Elixir SWAPI
+
+Hosted at https://swapi.profiq.com/
+
 The [Star Wars API](https://swapi.dev/) (SWAPI), reimplemented in [Elixir](https://elixir-lang.org/).
 
 This project aims to almost fully compatible with the original API, including pagination and search query parameters.
