@@ -7,7 +7,7 @@ defmodule SWAPIWeb.RequesterLive do
     <.form for={@form} phx-change="change" phx-submit="request">
       <div class="input-group">
         <span class="input-group-text"><%= url(~p"/api/") %></span>
-        <.input type="text" class="form-control" field={@form[:url]} />
+        <.input type="text" class="form-control" field={@form[:url]} placeholder={@placeholder} />
         <button class="btn btn-primary d-flex align-items-center">
           <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-player-play-filled" width="16" height="16" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
             <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
@@ -29,6 +29,7 @@ defmodule SWAPIWeb.RequesterLive do
       :ok,
       socket
       |> assign(:form, to_form(%{"url" => ""}))
+      |> assign(:placeholder, "people/1")
       |> assign(:result, nil),
       layout: false
     }
@@ -38,13 +39,24 @@ defmodule SWAPIWeb.RequesterLive do
     {:noreply, assign(socket, :form, to_form(%{"url" => url}))}
   end
 
-  def handle_event("request", %{"url" => url}, socket) do
-    result =
-      Phoenix.ConnTest.build_conn()
-      |> Phoenix.ConnTest.dispatch(SWAPIWeb.Endpoint, :get, "/api/#{url}")
-      |> Map.get(:resp_body)
-      |> Jason.Formatter.pretty_print()
+  def handle_event("request", %{"url" => ""}, socket) do
+    {
+      :noreply,
+      socket
+      |> assign(:form, to_form(%{"url" => socket.assigns.placeholder}))
+      |> assign(:result, dispatch(socket.assigns.placeholder))
+    }
+  end
 
-    {:noreply, assign(socket, :result, result)}
+  def handle_event("request", %{"url" => url}, socket) do
+    IO.inspect(socket)
+    {:noreply, assign(socket, :result, dispatch(url))}
+  end
+
+  defp dispatch(url) do
+    Phoenix.ConnTest.build_conn()
+    |> Phoenix.ConnTest.dispatch(SWAPIWeb.Endpoint, :get, "/api/#{url}")
+    |> Map.get(:resp_body)
+    |> Jason.Formatter.pretty_print()
   end
 end
