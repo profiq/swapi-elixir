@@ -1,0 +1,1049 @@
+{
+	"info": {
+		"_postman_id": "6333cd27-d716-429d-a1ca-f03bfa14e5fc",
+		"name": "Elixir SWAPI",
+		"description": "The Star Wars API, reimplemented in Elixir",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "32193218"
+	},
+	"item": [
+		{
+			"name": "api",
+			"item": [
+				{
+					"name": "films",
+					"item": [
+						{
+							"name": "{id}",
+							"item": [
+								{
+									"name": "Get a specific film resource",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/films/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"films",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "<integer>",
+													"description": "(Required) Film ID"
+												}
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "A film",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "application/json"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/api/films/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"films",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"created\": \"<string>\",\n  \"edited\": \"<string>\",\n  \"url\": \"<string>\",\n  \"characters\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"director\": \"<string>\",\n  \"episode_id\": \"<integer>\",\n  \"opening_crawl\": \"<string>\",\n  \"planets\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"producer\": \"<string>\",\n  \"release_date\": \"<string>\",\n  \"species\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"starships\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"title\": \"<string>\",\n  \"vehicles\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}"
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "Get all the film resources",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/films?search=<string>&page=<integer>",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"films"
+									],
+									"query": [
+										{
+											"key": "search",
+											"value": "<string>",
+											"description": "The search parameter may contain multiple search terms, which should be whitespace and/or comma separated. If multiple search terms are used then objects will be returned in the list only if all the provided terms are matched. Searches may contain quoted phrases with spaces, each phrase is considered as a single search term."
+										},
+										{
+											"key": "page",
+											"value": "<integer>",
+											"description": "Page number"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "List of films",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/films?search=<string>&page=<integer>",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"films"
+											],
+											"query": [
+												{
+													"key": "search",
+													"value": "<string>",
+													"description": "The search parameter may contain multiple search terms, which should be whitespace and/or comma separated. If multiple search terms are used then objects will be returned in the list only if all the provided terms are matched. Searches may contain quoted phrases with spaces, each phrase is considered as a single search term."
+												},
+												{
+													"key": "page",
+													"value": "<integer>",
+													"description": "Page number"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"count\": \"<integer>\",\n  \"next\": \"<string>\",\n  \"previous\": \"<string>\",\n  \"results\": [\n    {\n      \"created\": \"<string>\",\n      \"edited\": \"<string>\",\n      \"url\": \"<string>\",\n      \"characters\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"director\": \"<string>\",\n      \"episode_id\": \"<integer>\",\n      \"opening_crawl\": \"<string>\",\n      \"planets\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"producer\": \"<string>\",\n      \"release_date\": \"<string>\",\n      \"species\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"starships\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"title\": \"<string>\",\n      \"vehicles\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"created\": \"<string>\",\n      \"edited\": \"<string>\",\n      \"url\": \"<string>\",\n      \"characters\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"director\": \"<string>\",\n      \"episode_id\": \"<integer>\",\n      \"opening_crawl\": \"<string>\",\n      \"planets\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"producer\": \"<string>\",\n      \"release_date\": \"<string>\",\n      \"species\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"starships\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"title\": \"<string>\",\n      \"vehicles\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ]\n}"
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "people",
+					"item": [
+						{
+							"name": "{id}",
+							"item": [
+								{
+									"name": "Get a specific people resource",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/people/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"people",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "<integer>",
+													"description": "(Required) Person ID"
+												}
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "A person",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "application/json"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/api/people/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"people",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"created\": \"<string>\",\n  \"edited\": \"<string>\",\n  \"url\": \"<string>\",\n  \"birth_year\": \"<string>\",\n  \"eye_color\": \"<string>\",\n  \"films\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"gender\": \"<string>\",\n  \"hair_color\": \"<string>\",\n  \"height\": \"<string>\",\n  \"homeworld\": \"<string>\",\n  \"mass\": \"<string>\",\n  \"name\": \"<string>\",\n  \"skin_color\": \"<string>\",\n  \"species\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"starships\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"vehicles\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}"
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "Get all people resources",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/people?search=<string>&page=<integer>",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"people"
+									],
+									"query": [
+										{
+											"key": "search",
+											"value": "<string>",
+											"description": "The search parameter may contain multiple search terms, which should be whitespace and/or comma separated. If multiple search terms are used then objects will be returned in the list only if all the provided terms are matched. Searches may contain quoted phrases with spaces, each phrase is considered as a single search term."
+										},
+										{
+											"key": "page",
+											"value": "<integer>",
+											"description": "Page number"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "List of people",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/people?search=<string>&page=<integer>",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"people"
+											],
+											"query": [
+												{
+													"key": "search",
+													"value": "<string>",
+													"description": "The search parameter may contain multiple search terms, which should be whitespace and/or comma separated. If multiple search terms are used then objects will be returned in the list only if all the provided terms are matched. Searches may contain quoted phrases with spaces, each phrase is considered as a single search term."
+												},
+												{
+													"key": "page",
+													"value": "<integer>",
+													"description": "Page number"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"count\": \"<integer>\",\n  \"next\": \"<string>\",\n  \"previous\": \"<string>\",\n  \"results\": [\n    {\n      \"created\": \"<string>\",\n      \"edited\": \"<string>\",\n      \"url\": \"<string>\",\n      \"birth_year\": \"<string>\",\n      \"eye_color\": \"<string>\",\n      \"films\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"gender\": \"<string>\",\n      \"hair_color\": \"<string>\",\n      \"height\": \"<string>\",\n      \"homeworld\": \"<string>\",\n      \"mass\": \"<string>\",\n      \"name\": \"<string>\",\n      \"skin_color\": \"<string>\",\n      \"species\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"starships\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"vehicles\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"created\": \"<string>\",\n      \"edited\": \"<string>\",\n      \"url\": \"<string>\",\n      \"birth_year\": \"<string>\",\n      \"eye_color\": \"<string>\",\n      \"films\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"gender\": \"<string>\",\n      \"hair_color\": \"<string>\",\n      \"height\": \"<string>\",\n      \"homeworld\": \"<string>\",\n      \"mass\": \"<string>\",\n      \"name\": \"<string>\",\n      \"skin_color\": \"<string>\",\n      \"species\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"starships\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"vehicles\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ]\n}"
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "planets",
+					"item": [
+						{
+							"name": "{id}",
+							"item": [
+								{
+									"name": "Get a specific planet resource",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/planets/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"planets",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "<integer>",
+													"description": "(Required) Planet ID"
+												}
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "A planet",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "application/json"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/api/planets/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"planets",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"created\": \"<string>\",\n  \"edited\": \"<string>\",\n  \"url\": \"<string>\",\n  \"climate\": \"<string>\",\n  \"diameter\": \"<string>\",\n  \"films\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"gravity\": \"<string>\",\n  \"name\": \"<string>\",\n  \"orbital_period\": \"<string>\",\n  \"population\": \"<string>\",\n  \"residents\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"rotation_period\": \"<string>\",\n  \"surface_water\": \"<string>\",\n  \"terrain\": \"<string>\"\n}"
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "Get all planet resources",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/planets?search=<string>&page=<integer>",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"planets"
+									],
+									"query": [
+										{
+											"key": "search",
+											"value": "<string>",
+											"description": "The search parameter may contain multiple search terms, which should be whitespace and/or comma separated. If multiple search terms are used then objects will be returned in the list only if all the provided terms are matched. Searches may contain quoted phrases with spaces, each phrase is considered as a single search term."
+										},
+										{
+											"key": "page",
+											"value": "<integer>",
+											"description": "Page number"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "List of planets",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/planets?search=<string>&page=<integer>",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"planets"
+											],
+											"query": [
+												{
+													"key": "search",
+													"value": "<string>",
+													"description": "The search parameter may contain multiple search terms, which should be whitespace and/or comma separated. If multiple search terms are used then objects will be returned in the list only if all the provided terms are matched. Searches may contain quoted phrases with spaces, each phrase is considered as a single search term."
+												},
+												{
+													"key": "page",
+													"value": "<integer>",
+													"description": "Page number"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"count\": \"<integer>\",\n  \"next\": \"<string>\",\n  \"previous\": \"<string>\",\n  \"results\": [\n    {\n      \"created\": \"<string>\",\n      \"edited\": \"<string>\",\n      \"url\": \"<string>\",\n      \"climate\": \"<string>\",\n      \"diameter\": \"<string>\",\n      \"films\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"gravity\": \"<string>\",\n      \"name\": \"<string>\",\n      \"orbital_period\": \"<string>\",\n      \"population\": \"<string>\",\n      \"residents\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"rotation_period\": \"<string>\",\n      \"surface_water\": \"<string>\",\n      \"terrain\": \"<string>\"\n    },\n    {\n      \"created\": \"<string>\",\n      \"edited\": \"<string>\",\n      \"url\": \"<string>\",\n      \"climate\": \"<string>\",\n      \"diameter\": \"<string>\",\n      \"films\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"gravity\": \"<string>\",\n      \"name\": \"<string>\",\n      \"orbital_period\": \"<string>\",\n      \"population\": \"<string>\",\n      \"residents\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"rotation_period\": \"<string>\",\n      \"surface_water\": \"<string>\",\n      \"terrain\": \"<string>\"\n    }\n  ]\n}"
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "species",
+					"item": [
+						{
+							"name": "{id}",
+							"item": [
+								{
+									"name": "Get a specific species resource",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/species/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"species",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "<integer>",
+													"description": "(Required) Species ID"
+												}
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "A species",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "application/json"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/api/species/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"species",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"created\": \"<string>\",\n  \"edited\": \"<string>\",\n  \"url\": \"<string>\",\n  \"average_height\": \"<string>\",\n  \"average_lifespan\": \"<string>\",\n  \"classification\": \"<string>\",\n  \"designation\": \"<string>\",\n  \"eye_colors\": \"<string>\",\n  \"films\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"hair_colors\": \"<string>\",\n  \"homeworld\": \"<string>\",\n  \"language\": \"<string>\",\n  \"name\": \"<string>\",\n  \"people\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"skin_colors\": \"<string>\"\n}"
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "Get all species resources",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/species?search=<string>&page=<integer>",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"species"
+									],
+									"query": [
+										{
+											"key": "search",
+											"value": "<string>",
+											"description": "The search parameter may contain multiple search terms, which should be whitespace and/or comma separated. If multiple search terms are used then objects will be returned in the list only if all the provided terms are matched. Searches may contain quoted phrases with spaces, each phrase is considered as a single search term."
+										},
+										{
+											"key": "page",
+											"value": "<integer>",
+											"description": "Page number"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "List of species",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/species?search=<string>&page=<integer>",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"species"
+											],
+											"query": [
+												{
+													"key": "search",
+													"value": "<string>",
+													"description": "The search parameter may contain multiple search terms, which should be whitespace and/or comma separated. If multiple search terms are used then objects will be returned in the list only if all the provided terms are matched. Searches may contain quoted phrases with spaces, each phrase is considered as a single search term."
+												},
+												{
+													"key": "page",
+													"value": "<integer>",
+													"description": "Page number"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"count\": \"<integer>\",\n  \"next\": \"<string>\",\n  \"previous\": \"<string>\",\n  \"results\": [\n    {\n      \"created\": \"<string>\",\n      \"edited\": \"<string>\",\n      \"url\": \"<string>\",\n      \"average_height\": \"<string>\",\n      \"average_lifespan\": \"<string>\",\n      \"classification\": \"<string>\",\n      \"designation\": \"<string>\",\n      \"eye_colors\": \"<string>\",\n      \"films\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"hair_colors\": \"<string>\",\n      \"homeworld\": \"<string>\",\n      \"language\": \"<string>\",\n      \"name\": \"<string>\",\n      \"people\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"skin_colors\": \"<string>\"\n    },\n    {\n      \"created\": \"<string>\",\n      \"edited\": \"<string>\",\n      \"url\": \"<string>\",\n      \"average_height\": \"<string>\",\n      \"average_lifespan\": \"<string>\",\n      \"classification\": \"<string>\",\n      \"designation\": \"<string>\",\n      \"eye_colors\": \"<string>\",\n      \"films\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"hair_colors\": \"<string>\",\n      \"homeworld\": \"<string>\",\n      \"language\": \"<string>\",\n      \"name\": \"<string>\",\n      \"people\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"skin_colors\": \"<string>\"\n    }\n  ]\n}"
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "starships",
+					"item": [
+						{
+							"name": "{id}",
+							"item": [
+								{
+									"name": "Get a specific starship resource",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/starships/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"starships",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "<integer>",
+													"description": "(Required) Starship ID"
+												}
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "A starship",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "application/json"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/api/starships/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"starships",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"created\": \"<string>\",\n  \"edited\": \"<string>\",\n  \"url\": \"<string>\",\n  \"MGLT\": \"<string>\",\n  \"cargo_capacity\": \"<string>\",\n  \"consumables\": \"<string>\",\n  \"cost_in_credits\": \"<string>\",\n  \"crew\": \"<string>\",\n  \"films\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"hyperdrive_rating\": \"<string>\",\n  \"length\": \"<string>\",\n  \"manufacturer\": \"<string>\",\n  \"max_atmosphering_speed\": \"<string>\",\n  \"model\": \"<string>\",\n  \"name\": \"<string>\",\n  \"passengers\": \"<string>\",\n  \"pilots\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"starship_class\": \"<string>\"\n}"
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "Get all starship resources",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/starships?search=<string>&page=<integer>",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"starships"
+									],
+									"query": [
+										{
+											"key": "search",
+											"value": "<string>",
+											"description": "The search parameter may contain multiple search terms, which should be whitespace and/or comma separated. If multiple search terms are used then objects will be returned in the list only if all the provided terms are matched. Searches may contain quoted phrases with spaces, each phrase is considered as a single search term."
+										},
+										{
+											"key": "page",
+											"value": "<integer>",
+											"description": "Page number"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "List of starships",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/starships?search=<string>&page=<integer>",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"starships"
+											],
+											"query": [
+												{
+													"key": "search",
+													"value": "<string>",
+													"description": "The search parameter may contain multiple search terms, which should be whitespace and/or comma separated. If multiple search terms are used then objects will be returned in the list only if all the provided terms are matched. Searches may contain quoted phrases with spaces, each phrase is considered as a single search term."
+												},
+												{
+													"key": "page",
+													"value": "<integer>",
+													"description": "Page number"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"count\": \"<integer>\",\n  \"next\": \"<string>\",\n  \"previous\": \"<string>\",\n  \"results\": [\n    {\n      \"created\": \"<string>\",\n      \"edited\": \"<string>\",\n      \"url\": \"<string>\",\n      \"MGLT\": \"<string>\",\n      \"cargo_capacity\": \"<string>\",\n      \"consumables\": \"<string>\",\n      \"cost_in_credits\": \"<string>\",\n      \"crew\": \"<string>\",\n      \"films\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"hyperdrive_rating\": \"<string>\",\n      \"length\": \"<string>\",\n      \"manufacturer\": \"<string>\",\n      \"max_atmosphering_speed\": \"<string>\",\n      \"model\": \"<string>\",\n      \"name\": \"<string>\",\n      \"passengers\": \"<string>\",\n      \"pilots\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"starship_class\": \"<string>\"\n    },\n    {\n      \"created\": \"<string>\",\n      \"edited\": \"<string>\",\n      \"url\": \"<string>\",\n      \"MGLT\": \"<string>\",\n      \"cargo_capacity\": \"<string>\",\n      \"consumables\": \"<string>\",\n      \"cost_in_credits\": \"<string>\",\n      \"crew\": \"<string>\",\n      \"films\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"hyperdrive_rating\": \"<string>\",\n      \"length\": \"<string>\",\n      \"manufacturer\": \"<string>\",\n      \"max_atmosphering_speed\": \"<string>\",\n      \"model\": \"<string>\",\n      \"name\": \"<string>\",\n      \"passengers\": \"<string>\",\n      \"pilots\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"starship_class\": \"<string>\"\n    }\n  ]\n}"
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "vehicles",
+					"item": [
+						{
+							"name": "{id}",
+							"item": [
+								{
+									"name": "Get a specific vehicle resource",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/vehicles/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"vehicles",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "<integer>",
+													"description": "(Required) Vehicle ID"
+												}
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "A vehicle",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "application/json"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/api/vehicles/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"vehicles",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"created\": \"<string>\",\n  \"edited\": \"<string>\",\n  \"url\": \"<string>\",\n  \"cargo_capacity\": \"<string>\",\n  \"consumables\": \"<string>\",\n  \"cost_in_credits\": \"<string>\",\n  \"crew\": \"<string>\",\n  \"films\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"length\": \"<string>\",\n  \"manufacturer\": \"<string>\",\n  \"max_atmosphering_speed\": \"<string>\",\n  \"model\": \"<string>\",\n  \"name\": \"<string>\",\n  \"passengers\": \"<string>\",\n  \"pilots\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"vehicle_class\": \"<string>\"\n}"
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "Get all vehicle resources",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/vehicles?search=<string>&page=<integer>",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"vehicles"
+									],
+									"query": [
+										{
+											"key": "search",
+											"value": "<string>",
+											"description": "The search parameter may contain multiple search terms, which should be whitespace and/or comma separated. If multiple search terms are used then objects will be returned in the list only if all the provided terms are matched. Searches may contain quoted phrases with spaces, each phrase is considered as a single search term."
+										},
+										{
+											"key": "page",
+											"value": "<integer>",
+											"description": "Page number"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "List of vehicles",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/vehicles?search=<string>&page=<integer>",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"vehicles"
+											],
+											"query": [
+												{
+													"key": "search",
+													"value": "<string>",
+													"description": "The search parameter may contain multiple search terms, which should be whitespace and/or comma separated. If multiple search terms are used then objects will be returned in the list only if all the provided terms are matched. Searches may contain quoted phrases with spaces, each phrase is considered as a single search term."
+												},
+												{
+													"key": "page",
+													"value": "<integer>",
+													"description": "Page number"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"count\": \"<integer>\",\n  \"next\": \"<string>\",\n  \"previous\": \"<string>\",\n  \"results\": [\n    {\n      \"created\": \"<string>\",\n      \"edited\": \"<string>\",\n      \"url\": \"<string>\",\n      \"cargo_capacity\": \"<string>\",\n      \"consumables\": \"<string>\",\n      \"cost_in_credits\": \"<string>\",\n      \"crew\": \"<string>\",\n      \"films\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"length\": \"<string>\",\n      \"manufacturer\": \"<string>\",\n      \"max_atmosphering_speed\": \"<string>\",\n      \"model\": \"<string>\",\n      \"name\": \"<string>\",\n      \"passengers\": \"<string>\",\n      \"pilots\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"vehicle_class\": \"<string>\"\n    },\n    {\n      \"created\": \"<string>\",\n      \"edited\": \"<string>\",\n      \"url\": \"<string>\",\n      \"cargo_capacity\": \"<string>\",\n      \"consumables\": \"<string>\",\n      \"cost_in_credits\": \"<string>\",\n      \"crew\": \"<string>\",\n      \"films\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"length\": \"<string>\",\n      \"manufacturer\": \"<string>\",\n      \"max_atmosphering_speed\": \"<string>\",\n      \"model\": \"<string>\",\n      \"name\": \"<string>\",\n      \"passengers\": \"<string>\",\n      \"pilots\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"vehicle_class\": \"<string>\"\n    }\n  ]\n}"
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Get URL roots for all available resources",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "List of endpoints",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"films\": \"<string>\",\n  \"people\": \"<string>\",\n  \"planets\": \"<string>\",\n  \"species\": \"<string>\",\n  \"starships\": \"<string>\",\n  \"vehicles\": \"<string>\"\n}"
+						}
+					]
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:4000"
+		}
+	]
+}

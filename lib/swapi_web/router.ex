@@ -31,6 +31,7 @@ defmodule SWAPIWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :home
+    get "/postman", PageController, :postman
     get "/swaggerui", OpenApiSpex.Plug.SwaggerUI, path: "/api/openapi"
   end
 

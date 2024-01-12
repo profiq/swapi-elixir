@@ -17,7 +17,7 @@ defmodule SWAPIWeb do
   those modules here.
   """
 
-  def static_paths, do: ~w(assets fonts images favicon.ico robots.txt)
+  def static_paths, do: ~w(assets fonts images favicon.ico robots.txt swapi.postman_collection.json)
 
   def router do
     quote do
