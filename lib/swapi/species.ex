@@ -34,7 +34,7 @@ defmodule SWAPI.Species do
   def list_species(params), do: paginate(Species, params)
 
   defp paginate(query, params) do
-    with {:ok, {species, meta}} = Flop.validate_and_run(query, params) do
+    with {:ok, {species, meta}} <- Flop.validate_and_run(query, params) do
       {:ok, {preload(species, :all), meta}}
     end
   end

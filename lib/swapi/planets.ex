@@ -34,7 +34,7 @@ defmodule SWAPI.Planets do
   def list_planets(params), do: paginate(Planet, params)
 
   defp paginate(query, params) do
-    with {:ok, {planets, meta}} = Flop.validate_and_run(query, params) do
+    with {:ok, {planets, meta}} <- Flop.validate_and_run(query, params) do
       {:ok, {preload(planets, :all), meta}}
     end
   end

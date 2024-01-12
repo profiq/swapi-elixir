@@ -35,7 +35,7 @@ defmodule SWAPI.Starships do
   def list_starships(params), do: paginate(Starship, params)
 
   defp paginate(query, params) do
-    with {:ok, {starships, meta}} = Flop.validate_and_run(query, params) do
+    with {:ok, {starships, meta}} <- Flop.validate_and_run(query, params) do
       {:ok, {preload(starships, :all), meta}}
     end
   end

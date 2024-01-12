@@ -34,7 +34,7 @@ defmodule SWAPI.People do
   def list_people(params), do: paginate(Person, params)
 
   defp paginate(query, params) do
-    with {:ok, {people, meta}} = Flop.validate_and_run(query, params) do
+    with {:ok, {people, meta}} <- Flop.validate_and_run(query, params) do
       {:ok, {preload(people, :all), meta}}
     end
   end
