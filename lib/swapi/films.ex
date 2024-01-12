@@ -36,6 +36,8 @@ defmodule SWAPI.Films do
   defp paginate(query, params) do
     with {:ok, {films, meta}} <- Flop.validate_and_run(query, params) do
       {:ok, {preload(films, :all), meta}}
+    else
+      _ -> {:error, :bad_request}
     end
   end
 

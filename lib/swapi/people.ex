@@ -36,6 +36,8 @@ defmodule SWAPI.People do
   defp paginate(query, params) do
     with {:ok, {people, meta}} <- Flop.validate_and_run(query, params) do
       {:ok, {preload(people, :all), meta}}
+    else
+      _ -> {:error, :bad_request}
     end
   end
 

@@ -37,6 +37,8 @@ defmodule SWAPI.Vehicles do
   defp paginate(query, params) do
     with {:ok, {vehicles, meta}} <- Flop.validate_and_run(query, params) do
       {:ok, {preload(vehicles, :all), meta}}
+    else
+      _ -> {:error, :bad_request}
     end
   end
 

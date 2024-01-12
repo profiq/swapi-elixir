@@ -13,4 +13,11 @@ defmodule SWAPIWeb.FallbackController do
     |> put_view(html: SWAPIWeb.ErrorHTML, json: SWAPIWeb.ErrorJSON)
     |> render(:"404")
   end
+
+  def call(conn, {:error, :bad_request}) do
+    conn
+    |> put_status(:bad_request)
+    |> put_view(html: SWAPIWeb.ErrorHTML, json: SWAPIWeb.ErrorJSON)
+    |> render(:"400")
+  end
 end
