@@ -30,12 +30,8 @@ The server can also be started under Docker by running `docker compose -f dev/do
 The Postman collection is stored in `priv/static/downloads/swapi.postman_collection.json`. Whenever the API documentation changes, the collection should be updated to match.
 
 You can generate a new collection file as follows:
-1. Start the server
-2. Click "Import" in the workspace sidebar in Postman
-3. Enter the URL to the OpenAPI doc, e.g. `http://localhost:4000/api/openapi`
-4. Import the API as a Postman collection
-5. Open the "Elixir SWAPI" collection and go to the Variables tab in the main pane
-6. Change the `baseUrl` variable to `https://swapi.profiq.com`
-7. Right-click the "Elixir SWAPI" collection and click "Export"
-8. Select the Collection 2.1 format and click "Export"
-9. Save the file to `priv/static/downloads/swapi.postman_collection.json` in the cloned repository
+1. Start the server.
+2. Click "Import" in the workspace sidebar in Postman, enter the URL to the OpenAPI doc, e.g. `http://localhost:4000/api/openapi` and import the API as a Postman collection.
+3. Open the "Elixir SWAPI" collection, go to the Variables tab in the main pane and change the `baseUrl` variable to `https://swapi.profiq.com`.
+4. Right-click the "Elixir SWAPI" collection, click "Export" and choose the Collection 2.1 format.
+5. Copy the exported collection to `priv/static/downloads/swapi.postman_collection.json`.
