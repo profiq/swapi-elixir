@@ -8,8 +8,6 @@ name: Build and deploy
 on:
   push:
     branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
 
 permissions:
   contents: read
@@ -47,8 +45,6 @@ jobs:
       url: https://swapi-dev.profiq.com
 
     needs: build
-
-    if: github.event_name == 'push'
 
     steps:
       - uses: actions/checkout@v3
