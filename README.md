@@ -1,8 +1,8 @@
 # Elixir SWAPI
 
-Hosted at https://swapi.profiq.com/
+Hosted at https://swapi.profiq.com
 
-Dev is deployed to https://swapi-dev.profiq.com/
+Dev is deployed to https://swapi-dev.profiq.com
 
 The [Star Wars API](https://swapi.dev/) (SWAPI), reimplemented in [Elixir](https://elixir-lang.org/).
 

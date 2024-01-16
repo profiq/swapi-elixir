@@ -12,6 +12,9 @@ jobs:
 
     name: Deploy app
     runs-on: ubuntu-latest
+    environment:
+      name: prod
+      url: https://swapi.profiq.com
 
     steps:
       - uses: actions/checkout@v3

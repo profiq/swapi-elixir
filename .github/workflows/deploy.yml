@@ -42,6 +42,9 @@ jobs:
 
     name: Deploy app
     runs-on: ubuntu-latest
+    environment:
+      name: dev
+      url: https://swapi-dev.profiq.com
 
     needs: build
 
