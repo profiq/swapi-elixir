@@ -495,8 +495,8 @@ defmodule SWAPIWeb.CoreComponents do
 
   def navbar(assigns) do
     ~H"""
-    <nav class="navbar navbar-expand-lg">
-      <div class="container-md">
+    <nav class="navbar navbar-expand-md">
+      <div class="container-md py-2">
         <a class="navbar-brand" href="/">
           <%= render_slot(@logo) %>
         </a>
