@@ -10,7 +10,7 @@ permissions:
 jobs:
   deploy:
 
-    name: Deploy app
+    name: Deploy app to PROD
     runs-on: ubuntu-latest
     environment:
       name: prod
