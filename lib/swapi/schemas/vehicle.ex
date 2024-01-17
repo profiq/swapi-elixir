@@ -25,7 +25,7 @@ defmodule SWAPI.Schemas.Vehicle do
     vehicle
     |> cast(params, @required_fields ++ @optional_fields)
     |> validate_required(@required_fields)
-    #|> cast_assoc(:transport)
+    |> cast_assoc(:transport)
     |> foreign_key_constraint(:id)
   end
 end
