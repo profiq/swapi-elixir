@@ -9,7 +9,7 @@ defmodule SWAPI.People do
   alias SWAPI.Schemas.Person
 
   def preload(person, :all) do
-    Repo.preload(person, [:films, :species, :starships, :vehicles])
+    Repo.preload(person, [:homeworld, :films, :species, :starships, :vehicles])
   end
 
   def preload(person, associations) do
