@@ -19,7 +19,9 @@ defmodule SWAPI.PlanetsFixtures do
         population: "some population",
         climate: "some climate",
         terrain: "some terrain",
-        surface_water: "some surface_water"
+        surface_water: "some surface_water",
+        residents: [],
+        films: []
       })
       |> SWAPI.Planets.create_planet()
 

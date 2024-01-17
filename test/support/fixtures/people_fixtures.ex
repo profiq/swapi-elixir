@@ -18,7 +18,12 @@ defmodule SWAPI.PeopleFixtures do
         hair_color: "some hair_color",
         height: "some height",
         mass: "some mass",
-        skin_color: "some skin_color"
+        skin_color: "some skin_color",
+        homeworld: nil,
+        films: [],
+        species: [],
+        starships: [],
+        vehicles: []
       })
       |> SWAPI.People.create_person()
 

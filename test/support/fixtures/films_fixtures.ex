@@ -11,12 +11,17 @@ defmodule SWAPI.FilmsFixtures do
     {:ok, film} =
       attrs
       |> Enum.into(%{
-        director: "some director",
+        title: "some title",
         episode_id: 42,
         opening_crawl: "some opening_crawl",
+        director: "some director",
         producer: "some producer",
         release_date: ~D[2023-11-28],
-        title: "some title"
+        species: [],
+        starships: [],
+        vehicles: [],
+        characters: [],
+        planets: []
       })
       |> SWAPI.Films.create_film()
 

@@ -19,7 +19,10 @@ defmodule SWAPI.SpeciesFixtures do
         eye_colors: "some eye_colors",
         hair_colors: "some hair_colors",
         skin_colors: "some skin_colors",
-        language: "some language"
+        language: "some language",
+        homeworld: nil,
+        people: [],
+        films: []
       })
       |> SWAPI.Species.create_species()
 

@@ -26,7 +26,9 @@ defmodule SWAPI.VehiclesFixtures do
             cargo_capacity: "some cargo_capacity",
             consumables: "some consumables"
           }),
-        vehicle_class: "some vehicle_class"
+        vehicle_class: "some vehicle_class",
+        films: [],
+        pilots: []
       })
       |> SWAPI.Vehicles.create_vehicle()
 

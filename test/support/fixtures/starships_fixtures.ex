@@ -28,7 +28,9 @@ defmodule SWAPI.StarshipsFixtures do
           }),
         starship_class: "some starship_class",
         hyperdrive_rating: "some hyperdrive_rating",
-        mglt: "some mglt"
+        mglt: "some mglt",
+        films: [],
+        pilots: []
       })
       |> SWAPI.Starships.create_starship()
 
