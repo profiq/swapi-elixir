@@ -1,8 +1,8 @@
 # Elixir SWAPI
 
-Hosted at https://swapi.profiq.com/
+Hosted at https://swapi.profiq.com
 
-Dev is deployed to https://swapi-dev.profiq.com/
+Dev is deployed to https://swapi-dev.profiq.com
 
 The [Star Wars API](https://swapi.dev/) (SWAPI), reimplemented in [Elixir](https://elixir-lang.org/).
 
@@ -14,10 +14,12 @@ This project aims to almost fully compatible with the original API, including pa
 The following software is required for local development:
 * Elixir 1.15
 * Erlang/OTP 26
+* NodeJS 18+
 
 #### Instructions
 To start the server locally, follow these steps:
 
+* Run `yarn` inside folder `assets` to install JavaScript dependencies
 * Run `mix setup` to install and setup dependencies
 * Start the API endpoint with `mix phx.server` or inside IEx with `iex -S mix phx.server`
 

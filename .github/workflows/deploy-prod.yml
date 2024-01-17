@@ -10,8 +10,11 @@ permissions:
 jobs:
   deploy:
 
-    name: Deploy app
+    name: Deploy app to PROD
     runs-on: ubuntu-latest
+    environment:
+      name: prod
+      url: https://swapi.profiq.com
 
     steps:
       - uses: actions/checkout@v3
