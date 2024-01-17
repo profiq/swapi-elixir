@@ -62,7 +62,7 @@ defmodule SWAPI.Repo.Seeds do
 
     %Starship{}
     |> change(id: starship["pk"], mglt: starship["fields"]["MGLT"])
-    |> Starship.changeset(starship["fields"])
+    |> Starship.changeset(fields)
     |> put_assoc(:pilots, Repo.all(from x in Person, where: x.id in ^pilots))
     |> Repo.insert!()
   end
