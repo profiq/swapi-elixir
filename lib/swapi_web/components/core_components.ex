@@ -491,6 +491,7 @@ defmodule SWAPIWeb.CoreComponents do
   slot :link do
     attr :to, :string, required: true
     attr :label, :string, required: true
+    attr :target, :string
   end
 
   def navbar(assigns) do
@@ -507,7 +508,7 @@ defmodule SWAPIWeb.CoreComponents do
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <%= for link <- @link do %>
               <li class="nav-item">
-                <a class="nav-link" href={link.to}><%= link.label %></a>
+                <a class="nav-link" href={link.to} target={Map.get(link, :target, "_self")}><%= link.label %></a>
               </li>
             <% end %>
           </ul>
