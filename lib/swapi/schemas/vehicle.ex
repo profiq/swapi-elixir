@@ -12,7 +12,7 @@ defmodule SWAPI.Schemas.Vehicle do
   @primary_key false
 
   schema "vehicles" do
-    belongs_to :transport, Transport, foreign_key: :id, primary_key: true
+    belongs_to :transport, Transport, foreign_key: :id, primary_key: true, on_replace: :update
 
     field :vehicle_class, :string
 

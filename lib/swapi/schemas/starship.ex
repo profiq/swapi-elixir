@@ -12,7 +12,7 @@ defmodule SWAPI.Schemas.Starship do
   @primary_key false
 
   schema "starships" do
-    belongs_to :transport, Transport, foreign_key: :id, primary_key: true
+    belongs_to :transport, Transport, foreign_key: :id, primary_key: true, on_replace: :update
 
     field :starship_class, :string
     field :hyperdrive_rating, :string
