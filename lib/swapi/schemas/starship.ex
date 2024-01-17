@@ -28,6 +28,8 @@ defmodule SWAPI.Schemas.Starship do
     |> cast(attrs, @required_fields ++ @optional_fields)
     |> validate_required(@required_fields)
     |> cast_assoc(:transport)
+    |> cast_assoc(:films)
+    |> cast_assoc(:pilots)
     |> foreign_key_constraint(:id)
   end
 end
