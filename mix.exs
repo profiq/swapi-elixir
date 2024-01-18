@@ -54,7 +54,8 @@ defmodule SWAPI.MixProject do
       {:dns_cluster, "~> 0.1.1"},
       {:plug_cowboy, "~> 2.5"},
       {:flop, "~> 0.24.1"},
-      {:open_api_spex, "~> 3.18"}
+      {:open_api_spex, "~> 3.18"},
+      {:makeup_json, "~> 0.1.0"}
     ]
   end
 
