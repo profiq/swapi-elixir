@@ -20,7 +20,7 @@ defmodule SWAPIWeb.RequesterLive do
     <div class={"border rounded mt-2"}>
       <%=
         @result
-        |> Makeup.highlight(lexer: Makeup.Lexers.JsonLexer, formatter_options: [css_class: "highlight m-2"])
+        |> Makeup.highlight(lexer: Makeup.Lexers.JsonLexer, formatter_options: [css_class: "highlight p-2 m-0"])
         |> raw()
       %>
     </div>

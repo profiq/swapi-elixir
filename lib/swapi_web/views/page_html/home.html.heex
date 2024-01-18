@@ -43,7 +43,7 @@
           |> Phoenix.ConnTest.dispatch(SWAPIWeb.Endpoint, :get, "/api/planets/1")
           |> Map.get(:resp_body)
           |> Jason.Formatter.pretty_print()
-          |> Makeup.highlight(lexer: Makeup.Lexers.JsonLexer, formatter_options: [css_class: "highlight m-2"])
+          |> Makeup.highlight(lexer: Makeup.Lexers.JsonLexer, formatter_options: [css_class: "highlight p-2 m-0"])
           |> raw()
         %>
       </div>
@@ -58,7 +58,7 @@
           |> Phoenix.ConnTest.dispatch(SWAPIWeb.Endpoint, :get, "/api/starships?search=\"death star\"")
           |> Map.get(:resp_body)
           |> Jason.Formatter.pretty_print()
-          |> Makeup.highlight(lexer: Makeup.Lexers.JsonLexer, formatter_options: [css_class: "highlight m-2"])
+          |> Makeup.highlight(lexer: Makeup.Lexers.JsonLexer, formatter_options: [css_class: "highlight p-2 m-0"])
           |> raw()
         %>
       </div>
