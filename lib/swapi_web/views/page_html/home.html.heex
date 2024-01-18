@@ -38,12 +38,14 @@
         <div class="border-bottom">
           <pre class="m-2">GET /api/planets/1</pre>
         </div>
-        <pre class="m-2"><%=
+        <%=
           Phoenix.ConnTest.build_conn()
           |> Phoenix.ConnTest.dispatch(SWAPIWeb.Endpoint, :get, "/api/planets/1")
           |> Map.get(:resp_body)
           |> Jason.Formatter.pretty_print()
-        %></pre>
+          |> Makeup.highlight(lexer: Makeup.Lexers.JsonLexer, formatter_options: [css_class: "highlight m-2"])
+          |> raw()
+        %>
       </div>
     </div>
     <div class="col mt-2">
@@ -51,12 +53,14 @@
         <div class="border-bottom">
           <pre class="m-2">GET /api/starships?search="death star"</pre>
         </div>
-        <pre class="m-2"><%=
+        <%=
           Phoenix.ConnTest.build_conn()
           |> Phoenix.ConnTest.dispatch(SWAPIWeb.Endpoint, :get, "/api/starships?search=\"death star\"")
           |> Map.get(:resp_body)
           |> Jason.Formatter.pretty_print()
-        %></pre>
+          |> Makeup.highlight(lexer: Makeup.Lexers.JsonLexer, formatter_options: [css_class: "highlight m-2"])
+          |> raw()
+        %>
       </div>
     </div>
   </div>
