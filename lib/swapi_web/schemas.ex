@@ -44,7 +44,7 @@ defmodule SWAPIWeb.Schemas do
       properties: %{
         count: %Schema{
           type: :integer,
-          description: "Total count of records"
+          description: "Total count of records in this list. Note that the IDs are not sequential, you should not make any assumptions about the range of valid IDs based on this value."
         },
         next: %Schema{
           type: :string,
