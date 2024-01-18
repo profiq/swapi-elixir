@@ -21,7 +21,14 @@ config :swapi, SWAPIWeb.Endpoint,
     layout: false
   ],
   pubsub_server: SWAPI.PubSub,
-  live_view: [signing_salt: "OT++cn9w"]
+  live_view: [signing_salt: "OT++cn9w"],
+  check_origin: [ # TODO: configure this via environment variables
+    "//localhost:4000",
+    "//swapi.profiq.com",
+    "//swapi-dev.profiq.com",
+    "//swapi-elixir.fly.dev",
+    "//swapi-elixir-dev.fly.dev"
+  ]
 
 # Configures the mailer
 #
