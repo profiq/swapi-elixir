@@ -13,7 +13,7 @@ defmodule SWAPIWeb.StarshipController do
   operation :index,
     summary: "Get all starship resources",
     parameters: [
-      search: [in: :query, description: "The search parameter may contain multiple search terms, which should be whitespace and/or comma separated. If multiple search terms are used then objects will be returned in the list only if all the provided terms are matched. Searches may contain quoted phrases with spaces, each phrase is considered as a single search term.", type: :string],
+      search: [in: :query, description: "One or more search terms, which should be whitespace and/or comma separated. If multiple search terms are used then objects will be returned in the list only if all the provided terms are matched. Searches may contain quoted phrases with spaces, each phrase is considered as a single search term.", type: :string],
       page: [in: :query, description: "Page number", type: :integer]
     ],
     responses: [
