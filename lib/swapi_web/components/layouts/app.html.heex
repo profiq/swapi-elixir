@@ -4,9 +4,11 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="csrf-token" content={get_csrf_token()} />
-    <.live_title>
-      <%= assigns[:page_title] || "SWAPI" %>
-    </.live_title>
+    <SEO.juice
+      conn={@conn}
+      config={SWAPIWeb.SEO.config()}
+      page_title={assigns[:page_title]}
+    />
     <link phx-track-static rel="stylesheet" href={~p"/assets/app.css"} />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto%20Slab">
     <script defer phx-track-static type="text/javascript" src={~p"/assets/app.js"}>
