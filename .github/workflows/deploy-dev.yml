@@ -22,7 +22,18 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+
       - uses: superfly/flyctl-actions/setup-flyctl@master
       - run: flyctl deploy --remote-only -c fly-dev.toml
         env:
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN_DEV }}
+      - name: "Install deps"
+        working-directory: ./cdn-config
+        run: npm install
+      - name: "Deploy CND Config"
+        working-directory: ./cdn-config
+        # Deploys new config and also purges cache
+        run: npx edgio deploy --property=swapi-elixir-profiq --organization=profiq --environment=dev --purge-cache-on-deploy --token ${{ secrets.EDGIO_DEPLOY_TOKEN }}
