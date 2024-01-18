@@ -38,40 +38,12 @@
         <div class="border-bottom">
           <pre class="m-2">GET /api/planets/1</pre>
         </div>
-        <pre class="m-2">
-{
-  "name": "Tatooine",
-  "url": "http://localhost:4000/api/planets/1",
-  "diameter": "10465",
-  "rotation_period": "23",
-  "orbital_period": "304",
-  "gravity": "1 standard",
-  "population": "200000",
-  "climate": "arid",
-  "terrain": "desert",
-  "surface_water": "1",
-  "residents": [
-    "http://localhost:4000/api/people/1",
-    "http://localhost:4000/api/people/2",
-    "http://localhost:4000/api/people/4",
-    "http://localhost:4000/api/people/6",
-    "http://localhost:4000/api/people/7",
-    "http://localhost:4000/api/people/8",
-    "http://localhost:4000/api/people/9",
-    "http://localhost:4000/api/people/11",
-    "http://localhost:4000/api/people/43",
-    "http://localhost:4000/api/people/62"
-  ],
-  "films": [
-    "http://localhost:4000/api/films/1",
-    "http://localhost:4000/api/films/3",
-    "http://localhost:4000/api/films/4",
-    "http://localhost:4000/api/films/5",
-    "http://localhost:4000/api/films/6"
-  ],
-  "created": "2014-12-09T13:50:49Z",
-  "edited": "2014-12-20T20:58:18Z"
-}</pre>
+        <pre class="m-2"><%=
+          Phoenix.ConnTest.build_conn()
+          |> Phoenix.ConnTest.dispatch(SWAPIWeb.Endpoint, :get, "/api/planets/1")
+          |> Map.get(:resp_body)
+          |> Jason.Formatter.pretty_print()
+        %></pre>
       </div>
     </div>
     <div class="col mt-2">
@@ -79,36 +51,12 @@
         <div class="border-bottom">
           <pre class="m-2">GET /api/starships?search="death star"</pre>
         </div>
-        <pre class="m-2">
-{
-  "count": 1,
-  "next": null,
-  "previous": null,
-  "results": [
-    {
-      "name": "Death Star",
-      "length": "120000",
-      "url": "http://localhost:4000/api/starships/9",
-      "films": [
-        "http://localhost:4000/api/films/1"
-      ],
-      "created": "2014-12-10T16:36:50Z",
-      "edited": "2014-12-20T21:26:24Z",
-      "model": "DS-1 Orbital Battle Station",
-      "starship_class": "Deep Space Mobile Battlestation",
-      "manufacturer": "Imperial Department of Military Research, Sienar Fleet Systems",
-      "cost_in_credits": "1000000000000",
-      "crew": "342,953",
-      "passengers": "843,342",
-      "max_atmosphering_speed": "n/a",
-      "hyperdrive_rating": "4.0",
-      "MGLT": "10",
-      "cargo_capacity": "1000000000000",
-      "consumables": "3 years",
-      "pilots": []
-    }
-  ]
-}</pre>
+        <pre class="m-2"><%=
+          Phoenix.ConnTest.build_conn()
+          |> Phoenix.ConnTest.dispatch(SWAPIWeb.Endpoint, :get, "/api/starships?search=\"death star\"")
+          |> Map.get(:resp_body)
+          |> Jason.Formatter.pretty_print()
+        %></pre>
       </div>
     </div>
   </div>
