@@ -24,6 +24,7 @@ defmodule SWAPIWeb.SpeciesJSON do
 
   defp data(%Species{} = species) do
     %{
+      id: species.id,
       name: species.name,
       classification: species.classification,
       designation: species.designation,

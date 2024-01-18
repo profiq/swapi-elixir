@@ -24,6 +24,7 @@ defmodule SWAPIWeb.FilmJSON do
 
   defp data(%Film{} = film) do
     %{
+      id: film.id,
       title: film.title,
       episode_id: film.episode_id,
       opening_crawl: film.opening_crawl,

@@ -24,6 +24,7 @@ defmodule SWAPIWeb.PersonJSON do
 
   defp data(%Person{} = person) do
     %{
+      id: person.id,
       name: person.name,
       birth_year: person.birth_year,
       eye_color: person.eye_color,

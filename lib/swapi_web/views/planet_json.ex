@@ -24,6 +24,7 @@ defmodule SWAPIWeb.PlanetJSON do
 
   defp data(%Planet{} = planet) do
     %{
+      id: planet.id,
       name: planet.name,
       diameter: planet.diameter,
       rotation_period: planet.rotation_period,

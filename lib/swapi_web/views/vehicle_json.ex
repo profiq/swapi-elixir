@@ -25,6 +25,7 @@ defmodule SWAPIWeb.VehicleJSON do
 
   defp data(%Vehicle{transport: %Transport{} = transport} = vehicle) do
     %{
+      id: transport.id,
       name: transport.name,
       model: transport.model,
       vehicle_class: vehicle.vehicle_class,

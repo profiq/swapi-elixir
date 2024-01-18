@@ -25,6 +25,7 @@ defmodule SWAPIWeb.StarshipJSON do
 
   defp data(%Starship{transport: %Transport{} = transport} = starship) do
     %{
+      id: transport.id,
       name: transport.name,
       model: transport.model,
       starship_class: starship.starship_class,
