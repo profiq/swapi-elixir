@@ -15,9 +15,31 @@ defmodule SWAPI.FilmsTest do
       assert Films.list_films() == [film]
     end
 
+    test "list_films/1 returns all films" do
+      film = film_fixture()
+      assert {:ok, {[^film], _}} = Films.list_films(%{})
+    end
+
+    test "search_films/1 returns only matching films" do
+      film = film_fixture(%{title: "foo bar baz"})
+      film_fixture(%{title: "foo bar"})
+      film_fixture(%{title: "foo"})
+
+      assert {:ok, {[^film], _}} = Films.search_films(["foo", "bar", "baz"], %{})
+    end
+
     test "get_film!/1 returns the film with given id" do
       film = film_fixture()
       assert Films.get_film!(film.id) == film
+    end
+
+    test "get_film/1 returns the film with given id" do
+      film = film_fixture()
+      assert Films.get_film(film.id) == {:ok, film}
+    end
+
+    test "get_film/1 returns error when given id does not exist" do
+      assert Films.get_film(42) == {:error, :not_found}
     end
 
     test "create_film/1 with valid data creates a film" do

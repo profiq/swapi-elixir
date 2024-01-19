@@ -29,9 +29,38 @@ defmodule SWAPI.VehiclesTest do
       assert Vehicles.list_vehicles() == [vehicle]
     end
 
+    test "list_vehicles/1 returns all vehicles" do
+      vehicle = vehicle_fixture()
+      assert {:ok, {[^vehicle], _}} = Vehicles.list_vehicles(%{})
+    end
+
+    test "search_vehicles/1 returns only matching vehicles" do
+      vehicle1 = vehicle_fixture(%{transport: %{name: "foo bar baz"}})
+      vehicle2 = vehicle_fixture(%{transport: %{model: "foo bar baz"}})
+
+      vehicle_fixture(%{transport: %{name: "foo bar"}})
+      vehicle_fixture(%{transport: %{name: "bar baz"}})
+      vehicle_fixture(%{transport: %{model: "foo"}})
+      vehicle_fixture(%{transport: %{model: "bar"}})
+
+      {:ok, {vehicles, _}} = Vehicles.search_vehicles(["foo", "bar", "baz"], %{})
+      assert length(vehicles) == 2
+      assert vehicle1 in vehicles
+      assert vehicle2 in vehicles
+    end
+
     test "get_vehicle!/1 returns the vehicle with given id" do
       vehicle = vehicle_fixture()
       assert Vehicles.get_vehicle!(vehicle.id) == vehicle
+    end
+
+    test "get_vehicle/1 returns the vehicle with given id" do
+      vehicle = vehicle_fixture()
+      assert Vehicles.get_vehicle(vehicle.id) == {:ok, vehicle}
+    end
+
+    test "get_vehicle/1 returns error when given id does not exist" do
+      assert Vehicles.get_vehicle(42) == {:error, :not_found}
     end
 
     test "create_vehicle/1 with valid data creates a vehicle" do

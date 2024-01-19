@@ -15,9 +15,31 @@ defmodule SWAPI.PeopleTest do
       assert People.list_people() == [person]
     end
 
+    test "list_people/1 returns all people" do
+      person = person_fixture()
+      assert {:ok, {[^person], _}} = People.list_people(%{})
+    end
+
+    test "search_people/1 returns only matching people" do
+      person = person_fixture(%{name: "foo bar baz"})
+      person_fixture(%{name: "foo bar"})
+      person_fixture(%{name: "foo"})
+
+      assert {:ok, {[^person], _}} = People.search_people(["foo", "bar", "baz"], %{})
+    end
+
     test "get_person!/1 returns the person with given id" do
       person = person_fixture()
       assert People.get_person!(person.id) == person
+    end
+
+    test "get_person/1 returns the person with given id" do
+      person = person_fixture()
+      assert People.get_person(person.id) == {:ok, person}
+    end
+
+    test "get_person/1 returns error when given id does not exist" do
+      assert People.get_person(42) == {:error, :not_found}
     end
 
     test "create_person/1 with valid data creates a person" do

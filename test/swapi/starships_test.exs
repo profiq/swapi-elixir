@@ -31,9 +31,38 @@ defmodule SWAPI.StarshipsTest do
       assert Starships.list_starships() == [starship]
     end
 
+    test "list_starships/1 returns all starships" do
+      starship = starship_fixture()
+      assert {:ok, {[^starship], _}} = Starships.list_starships(%{})
+    end
+
+    test "search_starships/1 returns only matching starships" do
+      starship1 = starship_fixture(%{transport: %{name: "foo bar baz"}})
+      starship2 = starship_fixture(%{transport: %{model: "foo bar baz"}})
+
+      starship_fixture(%{transport: %{name: "foo bar"}})
+      starship_fixture(%{transport: %{name: "bar baz"}})
+      starship_fixture(%{transport: %{model: "foo"}})
+      starship_fixture(%{transport: %{model: "bar"}})
+
+      {:ok, {starships, _}} = Starships.search_starships(["foo", "bar", "baz"], %{})
+      assert length(starships) == 2
+      assert starship1 in starships
+      assert starship2 in starships
+    end
+
     test "get_starship!/1 returns the starship with given id" do
       starship = starship_fixture()
       assert Starships.get_starship!(starship.id) == starship
+    end
+
+    test "get_starship/1 returns the starship with given id" do
+      starship = starship_fixture()
+      assert Starships.get_starship(starship.id) == {:ok, starship}
+    end
+
+    test "get_starship/1 returns error when given id does not exist" do
+      assert Starships.get_starship(42) == {:error, :not_found}
     end
 
     test "create_starship/1 with valid data creates a starship" do

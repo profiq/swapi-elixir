@@ -15,9 +15,31 @@ defmodule SWAPI.SpeciesTest do
       assert Species.list_species() == [species]
     end
 
+    test "list_species/1 returns all species" do
+      species = species_fixture()
+      assert {:ok, {[^species], _}} = Species.list_species(%{})
+    end
+
+    test "search_species/1 returns only matching species" do
+      species = species_fixture(%{name: "foo bar baz"})
+      species_fixture(%{name: "foo bar"})
+      species_fixture(%{name: "foo"})
+
+      assert {:ok, {[^species], _}} = Species.search_species(["foo", "bar", "baz"], %{})
+    end
+
     test "get_species!/1 returns the species with given id" do
       species = species_fixture()
       assert Species.get_species!(species.id) == species
+    end
+
+    test "get_species/1 returns the species with given id" do
+      species = species_fixture()
+      assert Species.get_species(species.id) == {:ok, species}
+    end
+
+    test "get_species/1 returns error when given id does not exist" do
+      assert Species.get_species(42) == {:error, :not_found}
     end
 
     test "create_species/1 with valid data creates a species" do

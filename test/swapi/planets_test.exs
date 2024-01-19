@@ -15,9 +15,31 @@ defmodule SWAPI.PlanetsTest do
       assert Planets.list_planets() == [planet]
     end
 
+    test "list_planets/1 returns all planets" do
+      planet = planet_fixture()
+      assert {:ok, {[^planet], _}} = Planets.list_planets(%{})
+    end
+
+    test "search_planets/1 returns only matching planets" do
+      planet = planet_fixture(%{name: "foo bar baz"})
+      planet_fixture(%{name: "foo bar"})
+      planet_fixture(%{name: "foo"})
+
+      assert {:ok, {[^planet], _}} = Planets.search_planets(["foo", "bar", "baz"], %{})
+    end
+
     test "get_planet!/1 returns the planet with given id" do
       planet = planet_fixture()
       assert Planets.get_planet!(planet.id) == planet
+    end
+
+    test "get_planet/1 returns the planet with given id" do
+      planet = planet_fixture()
+      assert Planets.get_planet(planet.id) == {:ok, planet}
+    end
+
+    test "get_planet/1 returns error when given id does not exist" do
+      assert Planets.get_planet(42) == {:error, :not_found}
     end
 
     test "create_planet/1 with valid data creates a planet" do
