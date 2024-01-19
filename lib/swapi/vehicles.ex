@@ -7,15 +7,11 @@ defmodule SWAPI.Vehicles do
   alias SWAPI.Schemas.Transport
   alias SWAPI.Schemas.Vehicle
 
-  import Ecto.Query, warn: false, except: [preload: 2]
+  import Ecto.Query, warn: false
   import SWAPI.Util
 
-  def preload(vehicle, :all) do
+  def preload_all(vehicle) do
     Repo.preload(vehicle, [:transport, :films, :pilots])
-  end
-
-  def preload(vehicle, associations) do
-    Repo.preload(vehicle, associations)
   end
 
   @doc """
@@ -30,12 +26,12 @@ defmodule SWAPI.Vehicles do
   def list_vehicles do
     Vehicle
     |> Repo.all()
-    |> preload(:all)
+    |> preload_all()
   end
 
   def list_vehicles(params) do
     with {:ok, {vehicles, meta}} <- paginate(Vehicle, params) do
-      {:ok, {preload(vehicles, :all), meta}}
+      {:ok, {preload_all(vehicles), meta}}
     end
   end
 
@@ -51,7 +47,7 @@ defmodule SWAPI.Vehicles do
       end)
 
     with {:ok, {vehicles, meta}} <- paginate(vehicles, params) do
-      {:ok, {preload(vehicles, :all), meta}}
+      {:ok, {preload_all(vehicles), meta}}
     end
   end
 
@@ -72,12 +68,12 @@ defmodule SWAPI.Vehicles do
   def get_vehicle!(id) do
     Vehicle
     |> Repo.get!(id)
-    |> preload(:all)
+    |> preload_all()
   end
 
   def get_vehicle(id) do
     with %Vehicle{} = vehicle <- Repo.get(Vehicle, id) do
-      {:ok, preload(vehicle, :all)}
+      {:ok, preload_all(vehicle)}
     else
       _ -> {:error, :not_found}
     end

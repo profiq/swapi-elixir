@@ -7,15 +7,11 @@ defmodule SWAPI.Starships do
   alias SWAPI.Schemas.Starship
   alias SWAPI.Schemas.Transport
 
-  import Ecto.Query, warn: false, except: [preload: 2]
+  import Ecto.Query, warn: false
   import SWAPI.Util
 
-  def preload(starship, :all) do
+  def preload_all(starship) do
     Repo.preload(starship, [:transport, :films, :pilots])
-  end
-
-  def preload(starship, associations) do
-    Repo.preload(starship, associations)
   end
 
   @doc """
@@ -30,12 +26,12 @@ defmodule SWAPI.Starships do
   def list_starships do
     Starship
     |> Repo.all()
-    |> preload(:all)
+    |> preload_all()
   end
 
   def list_starships(params) do
     with {:ok, {starships, meta}} <- paginate(Starship, params) do
-      {:ok, {preload(starships, :all), meta}}
+      {:ok, {preload_all(starships), meta}}
     end
   end
 
@@ -51,7 +47,7 @@ defmodule SWAPI.Starships do
       end)
 
     with {:ok, {starships, meta}} <- paginate(starships, params) do
-      {:ok, {preload(starships, :all), meta}}
+      {:ok, {preload_all(starships), meta}}
     end
   end
 
@@ -72,12 +68,12 @@ defmodule SWAPI.Starships do
   def get_starship!(id) do
     Starship
     |> Repo.get!(id)
-    |> preload(:all)
+    |> preload_all()
   end
 
   def get_starship(id) do
     with %Starship{} = starship <- Repo.get(Starship, id) do
-      {:ok, preload(starship, :all)}
+      {:ok, preload_all(starship)}
     else
       _ -> {:error, :not_found}
     end

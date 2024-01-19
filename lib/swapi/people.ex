@@ -6,15 +6,11 @@ defmodule SWAPI.People do
   alias SWAPI.Repo
   alias SWAPI.Schemas.Person
 
-  import Ecto.Query, warn: false, except: [preload: 2]
+  import Ecto.Query, warn: false
   import SWAPI.Util
 
-  def preload(person, :all) do
+  def preload_all(person) do
     Repo.preload(person, [:homeworld, :films, :species, :starships, :vehicles])
-  end
-
-  def preload(person, associations) do
-    Repo.preload(person, associations)
   end
 
   @doc """
@@ -29,12 +25,12 @@ defmodule SWAPI.People do
   def list_people do
     Person
     |> Repo.all()
-    |> preload(:all)
+    |> preload_all()
   end
 
   def list_people(params) do
     with {:ok, {people, meta}} <- paginate(Person, params) do
-      {:ok, {preload(people, :all), meta}}
+      {:ok, {preload_all(people), meta}}
     end
   end
 
@@ -46,7 +42,7 @@ defmodule SWAPI.People do
       end)
 
     with {:ok, {people, meta}} <- paginate(people, params) do
-      {:ok, {preload(people, :all), meta}}
+      {:ok, {preload_all(people), meta}}
     end
   end
 
@@ -67,12 +63,12 @@ defmodule SWAPI.People do
   def get_person!(id) do
     Person
     |> Repo.get!(id)
-    |> preload(:all)
+    |> preload_all()
   end
 
   def get_person(id) do
     with %Person{} = person <- Repo.get(Person, id) do
-      {:ok, preload(person, :all)}
+      {:ok, preload_all(person)}
     else
       _ -> {:error, :not_found}
     end

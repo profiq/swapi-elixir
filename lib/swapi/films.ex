@@ -6,15 +6,11 @@ defmodule SWAPI.Films do
   alias SWAPI.Repo
   alias SWAPI.Schemas.Film
 
-  import Ecto.Query, warn: false, except: [preload: 2]
+  import Ecto.Query, warn: false
   import SWAPI.Util
 
-  def preload(film, :all) do
+  def preload_all(film) do
     Repo.preload(film, [:species, :starships, :vehicles, :characters, :planets])
-  end
-
-  def preload(film, associations) do
-    Repo.preload(film, associations)
   end
 
   @doc """
@@ -29,12 +25,12 @@ defmodule SWAPI.Films do
   def list_films do
     Film
     |> Repo.all()
-    |> preload(:all)
+    |> preload_all()
   end
 
   def list_films(params) do
     with {:ok, {films, meta}} <- paginate(Film, params) do
-      {:ok, {preload(films, :all), meta}}
+      {:ok, {preload_all(films), meta}}
     end
   end
 
@@ -46,7 +42,7 @@ defmodule SWAPI.Films do
       end)
 
     with {:ok, {films, meta}} <- paginate(films, params) do
-      {:ok, {preload(films, :all), meta}}
+      {:ok, {preload_all(films), meta}}
     end
   end
 
@@ -67,12 +63,12 @@ defmodule SWAPI.Films do
   def get_film!(id) do
     Film
     |> Repo.get!(id)
-    |> preload(:all)
+    |> preload_all()
   end
 
   def get_film(id) do
     with %Film{} = film <- Repo.get(Film, id) do
-      {:ok, preload(film, :all)}
+      {:ok, preload_all(film)}
     else
       _ -> {:error, :not_found}
     end

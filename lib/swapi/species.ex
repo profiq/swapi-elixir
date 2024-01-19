@@ -6,15 +6,11 @@ defmodule SWAPI.Species do
   alias SWAPI.Repo
   alias SWAPI.Schemas.Species
 
-  import Ecto.Query, warn: false, except: [preload: 2]
+  import Ecto.Query, warn: false
   import SWAPI.Util
 
-  def preload(species, :all) do
+  def preload_all(species) do
     Repo.preload(species, [:homeworld, :people, :films])
-  end
-
-  def preload(species, associations) do
-    Repo.preload(species, associations)
   end
 
   @doc """
@@ -29,12 +25,12 @@ defmodule SWAPI.Species do
   def list_species do
     Species
     |> Repo.all()
-    |> preload(:all)
+    |> preload_all()
   end
 
   def list_species(params) do
     with {:ok, {species, meta}} <- paginate(Species, params) do
-      {:ok, {preload(species, :all), meta}}
+      {:ok, {preload_all(species), meta}}
     end
   end
 
@@ -46,7 +42,7 @@ defmodule SWAPI.Species do
       end)
 
     with {:ok, {species, meta}} <- paginate(species, params) do
-      {:ok, {preload(species, :all), meta}}
+      {:ok, {preload_all(species), meta}}
     end
   end
 
@@ -67,12 +63,12 @@ defmodule SWAPI.Species do
   def get_species!(id) do
     Species
     |> Repo.get!(id)
-    |> preload(:all)
+    |> preload_all()
   end
 
   def get_species(id) do
     with %Species{} = species <- Repo.get(Species, id) do
-      {:ok, preload(species, :all)}
+      {:ok, preload_all(species)}
     else
       _ -> {:error, :not_found}
     end
