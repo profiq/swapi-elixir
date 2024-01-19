@@ -3,11 +3,12 @@ defmodule SWAPI.Vehicles do
   The Vehicles context.
   """
 
-  import Ecto.Query, warn: false, except: [preload: 2]
   alias SWAPI.Repo
-
   alias SWAPI.Schemas.Transport
   alias SWAPI.Schemas.Vehicle
+
+  import Ecto.Query, warn: false, except: [preload: 2]
+  import SWAPI.Util
 
   def preload(vehicle, :all) do
     Repo.preload(vehicle, [:transport, :films, :pilots])
@@ -32,13 +33,9 @@ defmodule SWAPI.Vehicles do
     |> preload(:all)
   end
 
-  def list_vehicles(params), do: paginate(Vehicle, params)
-
-  defp paginate(query, params) do
-    with {:ok, {vehicles, meta}} <- Flop.validate_and_run(query, params) do
+  def list_vehicles(params) do
+    with {:ok, {vehicles, meta}} <- paginate(Vehicle, params) do
       {:ok, {preload(vehicles, :all), meta}}
-    else
-      _ -> {:error, :bad_request}
     end
   end
 
@@ -53,7 +50,9 @@ defmodule SWAPI.Vehicles do
         |> where([v, t], like(t.name, ^"%#{term}%") or like(t.model, ^"%#{term}%"))
       end)
 
-    paginate(vehicles, params)
+    with {:ok, {vehicles, meta}} <- paginate(vehicles, params) do
+      {:ok, {preload(vehicles, :all), meta}}
+    end
   end
 
   @doc """

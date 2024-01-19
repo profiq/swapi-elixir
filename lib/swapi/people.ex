@@ -3,10 +3,11 @@ defmodule SWAPI.People do
   The People context.
   """
 
-  import Ecto.Query, warn: false, except: [preload: 2]
   alias SWAPI.Repo
-
   alias SWAPI.Schemas.Person
+
+  import Ecto.Query, warn: false, except: [preload: 2]
+  import SWAPI.Util
 
   def preload(person, :all) do
     Repo.preload(person, [:homeworld, :films, :species, :starships, :vehicles])
@@ -31,13 +32,9 @@ defmodule SWAPI.People do
     |> preload(:all)
   end
 
-  def list_people(params), do: paginate(Person, params)
-
-  defp paginate(query, params) do
-    with {:ok, {people, meta}} <- Flop.validate_and_run(query, params) do
+  def list_people(params) do
+    with {:ok, {people, meta}} <- paginate(Person, params) do
       {:ok, {preload(people, :all), meta}}
-    else
-      _ -> {:error, :bad_request}
     end
   end
 
@@ -48,7 +45,9 @@ defmodule SWAPI.People do
         |> where([p], like(p.name, ^"%#{term}%"))
       end)
 
-    paginate(people, params)
+    with {:ok, {people, meta}} <- paginate(people, params) do
+      {:ok, {preload(people, :all), meta}}
+    end
   end
 
   @doc """

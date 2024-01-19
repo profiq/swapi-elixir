@@ -11,9 +11,9 @@ defmodule SWAPIWeb.VehicleJSON do
   """
   def index(%{vehicles: vehicles, meta: meta, conn: conn}) do
     %{
-      count: meta.total_count,
-      next: page_url(conn, meta.next_page),
-      previous: page_url(conn, meta.previous_page),
+      count: meta.count,
+      next: page_url(conn, meta.next),
+      previous: page_url(conn, meta.previous),
       results: for(vehicle <- vehicles, do: data(vehicle))
     }
   end

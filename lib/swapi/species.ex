@@ -3,10 +3,11 @@ defmodule SWAPI.Species do
   The Species context.
   """
 
-  import Ecto.Query, warn: false, except: [preload: 2]
   alias SWAPI.Repo
-
   alias SWAPI.Schemas.Species
+
+  import Ecto.Query, warn: false, except: [preload: 2]
+  import SWAPI.Util
 
   def preload(species, :all) do
     Repo.preload(species, [:homeworld, :people, :films])
@@ -31,13 +32,9 @@ defmodule SWAPI.Species do
     |> preload(:all)
   end
 
-  def list_species(params), do: paginate(Species, params)
-
-  defp paginate(query, params) do
-    with {:ok, {species, meta}} <- Flop.validate_and_run(query, params) do
+  def list_species(params) do
+    with {:ok, {species, meta}} <- paginate(Species, params) do
       {:ok, {preload(species, :all), meta}}
-    else
-      _ -> {:error, :bad_request}
     end
   end
 
@@ -48,7 +45,9 @@ defmodule SWAPI.Species do
         |> where([s], like(s.name, ^"%#{term}%"))
       end)
 
-    paginate(species, params)
+    with {:ok, {species, meta}} <- paginate(species, params) do
+      {:ok, {preload(species, :all), meta}}
+    end
   end
 
   @doc """

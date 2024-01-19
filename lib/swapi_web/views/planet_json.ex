@@ -10,9 +10,9 @@ defmodule SWAPIWeb.PlanetJSON do
   """
   def index(%{planets: planets, meta: meta, conn: conn}) do
     %{
-      count: meta.total_count,
-      next: page_url(conn, meta.next_page),
-      previous: page_url(conn, meta.previous_page),
+      count: meta.count,
+      next: page_url(conn, meta.next),
+      previous: page_url(conn, meta.previous),
       results: for(planet <- planets, do: data(planet))
     }
   end

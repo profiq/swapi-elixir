@@ -3,10 +3,11 @@ defmodule SWAPI.Films do
   The Films context.
   """
 
-  import Ecto.Query, warn: false, except: [preload: 2]
   alias SWAPI.Repo
-
   alias SWAPI.Schemas.Film
+
+  import Ecto.Query, warn: false, except: [preload: 2]
+  import SWAPI.Util
 
   def preload(film, :all) do
     Repo.preload(film, [:species, :starships, :vehicles, :characters, :planets])
@@ -31,13 +32,9 @@ defmodule SWAPI.Films do
     |> preload(:all)
   end
 
-  def list_films(params), do: paginate(Film, params)
-
-  defp paginate(query, params) do
-    with {:ok, {films, meta}} <- Flop.validate_and_run(query, params) do
+  def list_films(params) do
+    with {:ok, {films, meta}} <- paginate(Film, params) do
       {:ok, {preload(films, :all), meta}}
-    else
-      _ -> {:error, :bad_request}
     end
   end
 
@@ -48,7 +45,9 @@ defmodule SWAPI.Films do
         |> where([f], like(f.title, ^"%#{term}%"))
       end)
 
-    paginate(films, params)
+    with {:ok, {films, meta}} <- paginate(films, params) do
+      {:ok, {preload(films, :all), meta}}
+    end
   end
 
   @doc """

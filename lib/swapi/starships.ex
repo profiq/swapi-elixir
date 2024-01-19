@@ -3,11 +3,12 @@ defmodule SWAPI.Starships do
   The Starships context.
   """
 
-  import Ecto.Query, warn: false, except: [preload: 2]
   alias SWAPI.Repo
-
   alias SWAPI.Schemas.Starship
   alias SWAPI.Schemas.Transport
+
+  import Ecto.Query, warn: false, except: [preload: 2]
+  import SWAPI.Util
 
   def preload(starship, :all) do
     Repo.preload(starship, [:transport, :films, :pilots])
@@ -32,13 +33,9 @@ defmodule SWAPI.Starships do
     |> preload(:all)
   end
 
-  def list_starships(params), do: paginate(Starship, params)
-
-  defp paginate(query, params) do
-    with {:ok, {starships, meta}} <- Flop.validate_and_run(query, params) do
+  def list_starships(params) do
+    with {:ok, {starships, meta}} <- paginate(Starship, params) do
       {:ok, {preload(starships, :all), meta}}
-    else
-      _ -> {:error, :bad_request}
     end
   end
 
@@ -53,7 +50,9 @@ defmodule SWAPI.Starships do
         |> where([s, t], like(t.name, ^"%#{term}%") or like(t.model, ^"%#{term}%"))
       end)
 
-    paginate(starships, params)
+    with {:ok, {starships, meta}} <- paginate(starships, params) do
+      {:ok, {preload(starships, :all), meta}}
+    end
   end
 
   @doc """
