@@ -4,7 +4,6 @@ defmodule SWAPI.UtilTest do
   alias SWAPI.Util
   alias SWAPI.Schemas.Person
 
-  import Ecto.Query
   import SWAPI.PeopleFixtures
 
   describe "paginate/2" do
