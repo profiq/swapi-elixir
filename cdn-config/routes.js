@@ -5,6 +5,19 @@ import { Router, edgioRoutes } from '@edgio/core'
 // Edgio automatically respects all cache headers, we don't have to setup anything here.
 
 export default new Router()
+  // https://developer.chrome.com/blog/private-prefetch-proxy/
+  .match("/.well-known/traffic-advice", ({ send, setResponseHeader, cache }) => {
+    setResponseHeader("Content-Type", "application/trafficadvice+json");
+    send('[{"user_agent": "prefetch-proxy","fraction": 1.0}]', 200);
+    cache({
+      edge: {
+        maxAgeSeconds: 60 * 60 * 24,
+        staleWhileRevalidateSeconds: 60 * 60 * 24 * 7,
+        forcePrivateCaching: true,
+      },
+    });
+  })
+
   // Here is an example where we cache api/* at the edge but prevent caching in the browser
   // .match('/api/:path*', {
   //   caching: {
