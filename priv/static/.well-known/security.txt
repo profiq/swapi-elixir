@@ -1,0 +1,2 @@
+Contact: https://github.com/profiq/swapi-elixir
+Preferred-Languages: en, cz
