@@ -65,6 +65,11 @@ if config_env() == :prod do
   config :swapi, :cloudflare_web_analytics_enabled, true
   config :swapi, :cloudflare_web_analytics_token, System.get_env("CLOUDFLARE_WEB_ANALYTICS_TOKEN")
 
+  # Configure default check_origin
+  if check_origin = System.get_env("CHECK_ORIGIN") do
+    config :swapi, SWAPIWeb.Endpoint, check_origin: Jason.decode!(check_origin)
+  end
+
   # ## SSL Support
   #
   # To get SSL working, you will need to add the `https` key

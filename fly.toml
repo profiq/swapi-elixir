@@ -15,6 +15,7 @@ kill_signal = "SIGTERM"
   DATABASE_PATH = "/app/swapi.db"
   PHX_HOST = "swapi.profiq.com"
   PORT = "8080"
+  CHECK_ORIGIN = '["swapi.profiq.com", "swapi-elixir.fly.dev"]'
 
 [http_service]
   internal_port = 8080
