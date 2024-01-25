@@ -56,7 +56,8 @@ defmodule SWAPI.MixProject do
       {:flop, "~> 0.24.1"},
       {:open_api_spex, "~> 3.18"},
       {:makeup_json, "~> 0.1.0"},
-      {:cors_plug, "~> 3.0"}
+      {:cors_plug, "~> 3.0"},
+      {:credo, "~> 1.7", only: [:dev, :test], runtime: false}
     ]
   end
 
@@ -74,7 +75,11 @@ defmodule SWAPI.MixProject do
       test: ["ecto.create --quiet", "ecto.migrate --quiet", "test"],
       "assets.setup": ["sass.install --if-missing", "esbuild.install --if-missing"],
       "assets.build": ["sass default", "esbuild default"],
-      "assets.deploy": ["sass default --style=compressed", "esbuild default --minify", "phx.digest"]
+      "assets.deploy": [
+        "sass default --style=compressed",
+        "esbuild default --minify",
+        "phx.digest"
+      ]
     ]
   end
 end
