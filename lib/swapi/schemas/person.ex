@@ -8,7 +8,16 @@ defmodule SWAPI.Schemas.Person do
   alias SWAPI.Schemas.Starship
   alias SWAPI.Schemas.Vehicle
 
-  @required_fields [:name, :birth_year, :eye_color, :gender, :hair_color, :height, :mass, :skin_color]
+  @required_fields [
+    :name,
+    :birth_year,
+    :eye_color,
+    :gender,
+    :hair_color,
+    :height,
+    :mass,
+    :skin_color
+  ]
   @optional_fields [:id, :homeworld_id, :created, :edited]
 
   schema "people" do

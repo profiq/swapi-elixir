@@ -4,13 +4,14 @@ defmodule SWAPIWeb.RootController do
 
   action_fallback SWAPIWeb.FallbackController
 
-  tags ["root"]
+  tags(["root"])
 
-  operation :index,
+  operation(:index,
     summary: "Get URL roots for all available resources",
     responses: [
       ok: {"List of endpoints", "application/json", SWAPIWeb.Schemas.Root}
     ]
+  )
 
   def index(conn, _params) do
     render(conn, :index)

@@ -17,7 +17,8 @@ defmodule SWAPI.StarshipsFixtures do
         films: [],
         pilots: []
       })
-      |> Map.put(:transport,
+      |> Map.put(
+        :transport,
         attrs
         |> Map.get(:transport, %{})
         |> Enum.into(%{

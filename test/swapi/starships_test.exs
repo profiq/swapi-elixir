@@ -106,6 +106,7 @@ defmodule SWAPI.StarshipsTest do
 
     test "update_starship/2 with valid data updates the starship" do
       starship = starship_fixture()
+
       update_attrs = %{
         transport: %{
           name: "some updated name",

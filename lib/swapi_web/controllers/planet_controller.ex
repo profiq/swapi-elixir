@@ -8,17 +8,23 @@ defmodule SWAPIWeb.PlanetController do
 
   action_fallback SWAPIWeb.FallbackController
 
-  tags ["planets"]
+  tags(["planets"])
 
-  operation :index,
+  operation(:index,
     summary: "Get all planet resources",
     parameters: [
-      search: [in: :query, description: "One or more search terms, which should be whitespace and/or comma separated. If multiple search terms are used then objects will be returned in the list only if all the provided terms are matched. Searches may contain quoted phrases with spaces, each phrase is considered as a single search term.", type: :string],
+      search: [
+        in: :query,
+        description:
+          "One or more search terms, which should be whitespace and/or comma separated. If multiple search terms are used then objects will be returned in the list only if all the provided terms are matched. Searches may contain quoted phrases with spaces, each phrase is considered as a single search term.",
+        type: :string
+      ],
       page: [in: :query, description: "Page number", type: :integer]
     ],
     responses: [
       ok: {"List of planets", "application/json", SWAPIWeb.Schemas.PlanetList}
     ]
+  )
 
   def index(conn, %{"search" => query} = params) do
     query = parse_search_query(query)
@@ -34,7 +40,7 @@ defmodule SWAPIWeb.PlanetController do
     end
   end
 
-  operation :show,
+  operation(:show,
     summary: "Get a specific planet resource",
     parameters: [
       id: [in: :path, description: "Planet ID", type: :integer]
@@ -42,6 +48,7 @@ defmodule SWAPIWeb.PlanetController do
     responses: [
       ok: {"A planet", "application/json", SWAPIWeb.Schemas.Planet}
     ]
+  )
 
   def show(conn, %{"id" => id}) do
     with {:ok, planet} <- Planets.get_planet(id) do

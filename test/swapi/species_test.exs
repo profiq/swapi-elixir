@@ -8,7 +8,17 @@ defmodule SWAPI.SpeciesTest do
 
     import SWAPI.SpeciesFixtures
 
-    @invalid_attrs %{name: nil, classification: nil, designation: nil, average_height: nil, average_lifespan: nil, eye_colors: nil, hair_colors: nil, skin_colors: nil, language: nil}
+    @invalid_attrs %{
+      name: nil,
+      classification: nil,
+      designation: nil,
+      average_height: nil,
+      average_lifespan: nil,
+      eye_colors: nil,
+      hair_colors: nil,
+      skin_colors: nil,
+      language: nil
+    }
 
     test "list_species/0 returns all species" do
       species = species_fixture()
@@ -43,7 +53,17 @@ defmodule SWAPI.SpeciesTest do
     end
 
     test "create_species/1 with valid data creates a species" do
-      valid_attrs = %{name: "some name", classification: "some classification", designation: "some designation", average_height: "some average_height", average_lifespan: "some average_lifespan", eye_colors: "some eye_colors", hair_colors: "some hair_colors", skin_colors: "some skin_colors", language: "some language"}
+      valid_attrs = %{
+        name: "some name",
+        classification: "some classification",
+        designation: "some designation",
+        average_height: "some average_height",
+        average_lifespan: "some average_lifespan",
+        eye_colors: "some eye_colors",
+        hair_colors: "some hair_colors",
+        skin_colors: "some skin_colors",
+        language: "some language"
+      }
 
       assert {:ok, %SpeciesSchema{} = species} = Species.create_species(valid_attrs)
       assert species.name == "some name"
@@ -63,7 +83,18 @@ defmodule SWAPI.SpeciesTest do
 
     test "update_species/2 with valid data updates the species" do
       species = species_fixture()
-      update_attrs = %{name: "some updated name", classification: "some updated classification", designation: "some updated designation", average_height: "some updated average_height", average_lifespan: "some updated average_lifespan", eye_colors: "some updated eye_colors", hair_colors: "some updated hair_colors", skin_colors: "some updated skin_colors", language: "some updated language"}
+
+      update_attrs = %{
+        name: "some updated name",
+        classification: "some updated classification",
+        designation: "some updated designation",
+        average_height: "some updated average_height",
+        average_lifespan: "some updated average_lifespan",
+        eye_colors: "some updated eye_colors",
+        hair_colors: "some updated hair_colors",
+        skin_colors: "some updated skin_colors",
+        language: "some updated language"
+      }
 
       assert {:ok, %SpeciesSchema{} = species} = Species.update_species(species, update_attrs)
       assert species.name == "some updated name"

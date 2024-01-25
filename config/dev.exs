@@ -23,8 +23,9 @@ config :swapi, SWAPIWeb.Endpoint,
   secret_key_base: "bxDoNntW8i44YrGpBbtzBa1jgkxQfm2wIm35zD+3gQhd2HQYsFp++TvzL02K9LJe",
   watchers: [
     esbuild: {Esbuild, :install_and_run, [:default, ~w(--sourcemap=inline --watch)]},
-    sass: {DartSass, :install_and_run, [:default, ~w(--embed-source-map --source-map-urls=absolute --watch)]
-    }
+    sass:
+      {DartSass, :install_and_run,
+       [:default, ~w(--embed-source-map --source-map-urls=absolute --watch)]}
   ]
 
 # ## SSL Support

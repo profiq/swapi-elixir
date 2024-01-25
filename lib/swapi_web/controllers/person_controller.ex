@@ -8,17 +8,23 @@ defmodule SWAPIWeb.PersonController do
 
   action_fallback SWAPIWeb.FallbackController
 
-  tags ["people"]
+  tags(["people"])
 
-  operation :index,
+  operation(:index,
     summary: "Get all people resources",
     parameters: [
-      search: [in: :query, description: "One or more search terms, which should be whitespace and/or comma separated. If multiple search terms are used then objects will be returned in the list only if all the provided terms are matched. Searches may contain quoted phrases with spaces, each phrase is considered as a single search term.", type: :string],
+      search: [
+        in: :query,
+        description:
+          "One or more search terms, which should be whitespace and/or comma separated. If multiple search terms are used then objects will be returned in the list only if all the provided terms are matched. Searches may contain quoted phrases with spaces, each phrase is considered as a single search term.",
+        type: :string
+      ],
       page: [in: :query, description: "Page number", type: :integer]
     ],
     responses: [
       ok: {"List of people", "application/json", SWAPIWeb.Schemas.PersonList}
     ]
+  )
 
   def index(conn, %{"search" => query} = params) do
     query = parse_search_query(query) |> IO.inspect()
@@ -34,7 +40,7 @@ defmodule SWAPIWeb.PersonController do
     end
   end
 
-  operation :show,
+  operation(:show,
     summary: "Get a specific people resource",
     parameters: [
       id: [in: :path, description: "Person ID", type: :integer]
@@ -42,6 +48,7 @@ defmodule SWAPIWeb.PersonController do
     responses: [
       ok: {"A person", "application/json", SWAPIWeb.Schemas.Person}
     ]
+  )
 
   def show(conn, %{"id" => id}) do
     with {:ok, person} <- People.get_person(id) do

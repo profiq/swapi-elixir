@@ -6,7 +6,17 @@ defmodule SWAPI.Schemas.Species do
   alias SWAPI.Schemas.Person
   alias SWAPI.Schemas.Planet
 
-  @required_fields [:name, :classification, :designation, :average_height, :average_lifespan, :eye_colors, :hair_colors, :skin_colors, :language]
+  @required_fields [
+    :name,
+    :classification,
+    :designation,
+    :average_height,
+    :average_lifespan,
+    :eye_colors,
+    :hair_colors,
+    :skin_colors,
+    :language
+  ]
   @optional_fields [:id, :homeworld_id, :created, :edited]
 
   schema "species" do

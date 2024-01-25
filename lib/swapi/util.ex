@@ -4,10 +4,10 @@ defmodule SWAPI.Util do
   """
 
   @type page_info() :: %{
-    count: non_neg_integer,
-    next: non_neg_integer | nil,
-    previous: non_neg_integer | nil
-  }
+          count: non_neg_integer,
+          next: non_neg_integer | nil,
+          previous: non_neg_integer | nil
+        }
 
   @doc """
   Queries the given Ecto queryable with pagination.
@@ -16,7 +16,8 @@ defmodule SWAPI.Util do
   def paginate(query, params) do
     with {:ok, page} <- get_page_number(params),
          {list, meta} <- Flop.validate_and_run!(query, %Flop{page: page}) do
-      {:ok, {list, %{count: meta.total_count, next: meta.next_page, previous: meta.previous_page}}}
+      {:ok,
+       {list, %{count: meta.total_count, next: meta.next_page, previous: meta.previous_page}}}
     end
   end
 

@@ -8,17 +8,23 @@ defmodule SWAPIWeb.VehicleController do
 
   action_fallback SWAPIWeb.FallbackController
 
-  tags ["vehicles"]
+  tags(["vehicles"])
 
-  operation :index,
+  operation(:index,
     summary: "Get all vehicle resources",
     parameters: [
-      search: [in: :query, description: "One or more search terms, which should be whitespace and/or comma separated. If multiple search terms are used then objects will be returned in the list only if all the provided terms are matched. Searches may contain quoted phrases with spaces, each phrase is considered as a single search term.", type: :string],
+      search: [
+        in: :query,
+        description:
+          "One or more search terms, which should be whitespace and/or comma separated. If multiple search terms are used then objects will be returned in the list only if all the provided terms are matched. Searches may contain quoted phrases with spaces, each phrase is considered as a single search term.",
+        type: :string
+      ],
       page: [in: :query, description: "Page number", type: :integer]
     ],
     responses: [
       ok: {"List of vehicles", "application/json", SWAPIWeb.Schemas.VehicleList}
     ]
+  )
 
   def index(conn, %{"search" => query} = params) do
     query = parse_search_query(query)
@@ -34,7 +40,7 @@ defmodule SWAPIWeb.VehicleController do
     end
   end
 
-  operation :show,
+  operation(:show,
     summary: "Get a specific vehicle resource",
     parameters: [
       id: [in: :path, description: "Vehicle ID", type: :integer]
@@ -42,6 +48,7 @@ defmodule SWAPIWeb.VehicleController do
     responses: [
       ok: {"A vehicle", "application/json", SWAPIWeb.Schemas.Vehicle}
     ]
+  )
 
   def show(conn, %{"id" => id}) do
     with {:ok, vehicle} <- Vehicles.get_vehicle(id) do

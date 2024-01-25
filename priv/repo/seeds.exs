@@ -12,13 +12,20 @@
 
 defmodule SWAPI.Repo.Seeds do
   alias SWAPI.Repo
-  alias SWAPI.Schemas.{Film, Person, Planet, Species, Starship, Transport, Vehicle}
+  alias SWAPI.Schemas.Film
+  alias SWAPI.Schemas.Person
+  alias SWAPI.Schemas.Planet
+  alias SWAPI.Schemas.Species
+  alias SWAPI.Schemas.Starship
+  alias SWAPI.Schemas.Transport
+  alias SWAPI.Schemas.Vehicle
 
   import Ecto.Changeset
   import Ecto.Query
 
   defp insert_film(film) do
-    {assocs, fields} = Map.split(film["fields"], ["characters", "planets", "species", "starships", "vehicles"])
+    {assocs, fields} =
+      Map.split(film["fields"], ["characters", "planets", "species", "starships", "vehicles"])
 
     %Film{}
     |> change(id: film["pk"])

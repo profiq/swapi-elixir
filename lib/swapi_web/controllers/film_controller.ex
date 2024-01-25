@@ -8,17 +8,23 @@ defmodule SWAPIWeb.FilmController do
 
   action_fallback SWAPIWeb.FallbackController
 
-  tags ["films"]
+  tags(["films"])
 
-  operation :index,
+  operation(:index,
     summary: "Get all the film resources",
     parameters: [
-      search: [in: :query, description: "One or more search terms, which should be whitespace and/or comma separated. If multiple search terms are used then objects will be returned in the list only if all the provided terms are matched. Searches may contain quoted phrases with spaces, each phrase is considered as a single search term.", type: :string],
+      search: [
+        in: :query,
+        description:
+          "One or more search terms, which should be whitespace and/or comma separated. If multiple search terms are used then objects will be returned in the list only if all the provided terms are matched. Searches may contain quoted phrases with spaces, each phrase is considered as a single search term.",
+        type: :string
+      ],
       page: [in: :query, description: "Page number", type: :integer]
     ],
     responses: [
       ok: {"List of films", "application/json", SWAPIWeb.Schemas.FilmList}
     ]
+  )
 
   def index(conn, %{"search" => query} = params) do
     query = parse_search_query(query)
@@ -34,7 +40,7 @@ defmodule SWAPIWeb.FilmController do
     end
   end
 
-  operation :show,
+  operation(:show,
     summary: "Get a specific film resource",
     parameters: [
       id: [in: :path, description: "Film ID", type: :integer]
@@ -42,6 +48,7 @@ defmodule SWAPIWeb.FilmController do
     responses: [
       ok: {"A film", "application/json", SWAPIWeb.Schemas.Film}
     ]
+  )
 
   def show(conn, %{"id" => id}) do
     with {:ok, film} <- Films.get_film(id) do

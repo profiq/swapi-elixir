@@ -8,7 +8,16 @@ defmodule SWAPI.PeopleTest do
 
     import SWAPI.PeopleFixtures
 
-    @invalid_attrs %{name: nil, birth_year: nil, eye_color: nil, gender: nil, hair_color: nil, height: nil, mass: nil, skin_color: nil}
+    @invalid_attrs %{
+      name: nil,
+      birth_year: nil,
+      eye_color: nil,
+      gender: nil,
+      hair_color: nil,
+      height: nil,
+      mass: nil,
+      skin_color: nil
+    }
 
     test "list_people/0 returns all people" do
       person = person_fixture()
@@ -43,7 +52,16 @@ defmodule SWAPI.PeopleTest do
     end
 
     test "create_person/1 with valid data creates a person" do
-      valid_attrs = %{name: "some name", birth_year: "some birth_year", eye_color: "some eye_color", gender: "some gender", hair_color: "some hair_color", height: "some height", mass: "some mass",skin_color: "some skin_color"}
+      valid_attrs = %{
+        name: "some name",
+        birth_year: "some birth_year",
+        eye_color: "some eye_color",
+        gender: "some gender",
+        hair_color: "some hair_color",
+        height: "some height",
+        mass: "some mass",
+        skin_color: "some skin_color"
+      }
 
       assert {:ok, %Person{} = person} = People.create_person(valid_attrs)
       assert person.name == "some name"
@@ -62,7 +80,17 @@ defmodule SWAPI.PeopleTest do
 
     test "update_person/2 with valid data updates the person" do
       person = person_fixture()
-      update_attrs = %{name: "some updated name", birth_year: "some updated birth_year", eye_color: "some updated eye_color", gender: "some updated gender", hair_color: "some updated hair_color", height: "some updated height", mass: "some updated mass", skin_color: "some updated skin_color"}
+
+      update_attrs = %{
+        name: "some updated name",
+        birth_year: "some updated birth_year",
+        eye_color: "some updated eye_color",
+        gender: "some updated gender",
+        hair_color: "some updated hair_color",
+        height: "some updated height",
+        mass: "some updated mass",
+        skin_color: "some updated skin_color"
+      }
 
       assert {:ok, %Person{} = person} = People.update_person(person, update_attrs)
       assert person.name == "some updated name"

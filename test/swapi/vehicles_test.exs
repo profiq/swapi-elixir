@@ -100,6 +100,7 @@ defmodule SWAPI.VehiclesTest do
 
     test "update_vehicle/2 with valid data updates the vehicle" do
       vehicle = vehicle_fixture()
+
       update_attrs = %{
         transport: %{
           name: "some updated name",

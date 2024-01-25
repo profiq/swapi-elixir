@@ -8,7 +8,14 @@ defmodule SWAPI.FilmsTest do
 
     import SWAPI.FilmsFixtures
 
-    @invalid_attrs %{title: nil, episode_id: nil, opening_crawl: nil, director: nil, producer: nil, release_date: nil}
+    @invalid_attrs %{
+      title: nil,
+      episode_id: nil,
+      opening_crawl: nil,
+      director: nil,
+      producer: nil,
+      release_date: nil
+    }
 
     test "list_films/0 returns all films" do
       film = film_fixture()
@@ -43,7 +50,14 @@ defmodule SWAPI.FilmsTest do
     end
 
     test "create_film/1 with valid data creates a film" do
-      valid_attrs = %{title: "some title", episode_id: 42, opening_crawl: "some opening_crawl", director: "some director", producer: "some producer", release_date: ~D[2023-11-28]}
+      valid_attrs = %{
+        title: "some title",
+        episode_id: 42,
+        opening_crawl: "some opening_crawl",
+        director: "some director",
+        producer: "some producer",
+        release_date: ~D[2023-11-28]
+      }
 
       assert {:ok, %Film{} = film} = Films.create_film(valid_attrs)
       assert film.title == "some title"
@@ -60,7 +74,15 @@ defmodule SWAPI.FilmsTest do
 
     test "update_film/2 with valid data updates the film" do
       film = film_fixture()
-      update_attrs = %{title: "some updated title", episode_id: 43, opening_crawl: "some updated opening_crawl", director: "some updated director", producer: "some updated producer", release_date: ~D[2023-11-29]}
+
+      update_attrs = %{
+        title: "some updated title",
+        episode_id: 43,
+        opening_crawl: "some updated opening_crawl",
+        director: "some updated director",
+        producer: "some updated producer",
+        release_date: ~D[2023-11-29]
+      }
 
       assert {:ok, %Film{} = film} = Films.update_film(film, update_attrs)
       assert film.title == "some updated title"

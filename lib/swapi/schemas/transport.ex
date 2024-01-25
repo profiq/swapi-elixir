@@ -2,7 +2,18 @@ defmodule SWAPI.Schemas.Transport do
   use Ecto.Schema
   import Ecto.Changeset
 
-  @required_fields [:name, :model, :manufacturer, :length, :cost_in_credits, :crew, :passengers, :max_atmosphering_speed, :cargo_capacity, :consumables]
+  @required_fields [
+    :name,
+    :model,
+    :manufacturer,
+    :length,
+    :cost_in_credits,
+    :crew,
+    :passengers,
+    :max_atmosphering_speed,
+    :cargo_capacity,
+    :consumables
+  ]
   @optional_fields [:id, :created, :edited]
 
   schema "transport" do

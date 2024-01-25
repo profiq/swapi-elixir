@@ -5,7 +5,17 @@ defmodule SWAPI.Schemas.Planet do
   alias SWAPI.Schemas.Film
   alias SWAPI.Schemas.Person
 
-  @required_fields [:name, :diameter, :rotation_period, :orbital_period, :gravity, :population, :climate, :terrain, :surface_water]
+  @required_fields [
+    :name,
+    :diameter,
+    :rotation_period,
+    :orbital_period,
+    :gravity,
+    :population,
+    :climate,
+    :terrain,
+    :surface_water
+  ]
   @optional_fields [:id, :created, :edited]
 
   schema "planets" do

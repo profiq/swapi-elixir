@@ -5,7 +5,8 @@ defmodule SWAPIWeb.Schemas do
 
     OpenApiSpex.schema(%{
       type: :object,
-      description: "The Root resource provides information on all available resources within the API.",
+      description:
+        "The Root resource provides information on all available resources within the API.",
       properties: %{
         films: %Schema{
           type: :string,
@@ -44,7 +45,8 @@ defmodule SWAPIWeb.Schemas do
       properties: %{
         count: %Schema{
           type: :integer,
-          description: "Total count of records in this list. Note that the IDs are not sequential, you should not make any assumptions about the range of valid IDs based on this value."
+          description:
+            "Total count of records in this list. Note that the IDs are not sequential, you should not make any assumptions about the range of valid IDs based on this value."
         },
         next: %Schema{
           type: :string,
@@ -53,7 +55,7 @@ defmodule SWAPIWeb.Schemas do
         previous: %Schema{
           type: :string,
           description: "The URL to the previous page, or `null` if there is no previous page."
-        },
+        }
       }
     })
   end
@@ -191,7 +193,8 @@ defmodule SWAPIWeb.Schemas do
 
     OpenApiSpex.schema(%{
       type: :object,
-      description: "A People resource is an individual person or character within the Star Wars universe.",
+      description:
+        "A People resource is an individual person or character within the Star Wars universe.",
       allOf: [
         Item,
         %Schema{
@@ -203,19 +206,23 @@ defmodule SWAPIWeb.Schemas do
             },
             birth_year: %Schema{
               type: :string,
-              description: "The birth year of the person, using the in-universe standard of **BBY** or **ABY** - Before the Battle of Yavin or After the Battle of Yavin. The Battle of Yavin is a battle that occurs at the end of Star Wars episode IV: A New Hope."
+              description:
+                "The birth year of the person, using the in-universe standard of **BBY** or **ABY** - Before the Battle of Yavin or After the Battle of Yavin. The Battle of Yavin is a battle that occurs at the end of Star Wars episode IV: A New Hope."
             },
             eye_color: %Schema{
               type: :string,
-              description: "The eye color of this person. Will be \"unknown\" if not known or \"n/a\" if the person does not have an eye."
+              description:
+                "The eye color of this person. Will be \"unknown\" if not known or \"n/a\" if the person does not have an eye."
             },
             gender: %Schema{
               type: :string,
-              description: "The gender of this person. Either \"Male\", \"Female\" or \"unknown\", \"n/a\" if the person does not have a gender."
+              description:
+                "The gender of this person. Either \"Male\", \"Female\" or \"unknown\", \"n/a\" if the person does not have a gender."
             },
             hair_color: %Schema{
               type: :string,
-              description: "The hair color of this person. Will be \"unknown\" if not known or \"n/a\" if the person does not have hair."
+              description:
+                "The hair color of this person. Will be \"unknown\" if not known or \"n/a\" if the person does not have hair."
             },
             height: %Schema{
               type: :string,
@@ -231,7 +238,8 @@ defmodule SWAPIWeb.Schemas do
             },
             homeworld: %Schema{
               type: :string,
-              description: "The URL of a planet resource, a planet that this person was born on or inhabits."
+              description:
+                "The URL of a planet resource, a planet that this person was born on or inhabits."
             },
             films: %Schema{
               type: :array,
@@ -287,7 +295,8 @@ defmodule SWAPIWeb.Schemas do
 
     OpenApiSpex.schema(%{
       type: :object,
-      description: "A Planet resource is a large mass, planet or planetoid in the Star Wars Universe, at the time of 0 ABY.",
+      description:
+        "A Planet resource is a large mass, planet or planetoid in the Star Wars Universe, at the time of 0 ABY.",
       allOf: [
         Item,
         %Schema{
@@ -303,15 +312,18 @@ defmodule SWAPIWeb.Schemas do
             },
             rotation_period: %Schema{
               type: :string,
-              description: "The number of standard hours it takes for this planet to complete a single rotation on its axis."
+              description:
+                "The number of standard hours it takes for this planet to complete a single rotation on its axis."
             },
             orbital_period: %Schema{
               type: :string,
-              description: "The number of standard days it takes for this planet to complete a single orbit of its local star."
+              description:
+                "The number of standard days it takes for this planet to complete a single orbit of its local star."
             },
             gravity: %Schema{
               type: :string,
-              description: "A number denoting the gravity of this planet, where \"1\" is normal or 1 standard G. \"2\" is twice or 2 standard Gs. \"0.5\" is half or 0.5 standard Gs."
+              description:
+                "A number denoting the gravity of this planet, where \"1\" is normal or 1 standard G. \"2\" is twice or 2 standard Gs. \"0.5\" is half or 0.5 standard Gs."
             },
             population: %Schema{
               type: :string,
@@ -327,7 +339,8 @@ defmodule SWAPIWeb.Schemas do
             },
             surface_water: %Schema{
               type: :string,
-              description: "The percentage of the planet surface that is naturally occurring water or bodies of water."
+              description:
+                "The percentage of the planet surface that is naturally occurring water or bodies of water."
             },
             residents: %Schema{
               type: :array,
@@ -373,7 +386,8 @@ defmodule SWAPIWeb.Schemas do
 
     OpenApiSpex.schema(%{
       type: :object,
-      description: "A Species resource is a type of person or character within the Star Wars Universe.",
+      description:
+        "A Species resource is a type of person or character within the Star Wars Universe.",
       allOf: [
         Item,
         %Schema{
@@ -385,7 +399,8 @@ defmodule SWAPIWeb.Schemas do
             },
             classification: %Schema{
               type: :string,
-              description: "The classification of this species, such as \"mammal\" or \"reptile\"."
+              description:
+                "The classification of this species, such as \"mammal\" or \"reptile\"."
             },
             designation: %Schema{
               type: :string,
@@ -401,15 +416,18 @@ defmodule SWAPIWeb.Schemas do
             },
             eye_colors: %Schema{
               type: :string,
-              description: "A comma-separated string of common eye colors for this species, \"none\" if this species does not typically have eyes."
+              description:
+                "A comma-separated string of common eye colors for this species, \"none\" if this species does not typically have eyes."
             },
             hair_colors: %Schema{
               type: :string,
-              description: "A comma-separated string of common hair colors for this species, \"none\" if this species does not typically have hair."
+              description:
+                "A comma-separated string of common hair colors for this species, \"none\" if this species does not typically have hair."
             },
             skin_colors: %Schema{
               type: :string,
-              description: "A comma-separated string of common skin colors for this species, \"none\" if this species does not typically have skin."
+              description:
+                "A comma-separated string of common skin colors for this species, \"none\" if this species does not typically have skin."
             },
             language: %Schema{
               type: :string,
@@ -417,7 +435,8 @@ defmodule SWAPIWeb.Schemas do
             },
             homeworld: %Schema{
               type: :string,
-              description: "The URL of a planet resource, a planet that this species originates from."
+              description:
+                "The URL of a planet resource, a planet that this species originates from."
             },
             people: %Schema{
               type: :array,
@@ -463,7 +482,8 @@ defmodule SWAPIWeb.Schemas do
 
     OpenApiSpex.schema(%{
       type: :object,
-      description: "A Starship resource is a single transport craft that has hyperdrive capability.",
+      description:
+        "A Starship resource is a single transport craft that has hyperdrive capability.",
       allOf: [
         Item,
         %Schema{
@@ -475,11 +495,13 @@ defmodule SWAPIWeb.Schemas do
             },
             model: %Schema{
               type: :string,
-              description: "The model or official name of this starship. Such as \"T-65 X-wing\" or \"DS-1 Orbital Battle Station\"."
+              description:
+                "The model or official name of this starship. Such as \"T-65 X-wing\" or \"DS-1 Orbital Battle Station\"."
             },
             starship_class: %Schema{
               type: :string,
-              description: "The class of this starship, such as \"Starfighter\" or \"Deep Space Mobile Battlestation\""
+              description:
+                "The class of this starship, such as \"Starfighter\" or \"Deep Space Mobile Battlestation\""
             },
             manufacturer: %Schema{
               type: :string,
@@ -503,7 +525,8 @@ defmodule SWAPIWeb.Schemas do
             },
             max_atmosphering_speed: %Schema{
               type: :string,
-              description: "The maximum speed of this starship in the atmosphere. \"N/A\" if this starship is incapable of atmospheric flight."
+              description:
+                "The maximum speed of this starship in the atmosphere. \"N/A\" if this starship is incapable of atmospheric flight."
             },
             hyperdrive_rating: %Schema{
               type: :string,
@@ -511,7 +534,8 @@ defmodule SWAPIWeb.Schemas do
             },
             MGLT: %Schema{
               type: :string,
-              description: "The Maximum number of Megalights this starship can travel in a standard hour. A \"Megalight\" is a standard unit of distance and has never been defined before within the Star Wars universe. This figure is only really useful for measuring the difference in speed of starships. We can assume it is similar to AU, the distance between our Sun (Sol) and Earth."
+              description:
+                "The Maximum number of Megalights this starship can travel in a standard hour. A \"Megalight\" is a standard unit of distance and has never been defined before within the Star Wars universe. This figure is only really useful for measuring the difference in speed of starships. We can assume it is similar to AU, the distance between our Sun (Sol) and Earth."
             },
             cargo_capacity: %Schema{
               type: :string,
@@ -519,7 +543,8 @@ defmodule SWAPIWeb.Schemas do
             },
             consumables: %Schema{
               type: :string,
-              description: "The maximum length of time that this starship can provide consumables for its entire crew without having to resupply."
+              description:
+                "The maximum length of time that this starship can provide consumables for its entire crew without having to resupply."
             },
             films: %Schema{
               type: :array,
@@ -528,7 +553,8 @@ defmodule SWAPIWeb.Schemas do
             },
             pilots: %Schema{
               type: :array,
-              description: "An array of People URL Resources that this starship has been piloted by.",
+              description:
+                "An array of People URL Resources that this starship has been piloted by.",
               items: %Schema{type: :string}
             }
           }
@@ -565,7 +591,8 @@ defmodule SWAPIWeb.Schemas do
 
     OpenApiSpex.schema(%{
       type: :object,
-      description: "A Vehicle resource is a single transport craft that does not have hyperdrive capability.",
+      description:
+        "A Vehicle resource is a single transport craft that does not have hyperdrive capability.",
       allOf: [
         Item,
         %Schema{
@@ -573,11 +600,13 @@ defmodule SWAPIWeb.Schemas do
           properties: %{
             name: %Schema{
               type: :string,
-              description: "The name of this vehicle. The common name, such as \"Sand Crawler\" or \"Speeder bike\"."
+              description:
+                "The name of this vehicle. The common name, such as \"Sand Crawler\" or \"Speeder bike\"."
             },
             model: %Schema{
               type: :string,
-              description: "The model or official name of this vehicle. Such as \"All-Terrain Attack Transport\"."
+              description:
+                "The model or official name of this vehicle. Such as \"All-Terrain Attack Transport\"."
             },
             vehicle_class: %Schema{
               type: :string,
@@ -613,7 +642,8 @@ defmodule SWAPIWeb.Schemas do
             },
             consumables: %Schema{
               type: :string,
-              description: "The maximum length of time that this vehicle can provide consumables for its entire crew without having to resupply."
+              description:
+                "The maximum length of time that this vehicle can provide consumables for its entire crew without having to resupply."
             },
             films: %Schema{
               type: :array,
@@ -622,7 +652,8 @@ defmodule SWAPIWeb.Schemas do
             },
             pilots: %Schema{
               type: :array,
-              description: "An array of People URL Resources that this vehicle has been piloted by.",
+              description:
+                "An array of People URL Resources that this vehicle has been piloted by.",
               items: %Schema{type: :string}
             }
           }

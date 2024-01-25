@@ -20,11 +20,13 @@ defmodule SWAPI.UtilTest do
     end
 
     test "returns the specified page when page parameter is provided" do
-      assert {:ok, {_, %{count: 42, next: 3, previous: 1}}} = Util.paginate(Person, %{"page" => "2"})
+      assert {:ok, {_, %{count: 42, next: 3, previous: 1}}} =
+               Util.paginate(Person, %{"page" => "2"})
     end
 
     test "returns empty list when page parameter is out of bounds" do
-      assert {:ok, {[], %{count: 42, next: _, previous: _}}} = Util.paginate(Person, %{"page" => "100"})
+      assert {:ok, {[], %{count: 42, next: _, previous: _}}} =
+               Util.paginate(Person, %{"page" => "100"})
     end
 
     test "returns error when page parameter is not a number" do
