@@ -1,4 +1,8 @@
 defmodule SWAPI.Schemas.Transport do
+  @moduledoc """
+  Transport schema
+  """
+
   use Ecto.Schema
   import Ecto.Changeset
 

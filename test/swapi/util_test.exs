@@ -1,8 +1,8 @@
 defmodule SWAPI.UtilTest do
   use SWAPI.DataCase
 
-  alias SWAPI.Util
   alias SWAPI.Schemas.Person
+  alias SWAPI.Util
 
   import SWAPI.PeopleFixtures
 

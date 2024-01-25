@@ -1,4 +1,8 @@
 defmodule SWAPI.Schemas.Film do
+  @moduledoc """
+  Film schema
+  """
+
   use Ecto.Schema
   import Ecto.Changeset
 

@@ -1,4 +1,8 @@
 defmodule SWAPI.Schemas.Vehicle do
+  @moduledoc """
+  Vehicle schema
+  """
+
   use Ecto.Schema
   import Ecto.Changeset
 

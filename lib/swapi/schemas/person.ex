@@ -1,4 +1,8 @@
 defmodule SWAPI.Schemas.Person do
+  @moduledoc """
+  Person schema
+  """
+
   use Ecto.Schema
   import Ecto.Changeset
 

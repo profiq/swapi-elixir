@@ -1,4 +1,8 @@
 defmodule SWAPIWeb.SEO do
+  @moduledoc """
+  SEO definitions
+  """
+
   use SEO,
     json_library: Jason,
     site: &__MODULE__.site_config/1,

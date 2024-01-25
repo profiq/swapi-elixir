@@ -1,16 +1,14 @@
 defmodule SWAPIWeb.Router do
   use SWAPIWeb, :router
 
-  alias SWAPIWeb.{
-    PageController,
-    RootController,
-    PersonController,
-    FilmController,
-    StarshipController,
-    VehicleController,
-    SpeciesController,
-    PlanetController
-  }
+  alias SWAPIWeb.FilmController
+  alias SWAPIWeb.PageController
+  alias SWAPIWeb.PersonController
+  alias SWAPIWeb.PlanetController
+  alias SWAPIWeb.RootController
+  alias SWAPIWeb.SpeciesController
+  alias SWAPIWeb.StarshipController
+  alias SWAPIWeb.VehicleController
 
   pipeline :api do
     plug :accepts, ["json"]

@@ -67,10 +67,12 @@ defmodule SWAPI.Species do
   end
 
   def get_species(id) do
-    with %Species{} = species <- Repo.get(Species, id) do
-      {:ok, preload_all(species)}
-    else
-      _ -> {:error, :not_found}
+    case Repo.get(Species, id) do
+      %Species{} = species ->
+        {:ok, preload_all(species)}
+
+      _ ->
+        {:error, :not_found}
     end
   end
 

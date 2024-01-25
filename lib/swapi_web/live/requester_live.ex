@@ -69,7 +69,6 @@ defmodule SWAPIWeb.RequesterLive do
   end
 
   def handle_event("request", %{"url" => url}, socket) do
-    IO.inspect(socket)
     {:noreply, assign(socket, :result, dispatch(url))}
   end
 

@@ -72,10 +72,12 @@ defmodule SWAPI.Vehicles do
   end
 
   def get_vehicle(id) do
-    with %Vehicle{} = vehicle <- Repo.get(Vehicle, id) do
-      {:ok, preload_all(vehicle)}
-    else
-      _ -> {:error, :not_found}
+    case Repo.get(Vehicle, id) do
+      %Vehicle{} = vehicle ->
+        {:ok, preload_all(vehicle)}
+
+      _ ->
+        {:error, :not_found}
     end
   end
 

@@ -1,4 +1,8 @@
 defmodule SWAPI.Schemas.Planet do
+  @moduledoc """
+  Planet schema
+  """
+
   use Ecto.Schema
   import Ecto.Changeset
 

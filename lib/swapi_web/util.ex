@@ -1,4 +1,8 @@
 defmodule SWAPIWeb.Util do
+  @moduledoc """
+  Utility functions for the SWAPI web app
+  """
+
   alias SWAPIWeb.Endpoint
 
   def page_url(_conn, nil), do: nil

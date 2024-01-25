@@ -1,4 +1,8 @@
 defmodule SWAPI.Schemas.Species do
+  @moduledoc """
+  Species schema
+  """
+
   use Ecto.Schema
   import Ecto.Changeset
 

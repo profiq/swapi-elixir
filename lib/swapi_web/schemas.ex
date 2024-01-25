@@ -1,5 +1,11 @@
 defmodule SWAPIWeb.Schemas do
+  @moduledoc """
+  OpenAPI schemas for SWAPI resources
+  """
+
   defmodule Root do
+    @moduledoc false
+
     require OpenApiSpex
     alias OpenApiSpex.Schema
 
@@ -37,6 +43,8 @@ defmodule SWAPIWeb.Schemas do
   end
 
   defmodule List do
+    @moduledoc false
+
     require OpenApiSpex
     alias OpenApiSpex.Schema
 
@@ -61,6 +69,8 @@ defmodule SWAPIWeb.Schemas do
   end
 
   defmodule Item do
+    @moduledoc false
+
     require OpenApiSpex
     alias OpenApiSpex.Schema
 
@@ -84,6 +94,8 @@ defmodule SWAPIWeb.Schemas do
   end
 
   defmodule Error do
+    @moduledoc false
+
     require OpenApiSpex
     alias OpenApiSpex.Schema
 
@@ -99,6 +111,8 @@ defmodule SWAPIWeb.Schemas do
   end
 
   defmodule Film do
+    @moduledoc false
+
     require OpenApiSpex
     alias OpenApiSpex.Schema
 
@@ -166,6 +180,8 @@ defmodule SWAPIWeb.Schemas do
   end
 
   defmodule FilmList do
+    @moduledoc false
+
     require OpenApiSpex
     alias OpenApiSpex.Schema
 
@@ -188,6 +204,8 @@ defmodule SWAPIWeb.Schemas do
   end
 
   defmodule Person do
+    @moduledoc false
+
     require OpenApiSpex
     alias OpenApiSpex.Schema
 
@@ -268,6 +286,8 @@ defmodule SWAPIWeb.Schemas do
   end
 
   defmodule PersonList do
+    @moduledoc false
+
     require OpenApiSpex
     alias OpenApiSpex.Schema
 
@@ -290,6 +310,8 @@ defmodule SWAPIWeb.Schemas do
   end
 
   defmodule Planet do
+    @moduledoc false
+
     require OpenApiSpex
     alias OpenApiSpex.Schema
 
@@ -359,6 +381,8 @@ defmodule SWAPIWeb.Schemas do
   end
 
   defmodule PlanetList do
+    @moduledoc false
+
     require OpenApiSpex
     alias OpenApiSpex.Schema
 
@@ -381,6 +405,8 @@ defmodule SWAPIWeb.Schemas do
   end
 
   defmodule Species do
+    @moduledoc false
+
     require OpenApiSpex
     alias OpenApiSpex.Schema
 
@@ -455,6 +481,8 @@ defmodule SWAPIWeb.Schemas do
   end
 
   defmodule SpeciesList do
+    @moduledoc false
+
     require OpenApiSpex
     alias OpenApiSpex.Schema
 
@@ -477,6 +505,8 @@ defmodule SWAPIWeb.Schemas do
   end
 
   defmodule Starship do
+    @moduledoc false
+
     require OpenApiSpex
     alias OpenApiSpex.Schema
 
@@ -564,6 +594,8 @@ defmodule SWAPIWeb.Schemas do
   end
 
   defmodule StarshipList do
+    @moduledoc false
+
     require OpenApiSpex
     alias OpenApiSpex.Schema
 
@@ -586,6 +618,8 @@ defmodule SWAPIWeb.Schemas do
   end
 
   defmodule Vehicle do
+    @moduledoc false
+
     require OpenApiSpex
     alias OpenApiSpex.Schema
 
@@ -663,6 +697,8 @@ defmodule SWAPIWeb.Schemas do
   end
 
   defmodule VehicleList do
+    @moduledoc false
+
     require OpenApiSpex
     alias OpenApiSpex.Schema
 

@@ -1,4 +1,8 @@
 defmodule SWAPI.Schemas.Starship do
+  @moduledoc """
+  Starship schema
+  """
+
   use Ecto.Schema
   import Ecto.Changeset
 

@@ -67,10 +67,12 @@ defmodule SWAPI.People do
   end
 
   def get_person(id) do
-    with %Person{} = person <- Repo.get(Person, id) do
-      {:ok, preload_all(person)}
-    else
-      _ -> {:error, :not_found}
+    case Repo.get(Person, id) do
+      %Person{} = person ->
+        {:ok, preload_all(person)}
+
+      _ ->
+        {:error, :not_found}
     end
   end
 

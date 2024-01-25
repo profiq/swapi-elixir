@@ -72,10 +72,12 @@ defmodule SWAPI.Starships do
   end
 
   def get_starship(id) do
-    with %Starship{} = starship <- Repo.get(Starship, id) do
-      {:ok, preload_all(starship)}
-    else
-      _ -> {:error, :not_found}
+    case Repo.get(Starship, id) do
+      %Starship{} = starship ->
+        {:ok, preload_all(starship)}
+
+      _ ->
+        {:error, :not_found}
     end
   end
 

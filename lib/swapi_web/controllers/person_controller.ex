@@ -27,7 +27,7 @@ defmodule SWAPIWeb.PersonController do
   )
 
   def index(conn, %{"search" => query} = params) do
-    query = parse_search_query(query) |> IO.inspect()
+    query = parse_search_query(query)
 
     with {:ok, {people, meta}} <- People.search_people(query, params) do
       render(conn, :index, people: people, meta: meta)

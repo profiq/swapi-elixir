@@ -1,6 +1,14 @@
 defmodule SWAPIWeb.ApiSpec do
-  alias OpenApiSpex.{Info, OpenApi, Paths, Server}
-  alias SWAPIWeb.{Endpoint, Router}
+  @moduledoc """
+  OpenAPI specification module
+  """
+
+  alias OpenApiSpex.Info
+  alias OpenApiSpex.OpenApi
+  alias OpenApiSpex.Paths
+  alias OpenApiSpex.Server
+  alias SWAPIWeb.Endpoint
+  alias SWAPIWeb.Router
   @behaviour OpenApi
 
   @impl OpenApi

@@ -1,8 +1,8 @@
 defmodule SWAPIWeb.VehicleJSON do
   use SWAPIWeb, :verified_routes
 
-  alias SWAPI.Schemas.Vehicle
   alias SWAPI.Schemas.Transport
+  alias SWAPI.Schemas.Vehicle
 
   import SWAPIWeb.Util
 

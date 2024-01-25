@@ -67,10 +67,12 @@ defmodule SWAPI.Planets do
   end
 
   def get_planet(id) do
-    with %Planet{} = planet <- Repo.get(Planet, id) do
-      {:ok, preload_all(planet)}
-    else
-      _ -> {:error, :not_found}
+    case Repo.get(Planet, id) do
+      %Planet{} = planet ->
+        {:ok, preload_all(planet)}
+
+      _ ->
+        {:error, :not_found}
     end
   end
 

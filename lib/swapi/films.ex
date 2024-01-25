@@ -67,10 +67,12 @@ defmodule SWAPI.Films do
   end
 
   def get_film(id) do
-    with %Film{} = film <- Repo.get(Film, id) do
-      {:ok, preload_all(film)}
-    else
-      _ -> {:error, :not_found}
+    case Repo.get(Film, id) do
+      %Film{} = film ->
+        {:ok, preload_all(film)}
+
+      _ ->
+        {:error, :not_found}
     end
   end
 
