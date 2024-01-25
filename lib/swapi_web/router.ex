@@ -4,10 +4,10 @@ defmodule SWAPIWeb.Router do
   alias SWAPIWeb.FilmController
   alias SWAPIWeb.PageController
   alias SWAPIWeb.PersonController
-  alias SWAPIWeb.PlanetController
-  alias SWAPIWeb.RootController
   alias SWAPIWeb.SpeciesController
+  alias SWAPIWeb.PlanetController
   alias SWAPIWeb.StarshipController
+  alias SWAPIWeb.RootController
   alias SWAPIWeb.VehicleController
 
   pipeline :api do
