@@ -1,5 +1,5 @@
 # Elixir SWAPI
-![Build status](https://github.com/profiq/swapi-elixir/actions/workflows/tests.yml/badge.svg) [![Prod is hosted at swapi.profiq.com](https://img.shields.io/badge/prod-swapi.profiq.com-blue)](https://swapi.profiq.com/) [![Dev is hosted at swapi-dev.profiq.com](https://img.shields.io/badge/dev-swapi--dev.profiq.com-blue)](https://swapi-dev.profiq.com/)
+![Build status](https://github.com/profiq/swapi-elixir/actions/workflows/build.yml/badge.svg) [![Prod is hosted at swapi.profiq.com](https://img.shields.io/badge/prod-swapi.profiq.com-blue)](https://swapi.profiq.com/) [![Dev is hosted at swapi-dev.profiq.com](https://img.shields.io/badge/dev-swapi--dev.profiq.com-blue)](https://swapi-dev.profiq.com/)
 
 The [Star Wars API](https://swapi.dev/) (SWAPI), reimplemented in [Elixir](https://elixir-lang.org/).
 
