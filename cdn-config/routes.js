@@ -5,6 +5,15 @@ import { Router, edgioRoutes } from '@edgio/core'
 // Edgio automatically respects all cache headers, we don't have to setup anything here.
 
 export default new Router()
+  // Redirect HTTP to HTTPS
+  .match({
+      scheme: "HTTP",
+  }, ({ setResponseHeader, setResponseCode }) => {
+      setResponseHeader("Location", "https://%{host}%{normalized_uri}")
+      // Change to 301 when you see the correct redirect on your site
+      setResponseCode(302)
+  })
+
   // https://developer.chrome.com/blog/private-prefetch-proxy/
   .match("/.well-known/traffic-advice", ({ send, setResponseHeader, cache }) => {
     setResponseHeader("Content-Type", "application/trafficadvice+json");
