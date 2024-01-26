@@ -38,3 +38,7 @@ npm-debug.log
 # SQLite3 database files.
 *.db
 *.db-*
+
+# IDEs
+.vscode
+.idea
