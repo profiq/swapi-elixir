@@ -12,3 +12,5 @@ We have two enviroments:
 - `dev`
 
 CND Configurations are automatically deployed in the CI/CD
+- Dev automatically wipes all cache
+- Prod deployment doesn't delete cache (only front page), you have to do so manully if necessary 
