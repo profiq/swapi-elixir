@@ -3,6 +3,7 @@ defmodule SWAPIWeb.SEO do
   SEO definitions
   """
 
+  use SWAPIWeb, :verified_routes
   use SEO,
     json_library: Jason,
     site: &__MODULE__.site_config/1,
@@ -15,11 +16,13 @@ defmodule SWAPIWeb.SEO do
 
   def site_config(_conn) do
     SEO.Site.build(
-      default_title: "SWAPI",
+      default_title: "Elixir SWAPI",
       description: "The Star Wars API",
-      theme_color: "#FFEE00",
-      windows_tile_color: "#FFEE00",
-      mask_icon_color: "#FFEE00"
+      theme_color: "#2b3035",
+      windows_tile_color: "#2b3035",
+      mask_icon_color: "#2b3035",
+      mask_icon_url: url(~p"/safari-pinned-tab.svg"),
+      manifest_url: url(~p"/site.webmanifest")
     )
   end
 end

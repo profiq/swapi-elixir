@@ -18,7 +18,25 @@ defmodule SWAPIWeb do
   """
 
   def static_paths,
-    do: ~w(assets downloads fonts images favicon.ico robots.txt sitemap.txt .well-known)
+    do: [
+      "assets",
+      "android-chrome-192x192.png",
+      "android-chrome-512x512.png",
+      "apple-touch-icon.png",
+      "browserconfig.xml",
+      "downloads",
+      "fonts",
+      "favicon.ico",
+      "favicon-16x16.png",
+      "favicon-32x32.png",
+      "images",
+      "mstile-150x150.png",
+      "robots.txt",
+      "safari-pinned-tab.svg",
+      "site.webmanifest",
+      "sitemap.txt",
+      ".well-known"
+    ]
 
   def router do
     quote do
