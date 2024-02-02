@@ -1,3 +1,3 @@
-swapi.profiq.com/
-swapi.profiq.com/swaggerui
-swapi.profiq.com/postman
+https://swapi.profiq.com/
+https://swapi.profiq.com/swaggerui
+https://swapi.profiq.com/postman
