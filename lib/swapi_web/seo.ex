@@ -4,6 +4,7 @@ defmodule SWAPIWeb.SEO do
   """
 
   use SWAPIWeb, :verified_routes
+
   use SEO,
     json_library: Jason,
     site: &__MODULE__.site_config/1,
