@@ -21,6 +21,7 @@
     <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon={"{\"token\": \"#{Application.get_env(:swapi, :cloudflare_web_analytics_token)}\"}"}></script>
     <!-- End Cloudflare Web Analytics -->
     <% end %>
+    <meta property="og:image" content={~p"/images/og-image.webp"} />
   </head>
   <body>
     <.navbar>
@@ -28,10 +29,10 @@
         <img height="48px" width="48px" src="/images/logo.webp"/>
         <span class="align-self-center ms-2">Elixir SWAPI</span>
       </:logo>
-      <:link label="Home" to={"/"} />
-      <:link label="Documentation" to={"/swaggerui"} target="_blank" />
-      <:link label="Postman Collection" to={"/postman"} />
-      <:link label="OpenAPI Definition" to={"/api/openapi"} target="_blank" />
+      <:link label="Home" to={~p"/"} />
+      <:link label="Documentation" to={~p"/swaggerui"} target="_blank" />
+      <:link label="Postman Collection" to={~p"/postman"} />
+      <:link label="OpenAPI Definition" to={~p"/api/openapi"} target="_blank" />
     </.navbar>
     <main class="container-md py-4">
       <%= @inner_content %>
