@@ -5,6 +5,8 @@ The [Star Wars API](https://swapi.dev/) (SWAPI), reimplemented in [Elixir](https
 
 This project aims to almost fully compatible with the original API, including pagination and search query parameters.
 
+<img src='https://github.com/profiq/swapi-elixir/assets/8086995/a6f85798-9c95-4d32-a344-99a9572284bd' width='250'>
+
 ## Development
 ### Local environment
 #### Prerequisites
