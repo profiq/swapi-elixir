@@ -33,7 +33,7 @@ defmodule SWAPI.Util do
   defp get_page_number(%{"offset" => offset}) when is_binary(offset) do
     case Integer.parse(offset) do
       :error -> {:error, :bad_request}
-      {offset, _} -> {:ok, div(offset, @page_size)}
+      {offset, _} -> {:ok, div(offset - 1, @page_size) + 1}
     end
   end
 
