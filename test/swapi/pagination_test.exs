@@ -1,8 +1,8 @@
 defmodule SWAPI.PaginationTest do
   use SWAPI.DataCase
 
-  alias SWAPI.Schemas.Person
   alias SWAPI.Pagination
+  alias SWAPI.Schemas.Person
 
   import SWAPI.PeopleFixtures
 
