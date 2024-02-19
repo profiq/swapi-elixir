@@ -7,7 +7,7 @@ defmodule SWAPI.Species do
   alias SWAPI.Schemas.Species
 
   import Ecto.Query, warn: false
-  import SWAPI.Util
+  import SWAPI.Pagination
 
   def preload_all(species) do
     Repo.preload(species, [:homeworld, :people, :films])

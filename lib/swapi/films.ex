@@ -7,7 +7,7 @@ defmodule SWAPI.Films do
   alias SWAPI.Schemas.Film
 
   import Ecto.Query, warn: false
-  import SWAPI.Util
+  import SWAPI.Pagination
 
   def preload_all(film) do
     Repo.preload(film, [:species, :starships, :vehicles, :characters, :planets])

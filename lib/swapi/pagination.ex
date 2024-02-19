@@ -1,4 +1,4 @@
-defmodule SWAPI.Util do
+defmodule SWAPI.Pagination do
   @moduledoc """
   Utility functions
   """
