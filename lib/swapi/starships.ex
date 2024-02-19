@@ -8,7 +8,7 @@ defmodule SWAPI.Starships do
   alias SWAPI.Schemas.Transport
 
   import Ecto.Query, warn: false
-  import SWAPI.Util
+  import SWAPI.Pagination
 
   def preload_all(starship) do
     Repo.preload(starship, [:transport, :films, :pilots])

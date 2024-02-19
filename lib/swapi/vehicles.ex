@@ -8,7 +8,7 @@ defmodule SWAPI.Vehicles do
   alias SWAPI.Schemas.Vehicle
 
   import Ecto.Query, warn: false
-  import SWAPI.Util
+  import SWAPI.Pagination
 
   def preload_all(vehicle) do
     Repo.preload(vehicle, [:transport, :films, :pilots])

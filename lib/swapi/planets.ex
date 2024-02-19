@@ -7,7 +7,7 @@ defmodule SWAPI.Planets do
   alias SWAPI.Schemas.Planet
 
   import Ecto.Query, warn: false
-  import SWAPI.Util
+  import SWAPI.Pagination
 
   def preload_all(planet) do
     Repo.preload(planet, [:residents, :films])

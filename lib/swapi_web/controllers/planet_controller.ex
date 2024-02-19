@@ -2,6 +2,7 @@ defmodule SWAPIWeb.PlanetController do
   use SWAPIWeb, :controller
   use OpenApiSpex.ControllerSpecs
 
+  alias OpenApiSpex.Schema
   alias SWAPI.Planets
 
   import SWAPIWeb.Util
@@ -19,7 +20,32 @@ defmodule SWAPIWeb.PlanetController do
           "One or more search terms, which should be whitespace and/or comma separated. If multiple search terms are used then objects will be returned in the list only if all the provided terms are matched. Searches may contain quoted phrases with spaces, each phrase is considered as a single search term.",
         type: :string
       ],
-      page: [in: :query, description: "Page number", type: :integer]
+      page: [
+        in: :query,
+        description: "Page number. Cannot be used together with `offset`.",
+        schema: %Schema{
+          type: :integer,
+          minimum: 1,
+          default: 1
+        }
+      ],
+      offset: [
+        in: :query,
+        description: "Offset of the first item. Cannot be used together with `page`.",
+        schema: %Schema{
+          type: :integer,
+          minimum: 0
+        }
+      ],
+      limit: [
+        in: :query,
+        description: "Maximum number of items to return in the response.",
+        schema: %Schema{
+          type: :integer,
+          minimum: 1,
+          default: 10
+        }
+      ]
     ],
     responses: [
       ok: {"List of planets", "application/json", SWAPIWeb.Schemas.PlanetList}

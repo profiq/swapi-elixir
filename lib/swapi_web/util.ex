@@ -7,10 +7,10 @@ defmodule SWAPIWeb.Util do
 
   def page_url(_conn, nil), do: nil
 
-  def page_url(conn, page_number) do
+  def page_url(conn, {param, value}) do
     query_string =
       conn.query_params
-      |> Map.put("page", page_number)
+      |> Map.put(Atom.to_string(param), value)
       |> URI.encode_query()
 
     Endpoint.url()
