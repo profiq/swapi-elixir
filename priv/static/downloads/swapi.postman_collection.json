@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "6333cd27-d716-429d-a1ca-f03bfa14e5fc",
+		"_postman_id": "18566a62-1a7d-49d4-b59f-b8f11b8d2afb",
 		"name": "Elixir SWAPI",
 		"description": "The Star Wars API, reimplemented in Elixir",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
@@ -100,7 +100,7 @@
 									}
 								],
 								"url": {
-									"raw": "{{baseUrl}}/api/films?search=<string>&page=<integer>",
+									"raw": "{{baseUrl}}/api/films?search=<string>&page=1&offset=<integer>&limit=10",
 									"host": [
 										"{{baseUrl}}"
 									],
@@ -116,8 +116,18 @@
 										},
 										{
 											"key": "page",
+											"value": "1",
+											"description": "Page number. Cannot be used together with `offset`."
+										},
+										{
+											"key": "offset",
 											"value": "<integer>",
-											"description": "Page number"
+											"description": "Offset of the first item. Cannot be used together with `page`."
+										},
+										{
+											"key": "limit",
+											"value": "10",
+											"description": "Maximum number of items to return in the response."
 										}
 									]
 								}
@@ -134,7 +144,7 @@
 											}
 										],
 										"url": {
-											"raw": "{{baseUrl}}/api/films?search=<string>&page=<integer>",
+											"raw": "{{baseUrl}}/api/films?search=<string>&page=1&offset=<integer>&limit=10",
 											"host": [
 												"{{baseUrl}}"
 											],
@@ -150,8 +160,18 @@
 												},
 												{
 													"key": "page",
+													"value": "1",
+													"description": "Page number. Cannot be used together with `offset`."
+												},
+												{
+													"key": "offset",
 													"value": "<integer>",
-													"description": "Page number"
+													"description": "Offset of the first item. Cannot be used together with `page`."
+												},
+												{
+													"key": "limit",
+													"value": "10",
+													"description": "Maximum number of items to return in the response."
 												}
 											]
 										}
@@ -262,7 +282,7 @@
 									}
 								],
 								"url": {
-									"raw": "{{baseUrl}}/api/people?search=<string>&page=<integer>",
+									"raw": "{{baseUrl}}/api/people?search=<string>&page=1&offset=<integer>&limit=10",
 									"host": [
 										"{{baseUrl}}"
 									],
@@ -278,8 +298,18 @@
 										},
 										{
 											"key": "page",
+											"value": "1",
+											"description": "Page number. Cannot be used together with `offset`."
+										},
+										{
+											"key": "offset",
 											"value": "<integer>",
-											"description": "Page number"
+											"description": "Offset of the first item. Cannot be used together with `page`."
+										},
+										{
+											"key": "limit",
+											"value": "10",
+											"description": "Maximum number of items to return in the response."
 										}
 									]
 								}
@@ -296,7 +326,7 @@
 											}
 										],
 										"url": {
-											"raw": "{{baseUrl}}/api/people?search=<string>&page=<integer>",
+											"raw": "{{baseUrl}}/api/people?search=<string>&page=1&offset=<integer>&limit=10",
 											"host": [
 												"{{baseUrl}}"
 											],
@@ -312,8 +342,18 @@
 												},
 												{
 													"key": "page",
+													"value": "1",
+													"description": "Page number. Cannot be used together with `offset`."
+												},
+												{
+													"key": "offset",
 													"value": "<integer>",
-													"description": "Page number"
+													"description": "Offset of the first item. Cannot be used together with `page`."
+												},
+												{
+													"key": "limit",
+													"value": "10",
+													"description": "Maximum number of items to return in the response."
 												}
 											]
 										}
@@ -424,7 +464,7 @@
 									}
 								],
 								"url": {
-									"raw": "{{baseUrl}}/api/planets?search=<string>&page=<integer>",
+									"raw": "{{baseUrl}}/api/planets?search=<string>&page=1&offset=<integer>&limit=10",
 									"host": [
 										"{{baseUrl}}"
 									],
@@ -440,8 +480,18 @@
 										},
 										{
 											"key": "page",
+											"value": "1",
+											"description": "Page number. Cannot be used together with `offset`."
+										},
+										{
+											"key": "offset",
 											"value": "<integer>",
-											"description": "Page number"
+											"description": "Offset of the first item. Cannot be used together with `page`."
+										},
+										{
+											"key": "limit",
+											"value": "10",
+											"description": "Maximum number of items to return in the response."
 										}
 									]
 								}
@@ -458,7 +508,7 @@
 											}
 										],
 										"url": {
-											"raw": "{{baseUrl}}/api/planets?search=<string>&page=<integer>",
+											"raw": "{{baseUrl}}/api/planets?search=<string>&page=1&offset=<integer>&limit=10",
 											"host": [
 												"{{baseUrl}}"
 											],
@@ -474,8 +524,18 @@
 												},
 												{
 													"key": "page",
+													"value": "1",
+													"description": "Page number. Cannot be used together with `offset`."
+												},
+												{
+													"key": "offset",
 													"value": "<integer>",
-													"description": "Page number"
+													"description": "Offset of the first item. Cannot be used together with `page`."
+												},
+												{
+													"key": "limit",
+													"value": "10",
+													"description": "Maximum number of items to return in the response."
 												}
 											]
 										}
@@ -586,7 +646,7 @@
 									}
 								],
 								"url": {
-									"raw": "{{baseUrl}}/api/species?search=<string>&page=<integer>",
+									"raw": "{{baseUrl}}/api/species?search=<string>&page=1&offset=<integer>&limit=10",
 									"host": [
 										"{{baseUrl}}"
 									],
@@ -602,8 +662,18 @@
 										},
 										{
 											"key": "page",
+											"value": "1",
+											"description": "Page number. Cannot be used together with `offset`."
+										},
+										{
+											"key": "offset",
 											"value": "<integer>",
-											"description": "Page number"
+											"description": "Offset of the first item. Cannot be used together with `page`."
+										},
+										{
+											"key": "limit",
+											"value": "10",
+											"description": "Maximum number of items to return in the response."
 										}
 									]
 								}
@@ -620,7 +690,7 @@
 											}
 										],
 										"url": {
-											"raw": "{{baseUrl}}/api/species?search=<string>&page=<integer>",
+											"raw": "{{baseUrl}}/api/species?search=<string>&page=1&offset=<integer>&limit=10",
 											"host": [
 												"{{baseUrl}}"
 											],
@@ -636,8 +706,18 @@
 												},
 												{
 													"key": "page",
+													"value": "1",
+													"description": "Page number. Cannot be used together with `offset`."
+												},
+												{
+													"key": "offset",
 													"value": "<integer>",
-													"description": "Page number"
+													"description": "Offset of the first item. Cannot be used together with `page`."
+												},
+												{
+													"key": "limit",
+													"value": "10",
+													"description": "Maximum number of items to return in the response."
 												}
 											]
 										}
@@ -748,7 +828,7 @@
 									}
 								],
 								"url": {
-									"raw": "{{baseUrl}}/api/starships?search=<string>&page=<integer>",
+									"raw": "{{baseUrl}}/api/starships?search=<string>&page=1&offset=<integer>&limit=10",
 									"host": [
 										"{{baseUrl}}"
 									],
@@ -764,8 +844,18 @@
 										},
 										{
 											"key": "page",
+											"value": "1",
+											"description": "Page number. Cannot be used together with `offset`."
+										},
+										{
+											"key": "offset",
 											"value": "<integer>",
-											"description": "Page number"
+											"description": "Offset of the first item. Cannot be used together with `page`."
+										},
+										{
+											"key": "limit",
+											"value": "10",
+											"description": "Maximum number of items to return in the response."
 										}
 									]
 								}
@@ -782,7 +872,7 @@
 											}
 										],
 										"url": {
-											"raw": "{{baseUrl}}/api/starships?search=<string>&page=<integer>",
+											"raw": "{{baseUrl}}/api/starships?search=<string>&page=1&offset=<integer>&limit=10",
 											"host": [
 												"{{baseUrl}}"
 											],
@@ -798,8 +888,18 @@
 												},
 												{
 													"key": "page",
+													"value": "1",
+													"description": "Page number. Cannot be used together with `offset`."
+												},
+												{
+													"key": "offset",
 													"value": "<integer>",
-													"description": "Page number"
+													"description": "Offset of the first item. Cannot be used together with `page`."
+												},
+												{
+													"key": "limit",
+													"value": "10",
+													"description": "Maximum number of items to return in the response."
 												}
 											]
 										}
@@ -910,7 +1010,7 @@
 									}
 								],
 								"url": {
-									"raw": "{{baseUrl}}/api/vehicles?search=<string>&page=<integer>",
+									"raw": "{{baseUrl}}/api/vehicles?search=<string>&page=1&offset=<integer>&limit=10",
 									"host": [
 										"{{baseUrl}}"
 									],
@@ -926,8 +1026,18 @@
 										},
 										{
 											"key": "page",
+											"value": "1",
+											"description": "Page number. Cannot be used together with `offset`."
+										},
+										{
+											"key": "offset",
 											"value": "<integer>",
-											"description": "Page number"
+											"description": "Offset of the first item. Cannot be used together with `page`."
+										},
+										{
+											"key": "limit",
+											"value": "10",
+											"description": "Maximum number of items to return in the response."
 										}
 									]
 								}
@@ -944,7 +1054,7 @@
 											}
 										],
 										"url": {
-											"raw": "{{baseUrl}}/api/vehicles?search=<string>&page=<integer>",
+											"raw": "{{baseUrl}}/api/vehicles?search=<string>&page=1&offset=<integer>&limit=10",
 											"host": [
 												"{{baseUrl}}"
 											],
@@ -960,8 +1070,18 @@
 												},
 												{
 													"key": "page",
+													"value": "1",
+													"description": "Page number. Cannot be used together with `offset`."
+												},
+												{
+													"key": "offset",
 													"value": "<integer>",
-													"description": "Page number"
+													"description": "Offset of the first item. Cannot be used together with `page`."
+												},
+												{
+													"key": "limit",
+													"value": "10",
+													"description": "Maximum number of items to return in the response."
 												}
 											]
 										}
