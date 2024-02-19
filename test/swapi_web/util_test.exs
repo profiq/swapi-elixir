@@ -10,7 +10,12 @@ defmodule SWAPIWeb.UtilTest do
 
     test "returns a URL with the page number" do
       conn = %Plug.Conn{request_path: "/films", query_params: %{"page" => 1}}
-      assert SWAPIWeb.Util.page_url(conn, 2) == "#{Endpoint.url()}/films?page=2"
+      assert SWAPIWeb.Util.page_url(conn, {:page, 2}) == "#{Endpoint.url()}/films?page=2"
+    end
+
+    test "returns a URL with the offset number" do
+      conn = %Plug.Conn{request_path: "/films", query_params: %{"offset" => 1}}
+      assert SWAPIWeb.Util.page_url(conn, {:offset, 2}) == "#{Endpoint.url()}/films?offset=2"
     end
   end
 
