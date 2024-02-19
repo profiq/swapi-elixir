@@ -11,6 +11,8 @@ defmodule SWAPIWeb.Endpoint do
     same_site: "Lax"
   ]
 
+  @static_cache_control "public, max-age=86400, s-max-age=172800, stale-while-revalidate=2678400"
+
   socket "/live", Phoenix.LiveView.Socket,
     websocket: [connect_info: [session: @session_options]],
     longpoll: true
@@ -23,7 +25,8 @@ defmodule SWAPIWeb.Endpoint do
     at: "/",
     from: :swapi,
     gzip: false,
-    only: SWAPIWeb.static_paths()
+    only: SWAPIWeb.static_paths(),
+    cache_control_for_etags: @static_cache_control
 
   # Code reloading can be explicitly enabled under the
   # :code_reloader configuration of your endpoint.
