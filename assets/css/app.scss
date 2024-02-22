@@ -8,6 +8,21 @@
   border-radius: 0.75rem;
 }
 
+.request-method {
+  font-size: 75%;
+  border-color: var(--bs-border-color) !important;
+  color: var(--bs-secondary-color);
+}
+
+.request-url {
+  color: var(--bs-body-color)
+}
+
+.icon-tabler-copy {
+  stroke-width: 1.5;
+  stroke: var(--bs-primary-text-emphasis);
+}
+
 .highlight {
   //color: #f8f8f2;
   //background-color: #272822;
