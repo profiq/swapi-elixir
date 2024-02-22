@@ -28,8 +28,9 @@
   <div class="row row-cols-1 row-cols-lg-2">
     <div class="col mt-2">
       <div class="border rounded">
-        <div class="border-bottom">
-          <pre class="m-2">GET /api/planets/1</pre>
+        <div class="border-bottom p-2">
+          <span class="border rounded m-1 px-2 py-1 request-method">GET</span>
+          <code class="request-url"><%= url(~p"/api/planets/1") %></code>
         </div>
         <%=
           Phoenix.ConnTest.build_conn()
@@ -43,8 +44,9 @@
     </div>
     <div class="col mt-2">
       <div class="border rounded">
-        <div class="border-bottom">
-          <pre class="m-2">GET /api/starships?search="death star"</pre>
+        <div class="border-bottom p-2">
+          <span class="border rounded m-1 px-2 py-1 request-method">GET</span>
+          <code class="request-url"><%= url(~p"/api/starships?search=\"death star\"") %></code>
         </div>
         <%=
           Phoenix.ConnTest.build_conn()
