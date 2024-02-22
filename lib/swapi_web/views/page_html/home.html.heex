@@ -28,11 +28,11 @@
   <div class="row row-cols-1 row-cols-lg-2">
     <div class="col mt-2">
       <div class="border rounded">
-        <div class="border-bottom p-2 d-flex align-items-baseline">
-          <span class="border rounded me-2 px-2 py-1 request-method align-self-center">GET</span>
+        <div class="border-bottom p-2 d-flex align-items-center">
+          <span class="border rounded me-2 px-2 py-1 request-method">GET</span>
           <code id="urlExample1" class="request-url flex-grow-1"><%= url(~p"/api/planets/1") %></code>
           <button class="btn btn-link p-0" title="Copy URL" onclick="navigator.clipboard.writeText(document.getElementById('urlExample1').innerText)">
-            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="22" height="22">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="20" height="20">
               <symbol id="copyIcon" viewBox="0 0 24 24" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
                 <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
                 <path d="M7 7m0 2.667a2.667 2.667 0 0 1 2.667 -2.667h8.666a2.667 2.667 0 0 1 2.667 2.667v8.666a2.667 2.667 0 0 1 -2.667 2.667h-8.666a2.667 2.667 0 0 1 -2.667 -2.667z" />
@@ -54,11 +54,11 @@
     </div>
     <div class="col mt-2">
       <div class="border rounded">
-        <div class="border-bottom p-2 d-flex align-items-baseline">
-          <span class="border rounded me-2 px-2 py-1 request-method align-self-center">GET</span>
+        <div class="border-bottom p-2 d-flex align-items-center">
+          <span class="border rounded me-2 px-2 py-1 request-method">GET</span>
           <code id="urlExample2" class="request-url flex-grow-1"><%= url(~p"/api/starships?search=\"death star\"") %></code>
           <button class="btn btn-link p-0" title="Copy URL" onclick="navigator.clipboard.writeText(document.getElementById('urlExample2').innerText)">
-            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="22" height="22">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="20" height="20">
               <use href="#copyIcon"/>
             </svg>
           </button>
