@@ -49,10 +49,10 @@ function copyRequestBoxUrl() {
     let baseUrl = document.getElementById("baseUrl").innerText;
     let input = document.getElementById("url");
 
-    if(input.innerText === "") {
+    if(input.value === "") {
         navigator.clipboard.writeText(baseUrl + input.placeholder)
     } else {
-        navigator.clipboard.writeText(baseUrl + input.innerText)
+        navigator.clipboard.writeText(baseUrl + input.value)
     }
 }
 
