@@ -7,7 +7,12 @@ defmodule SWAPIWeb.RequesterLive do
     <.form for={@form} phx-change="change" phx-submit="request">
       <div class="input-group">
         <span class="input-group-text" id="baseUrl"><%= url(~p"/api/") %></span>
-        <.input type="text" class="form-control border-end-0" field={@form[:url]} placeholder={@placeholder} />
+        <.input
+          type="text"
+          class="form-control border-end-0"
+          field={@form[:url]}
+          placeholder={@placeholder}
+        />
         <button
           class="btn btn-link border border-start-0 d-flex align-items-center"
           title="Copy URL"
