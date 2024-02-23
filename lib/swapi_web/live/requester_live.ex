@@ -6,12 +6,12 @@ defmodule SWAPIWeb.RequesterLive do
     ~H"""
     <.form for={@form} phx-change="change" phx-submit="request">
       <div class="input-group">
-        <span class="input-group-text"><%= url(~p"/api/") %></span>
+        <span class="input-group-text" id="baseUrl"><%= url(~p"/api/") %></span>
         <.input type="text" class="form-control" field={@form[:url]} placeholder={@placeholder} />
         <button
           class="btn btn-link border d-flex align-items-center"
           title="Copy URL"
-          onclick="return false;"
+          onclick="copyRequestBoxUrl(); return false;"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"

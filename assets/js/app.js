@@ -40,3 +40,21 @@ liveSocket.connect()
 window.liveSocket = liveSocket
 
 import "bootstrap"
+
+function copyExampleUrl(elementId) {
+    navigator.clipboard.writeText(document.getElementById(elementId).innerText)
+}
+
+function copyRequestBoxUrl() {
+    let baseUrl = document.getElementById("baseUrl").innerText;
+    let input = document.getElementById("url");
+
+    if(input.innerText === "") {
+        navigator.clipboard.writeText(baseUrl + input.placeholder)
+    } else {
+        navigator.clipboard.writeText(baseUrl + input.innerText)
+    }
+}
+
+window.copyExampleUrl = copyExampleUrl;
+window.copyRequestBoxUrl = copyRequestBoxUrl;
