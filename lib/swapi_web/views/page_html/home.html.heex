@@ -13,20 +13,13 @@
     </div>
     <div class="col text-center">
       <h3>Usage</h3>
-      <p>
-        You can use this API in your projects and tutorials. You can find all resources under <a href="/swaggerui" target="_blank">documentation</a> tab.    
-        We also provide <a href="/postman" target="_blank">Postman collection</a> and <a href="/api/openapi" target="_blank">Open API definition</a>.
-        <br>
-        <br>
-        For performance testing, you can find <a href="https://github.com/profiq/swapi-elixir?tab=readme-ov-file#docker" target="_blank">docker image</a> on our GitHub repo and run the whole application yourself. 
-       </p>
+      <p>You can use this API in your projects and tutorials. You can find all resources under <a href="/swaggerui" target="_blank">documentation</a> tab. We also provide <a href="/postman" target="_blank">Postman collection</a> and <a href="/api/openapi" target="_blank">Open API definition</a>.</p>
+      <p>For performance testing, you can find <a href="https://github.com/profiq/swapi-elixir?tab=readme-ov-file#docker" target="_blank">docker image</a> on our GitHub repo and run the whole application yourself.</p>
     </div>
     <div class="col text-center">
       <h3>Original project</h3>
-      <p>This is rewrite of  <a href="https://swapi.dev/" target="_blank">swapi.dev</a> project. The motivation for our implementation is to provide <b>better performance</b> (CDN) and different technology aproach (Elixir).
-      <br>
-      <br>
-      Feel free to contribute on our   <a href="https://github.com/profiq/swapi-elixir" target="_blank">GitHub.</a> </p>
+      <p>This is rewrite of  <a href="https://swapi.dev/" target="_blank">swapi.dev</a> project. The motivation for our implementation is to provide <b>better performance</b> (CDN) and different technology aproach (Elixir).</p>
+      <p>Feel free to contribute on our   <a href="https://github.com/profiq/swapi-elixir" target="_blank">GitHub.</a></p>
     </div>
   </div>
 </div>
@@ -35,8 +28,19 @@
   <div class="row row-cols-1 row-cols-lg-2">
     <div class="col mt-2">
       <div class="border rounded">
-        <div class="border-bottom">
-          <pre class="m-2">GET /api/planets/1</pre>
+        <div class="border-bottom p-2 d-flex align-items-center">
+          <span class="border rounded me-2 px-2 py-1 request-method">GET</span>
+          <code id="urlExample1" class="request-url flex-grow-1"><%= url(~p"/api/planets/1") %></code>
+          <button class="btn btn-link p-0 d-flex align-items-center" title="Copy URL" onclick="copyExampleUrl('urlExample1')">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="20" height="20">
+              <symbol id="copyIcon" viewBox="0 0 24 24" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                <path d="M7 7m0 2.667a2.667 2.667 0 0 1 2.667 -2.667h8.666a2.667 2.667 0 0 1 2.667 2.667v8.666a2.667 2.667 0 0 1 -2.667 2.667h-8.666a2.667 2.667 0 0 1 -2.667 -2.667z" />
+                <path d="M4.012 16.737a2.005 2.005 0 0 1 -1.012 -1.737v-10c0 -1.1 .9 -2 2 -2h10c.75 0 1.158 .385 1.5 1" />
+              </symbol>
+              <use href="#copyIcon" />
+            </svg>
+          </button>
         </div>
         <%=
           Phoenix.ConnTest.build_conn()
@@ -50,8 +54,14 @@
     </div>
     <div class="col mt-2">
       <div class="border rounded">
-        <div class="border-bottom">
-          <pre class="m-2">GET /api/starships?search="death star"</pre>
+        <div class="border-bottom p-2 d-flex align-items-center">
+          <span class="border rounded me-2 px-2 py-1 request-method">GET</span>
+          <code id="urlExample2" class="request-url flex-grow-1"><%= url(~p"/api/starships?search=\"death star\"") %></code>
+          <button class="btn btn-link p-0 d-flex align-items-center" title="Copy URL" onclick="copyExampleUrl('urlExample2')">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="20" height="20">
+              <use href="#copyIcon"/>
+            </svg>
+          </button>
         </div>
         <%=
           Phoenix.ConnTest.build_conn()
