@@ -39,6 +39,10 @@ defmodule SWAPI.PaginationTest do
       assert %{id: 2} = person
     end
 
+    test "returns the correct number of items when page size is specified but no page or offset" do
+      assert {:ok, {[_], _}} = Pagination.paginate(Person, %{"limit" => "1"})
+    end
+
     test "works with offset parameter" do
       assert {:ok, {[person | _], _}} = Pagination.paginate(Person, %{"offset" => "1"})
       assert %{id: 2} = person

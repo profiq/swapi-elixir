@@ -60,7 +60,7 @@ defmodule SWAPI.Pagination do
     end
   end
 
-  defp do_paginate(query, _), do: do_paginate(query, %{"page" => "1"})
+  defp do_paginate(query, params), do: do_paginate(query, Map.put(params, "page", "1"))
 
   defp parse_integer(value) do
     case Integer.parse(value) do
