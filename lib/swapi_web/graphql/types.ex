@@ -7,4 +7,5 @@ defmodule SWAPIWeb.GraphQL.Types do
   import_types(SWAPIWeb.GraphQL.Types.Person)
   import_types(SWAPIWeb.GraphQL.Types.Planet)
   import_types(SWAPIWeb.GraphQL.Types.Species)
+  import_types(SWAPIWeb.GraphQL.Types.Starship)
 end
