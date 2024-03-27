@@ -17,4 +17,9 @@ defmodule SWAPIWeb.GraphQL.Resolvers.VehicleResolver do
       {:error, :not_found} -> {:error, "Vehicle not found"}
     end
   end
+
+  @spec search(map, Absinthe.Blueprint.t()) :: {:ok, list(Vehicle.t())} | {:error, any}
+  def search(%{search_terms: search_terms}, _info) do
+    {:ok, Vehicles.search_vehicles(search_terms)}
+  end
 end
