@@ -5,4 +5,5 @@ defmodule SWAPIWeb.GraphQL.Types do
 
   import_types(SWAPIWeb.GraphQL.Types.Film)
   import_types(SWAPIWeb.GraphQL.Types.Person)
+  import_types(SWAPIWeb.GraphQL.Types.Planet)
 end
