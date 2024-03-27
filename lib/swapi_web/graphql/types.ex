@@ -4,4 +4,5 @@ defmodule SWAPIWeb.GraphQL.Types do
   import_types(Absinthe.Type.Custom)
 
   import_types(SWAPIWeb.GraphQL.Types.Film)
+  import_types(SWAPIWeb.GraphQL.Types.Person)
 end
