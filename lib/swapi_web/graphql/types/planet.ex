@@ -36,13 +36,19 @@ defmodule SWAPIWeb.GraphQL.Types.Planet do
     field :surface_water, :string
 
     @desc "A list of people that live on this planet."
-    field :residents, list_of(:person)
+    field :residents, list_of(:person) do
+      resolve(dataloader(SWAPI))
+    end
 
     @desc "A list of species that live on this planet."
-    field :species, list_of(:species)
+    field :species, list_of(:species) do
+      resolve(dataloader(SWAPI))
+    end
 
     @desc "A list of films that this planet has appeared in."
-    field :films, list_of(:film)
+    field :films, list_of(:film) do
+      resolve(dataloader(SWAPI))
+    end
 
     @desc "The time that this resource was created."
     field :created, :datetime
