@@ -26,6 +26,15 @@ defmodule SWAPI.Species do
 
   def list_species(params), do: paginate(Species, params)
 
+  def search_species(terms) do
+    terms
+    |> Enum.reduce(Species, fn term, query ->
+      query
+      |> where([s], like(s.name, ^"%#{term}%"))
+    end)
+    |> Repo.all()
+  end
+
   def search_species(terms, params) do
     terms
     |> Enum.reduce(Species, fn term, query ->

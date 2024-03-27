@@ -26,6 +26,15 @@ defmodule SWAPI.Films do
 
   def list_films(params), do: paginate(Film, params)
 
+  def search_films(terms) do
+    terms
+    |> Enum.reduce(Film, fn term, query ->
+      query
+      |> where([f], like(f.title, ^"%#{term}%"))
+    end)
+    |> Repo.all()
+  end
+
   def search_films(terms, params) do
     terms
     |> Enum.reduce(Film, fn term, query ->

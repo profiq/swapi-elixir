@@ -17,4 +17,9 @@ defmodule SWAPIWeb.GraphQL.Resolvers.SpeciesResolver do
       {:error, :not_found} -> {:error, "Species not found"}
     end
   end
+
+  @spec search(map, Absinthe.Blueprint.t()) :: {:ok, list(Species.t())} | {:error, any}
+  def search(%{search_terms: search_terms}, _info) do
+    {:ok, Species.search_species(search_terms)}
+  end
 end

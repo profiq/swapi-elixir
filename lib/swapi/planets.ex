@@ -26,6 +26,15 @@ defmodule SWAPI.Planets do
 
   def list_planets(params), do: paginate(Planet, params)
 
+  def search_planets(terms) do
+    terms
+    |> Enum.reduce(Planet, fn term, query ->
+      query
+      |> where([p], like(p.name, ^"%#{term}%"))
+    end)
+    |> Repo.all()
+  end
+
   def search_planets(terms, params) do
     terms
     |> Enum.reduce(Planet, fn term, query ->

@@ -26,6 +26,15 @@ defmodule SWAPI.People do
 
   def list_people(params), do: paginate(Person, params)
 
+  def search_people(terms) do
+    terms
+    |> Enum.reduce(Person, fn term, query ->
+      query
+      |> where([p], like(p.name, ^"%#{term}%"))
+    end)
+    |> Repo.all()
+  end
+
   def search_people(terms, params) do
     terms
     |> Enum.reduce(Person, fn term, query ->

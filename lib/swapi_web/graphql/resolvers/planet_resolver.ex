@@ -17,4 +17,9 @@ defmodule SWAPIWeb.GraphQL.Resolvers.PlanetResolver do
       {:error, :not_found} -> {:error, "Planet not found"}
     end
   end
+
+  @spec search(map, Absinthe.Blueprint.t()) :: {:ok, list(Planet.t())} | {:error, any}
+  def search(%{search_terms: search_terms}, _info) do
+    {:ok, Planets.search_planets(search_terms)}
+  end
 end

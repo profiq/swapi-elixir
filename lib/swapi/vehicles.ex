@@ -27,6 +27,19 @@ defmodule SWAPI.Vehicles do
 
   def list_vehicles(params), do: paginate(Vehicle, params)
 
+  def search_vehicles(terms) do
+    query =
+      Vehicle
+      |> join(:left, [v], t in Transport, on: v.id == t.id)
+
+    terms
+    |> Enum.reduce(query, fn term, query ->
+      query
+      |> where([v, t], like(t.name, ^"%#{term}%") or like(t.model, ^"%#{term}%"))
+    end)
+    |> Repo.all()
+  end
+
   def search_vehicles(terms, params) do
     query =
       Vehicle
