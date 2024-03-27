@@ -17,4 +17,9 @@ defmodule SWAPIWeb.GraphQL.Resolvers.StarshipResolver do
       {:error, :not_found} -> {:error, "Starship not found"}
     end
   end
+
+  @spec search(map, Absinthe.Blueprint.t()) :: {:ok, list(Starship.t())} | {:error, any}
+  def search(%{search_terms: search_terms}, _info) do
+    {:ok, Starships.search_starships(search_terms)}
+  end
 end

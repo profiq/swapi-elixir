@@ -17,4 +17,9 @@ defmodule SWAPIWeb.GraphQL.Resolvers.FilmResolver do
       {:error, :not_found} -> {:error, "Film not found"}
     end
   end
+
+  @spec search(map, Absinthe.Blueprint.t()) :: {:ok, list(Film.t())} | {:error, any}
+  def search(%{search_terms: search_terms}, _info) do
+    {:ok, Films.search_films(search_terms)}
+  end
 end

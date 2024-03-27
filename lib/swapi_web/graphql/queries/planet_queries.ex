@@ -14,5 +14,13 @@ defmodule SWAPIWeb.GraphQL.Queries.PlanetQueries do
 
       resolve(&SWAPIWeb.GraphQL.Resolvers.PlanetResolver.one/2)
     end
+
+    @desc "Search planets by name."
+    field :search_planets, list_of(:planet) do
+      @desc "A list of search terms. If multiple search terms are used then objects will be returned in the list only if all the provided terms are matched."
+      arg(:search_terms, non_null(list_of(non_null(:string))))
+
+      resolve(&SWAPIWeb.GraphQL.Resolvers.PlanetResolver.search/2)
+    end
   end
 end

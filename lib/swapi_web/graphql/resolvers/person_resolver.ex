@@ -17,4 +17,9 @@ defmodule SWAPIWeb.GraphQL.Resolvers.PersonResolver do
       {:error, :not_found} -> {:error, "Person not found"}
     end
   end
+
+  @spec search(map, Absinthe.Blueprint.t()) :: {:ok, list(Person.t())} | {:error, any}
+  def search(%{search_terms: search_terms}, _info) do
+    {:ok, People.search_people(search_terms)}
+  end
 end
