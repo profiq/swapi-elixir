@@ -32,6 +32,8 @@ defmodule SWAPI.MixProject do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
+      {:absinthe, "~> 1.7.0"},
+      {:absinthe_plug, "~> 1.5"},
       {:phoenix, "~> 1.7.9"},
       {:phoenix_ecto, "~> 4.4"},
       {:ecto_sql, "~> 3.10"},
