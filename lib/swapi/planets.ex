@@ -22,28 +22,26 @@ defmodule SWAPI.Planets do
       [%Planet{}, ...]
 
   """
-  def list_planets do
-    Planet
-    |> Repo.all()
-    |> preload_all()
-  end
+  def list_planets, do: Repo.all(Planet)
 
-  def list_planets(params) do
-    with {:ok, {planets, meta}} <- paginate(Planet, params) do
-      {:ok, {preload_all(planets), meta}}
-    end
+  def list_planets(params), do: paginate(Planet, params)
+
+  def search_planets(terms) do
+    terms
+    |> Enum.reduce(Planet, fn term, query ->
+      query
+      |> where([p], like(p.name, ^"%#{term}%"))
+    end)
+    |> Repo.all()
   end
 
   def search_planets(terms, params) do
-    planets =
-      Enum.reduce(terms, Planet, fn term, query ->
-        query
-        |> where([p], like(p.name, ^"%#{term}%"))
-      end)
-
-    with {:ok, {planets, meta}} <- paginate(planets, params) do
-      {:ok, {preload_all(planets), meta}}
-    end
+    terms
+    |> Enum.reduce(Planet, fn term, query ->
+      query
+      |> where([p], like(p.name, ^"%#{term}%"))
+    end)
+    |> paginate(params)
   end
 
   @doc """
@@ -60,16 +58,12 @@ defmodule SWAPI.Planets do
       ** (Ecto.NoResultsError)
 
   """
-  def get_planet!(id) do
-    Planet
-    |> Repo.get!(id)
-    |> preload_all()
-  end
+  def get_planet!(id), do: Repo.get!(Planet, id)
 
   def get_planet(id) do
     case Repo.get(Planet, id) do
       %Planet{} = planet ->
-        {:ok, preload_all(planet)}
+        {:ok, planet}
 
       _ ->
         {:error, :not_found}
