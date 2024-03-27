@@ -19,6 +19,10 @@ defmodule SWAPIWeb.Router do
     plug OpenApiSpex.Plug.PutApiSpec, module: SWAPIWeb.ApiSpec
   end
 
+  pipeline :graphql do
+    plug :accepts, ["json", "graphql-response+json"]
+  end
+
   pipeline :browser do
     plug :accepts, ["html"]
     plug :fetch_session
@@ -51,6 +55,12 @@ defmodule SWAPIWeb.Router do
     resources "/planets", PlanetController, only: [:index, :show]
 
     get "/openapi", OpenApiSpex.Plug.RenderSpec, []
+  end
+
+  scope "/graphql" do
+    pipe_through :graphql
+
+    forward "/", Absinthe.Plug, schema: SWAPIWeb.GraphQL.Schema
   end
 
   # Enable LiveDashboard and Swoosh mailbox preview in development
