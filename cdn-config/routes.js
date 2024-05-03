@@ -27,6 +27,23 @@ export default new Router()
     });
   })
 
+  .match('/', ({ setComment }) => {
+    setComment("Homepage")
+  })
+
+  .match('/swaggerui', ({ setComment }) => {
+    setComment("Swagger UI")
+  })
+
+  .match('/postman', ({ setComment }) => {
+    setComment("Postman")
+  })
+  
+  .match('/api/:path*', ({ setComment }) => {
+    setComment("API route")
+  })
+
+
   // Here is an example where we cache api/* at the edge but prevent caching in the browser
   // .match('/api/:path*', {
   //   caching: {
