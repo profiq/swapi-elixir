@@ -22,28 +22,26 @@ defmodule SWAPI.Films do
       [%Film{}, ...]
 
   """
-  def list_films do
-    Film
-    |> Repo.all()
-    |> preload_all()
-  end
+  def list_films, do: Repo.all(Film)
 
-  def list_films(params) do
-    with {:ok, {films, meta}} <- paginate(Film, params) do
-      {:ok, {preload_all(films), meta}}
-    end
+  def list_films(params), do: paginate(Film, params)
+
+  def search_films(terms) do
+    terms
+    |> Enum.reduce(Film, fn term, query ->
+      query
+      |> where([f], like(f.title, ^"%#{term}%"))
+    end)
+    |> Repo.all()
   end
 
   def search_films(terms, params) do
-    films =
-      Enum.reduce(terms, Film, fn term, query ->
-        query
-        |> where([f], like(f.title, ^"%#{term}%"))
-      end)
-
-    with {:ok, {films, meta}} <- paginate(films, params) do
-      {:ok, {preload_all(films), meta}}
-    end
+    terms
+    |> Enum.reduce(Film, fn term, query ->
+      query
+      |> where([f], like(f.title, ^"%#{term}%"))
+    end)
+    |> paginate(params)
   end
 
   @doc """
@@ -60,16 +58,12 @@ defmodule SWAPI.Films do
       ** (Ecto.NoResultsError)
 
   """
-  def get_film!(id) do
-    Film
-    |> Repo.get!(id)
-    |> preload_all()
-  end
+  def get_film!(id), do: Repo.get!(Film, id)
 
   def get_film(id) do
     case Repo.get(Film, id) do
       %Film{} = film ->
-        {:ok, preload_all(film)}
+        {:ok, film}
 
       _ ->
         {:error, :not_found}
