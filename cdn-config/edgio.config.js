@@ -42,10 +42,10 @@ module.exports = {
           },
     
           // Uncomment the following to configure a shield
-          shields: {
-            "emea": "FRB",
-            "us_west": "LAA"
-          }
+          // shields: {
+          //   "emea": "FRB",
+          //   "us_west": "LAA"
+          // }
     
         },
       ],
@@ -74,10 +74,10 @@ module.exports = {
           },
     
           // Uncomment the following to configure a shield
-          shields: {
-            "emea": "FRB",
-            "us_west": "LAA"
-          }
+          // shields: {
+          //   "emea": "FRB",
+          //   "us_west": "LAA"
+          // }
     
         },
       ],
