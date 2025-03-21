@@ -56,13 +56,13 @@ defmodule SWAPIWeb.StarshipController do
     query = parse_search_query(query)
 
     with {:ok, {starships, meta}} <- Starships.search_starships(query, params) do
-      render(conn, :index, starships: starships, meta: meta)
+      render(conn, :index, starships: Starships.preload_all(starships), meta: meta)
     end
   end
 
   def index(conn, params) do
     with {:ok, {starships, meta}} <- Starships.list_starships(params) do
-      render(conn, :index, starships: starships, meta: meta)
+      render(conn, :index, starships: Starships.preload_all(starships), meta: meta)
     end
   end
 
@@ -78,7 +78,7 @@ defmodule SWAPIWeb.StarshipController do
 
   def show(conn, %{"id" => id}) do
     with {:ok, starship} <- Starships.get_starship(id) do
-      render(conn, :show, starship: starship)
+      render(conn, :show, starship: Starships.preload_all(starship))
     end
   end
 end

@@ -22,28 +22,26 @@ defmodule SWAPI.Species do
       [%Species{}, ...]
 
   """
-  def list_species do
-    Species
-    |> Repo.all()
-    |> preload_all()
-  end
+  def list_species, do: Repo.all(Species)
 
-  def list_species(params) do
-    with {:ok, {species, meta}} <- paginate(Species, params) do
-      {:ok, {preload_all(species), meta}}
-    end
+  def list_species(params), do: paginate(Species, params)
+
+  def search_species(terms) do
+    terms
+    |> Enum.reduce(Species, fn term, query ->
+      query
+      |> where([s], like(s.name, ^"%#{term}%"))
+    end)
+    |> Repo.all()
   end
 
   def search_species(terms, params) do
-    species =
-      Enum.reduce(terms, Species, fn term, query ->
-        query
-        |> where([s], like(s.name, ^"%#{term}%"))
-      end)
-
-    with {:ok, {species, meta}} <- paginate(species, params) do
-      {:ok, {preload_all(species), meta}}
-    end
+    terms
+    |> Enum.reduce(Species, fn term, query ->
+      query
+      |> where([s], like(s.name, ^"%#{term}%"))
+    end)
+    |> paginate(params)
   end
 
   @doc """
@@ -60,16 +58,12 @@ defmodule SWAPI.Species do
       ** (Ecto.NoResultsError)
 
   """
-  def get_species!(id) do
-    Species
-    |> Repo.get!(id)
-    |> preload_all()
-  end
+  def get_species!(id), do: Repo.get!(Species, id)
 
   def get_species(id) do
     case Repo.get(Species, id) do
       %Species{} = species ->
-        {:ok, preload_all(species)}
+        {:ok, species}
 
       _ ->
         {:error, :not_found}

@@ -23,16 +23,21 @@ defmodule SWAPI.Vehicles do
       [%Vehicle{}, ...]
 
   """
-  def list_vehicles do
-    Vehicle
-    |> Repo.all()
-    |> preload_all()
-  end
+  def list_vehicles, do: Repo.all(Vehicle)
 
-  def list_vehicles(params) do
-    with {:ok, {vehicles, meta}} <- paginate(Vehicle, params) do
-      {:ok, {preload_all(vehicles), meta}}
-    end
+  def list_vehicles(params), do: paginate(Vehicle, params)
+
+  def search_vehicles(terms) do
+    query =
+      Vehicle
+      |> join(:left, [v], t in Transport, on: v.id == t.id)
+
+    terms
+    |> Enum.reduce(query, fn term, query ->
+      query
+      |> where([v, t], like(t.name, ^"%#{term}%") or like(t.model, ^"%#{term}%"))
+    end)
+    |> Repo.all()
   end
 
   def search_vehicles(terms, params) do
@@ -40,15 +45,12 @@ defmodule SWAPI.Vehicles do
       Vehicle
       |> join(:left, [v], t in Transport, on: v.id == t.id)
 
-    vehicles =
-      Enum.reduce(terms, query, fn term, query ->
-        query
-        |> where([v, t], like(t.name, ^"%#{term}%") or like(t.model, ^"%#{term}%"))
-      end)
-
-    with {:ok, {vehicles, meta}} <- paginate(vehicles, params) do
-      {:ok, {preload_all(vehicles), meta}}
-    end
+    terms
+    |> Enum.reduce(query, fn term, query ->
+      query
+      |> where([v, t], like(t.name, ^"%#{term}%") or like(t.model, ^"%#{term}%"))
+    end)
+    |> paginate(params)
   end
 
   @doc """
@@ -65,16 +67,12 @@ defmodule SWAPI.Vehicles do
       ** (Ecto.NoResultsError)
 
   """
-  def get_vehicle!(id) do
-    Vehicle
-    |> Repo.get!(id)
-    |> preload_all()
-  end
+  def get_vehicle!(id), do: Repo.get!(Vehicle, id)
 
   def get_vehicle(id) do
     case Repo.get(Vehicle, id) do
       %Vehicle{} = vehicle ->
-        {:ok, preload_all(vehicle)}
+        {:ok, vehicle}
 
       _ ->
         {:error, :not_found}

@@ -56,13 +56,13 @@ defmodule SWAPIWeb.VehicleController do
     query = parse_search_query(query)
 
     with {:ok, {vehicles, meta}} <- Vehicles.search_vehicles(query, params) do
-      render(conn, :index, vehicles: vehicles, meta: meta)
+      render(conn, :index, vehicles: Vehicles.preload_all(vehicles), meta: meta)
     end
   end
 
   def index(conn, params) do
     with {:ok, {vehicles, meta}} <- Vehicles.list_vehicles(params) do
-      render(conn, :index, vehicles: vehicles, meta: meta)
+      render(conn, :index, vehicles: Vehicles.preload_all(vehicles), meta: meta)
     end
   end
 
@@ -78,7 +78,7 @@ defmodule SWAPIWeb.VehicleController do
 
   def show(conn, %{"id" => id}) do
     with {:ok, vehicle} <- Vehicles.get_vehicle(id) do
-      render(conn, :show, vehicle: vehicle)
+      render(conn, :show, vehicle: Vehicles.preload_all(vehicle))
     end
   end
 end
