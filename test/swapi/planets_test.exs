@@ -22,12 +22,13 @@ defmodule SWAPI.PlanetsTest do
 
     test "list_planets/0 returns all planets" do
       planet = planet_fixture()
-      assert Planets.list_planets() == [planet]
+      assert [^planet] = Planets.list_planets() |> Enum.map(&Planets.preload_all/1)
     end
 
     test "list_planets/1 returns all planets" do
       planet = planet_fixture()
-      assert {:ok, {[^planet], _}} = Planets.list_planets(%{})
+      assert {:ok, {planets, _}} = Planets.list_planets(%{})
+      assert [^planet] = Enum.map(planets, &Planets.preload_all/1)
     end
 
     test "search_planets/1 returns only matching planets" do
@@ -35,21 +36,23 @@ defmodule SWAPI.PlanetsTest do
       planet_fixture(%{name: "foo bar"})
       planet_fixture(%{name: "foo"})
 
-      assert {:ok, {[^planet], _}} = Planets.search_planets(["foo", "bar", "baz"], %{})
+      assert {:ok, {planets, _}} = Planets.search_planets(["foo", "bar", "baz"], %{})
+      assert [^planet] = Enum.map(planets, &Planets.preload_all/1)
     end
 
     test "get_planet!/1 returns the planet with given id" do
       planet = planet_fixture()
-      assert Planets.get_planet!(planet.id) == planet
+      assert ^planet = Planets.get_planet!(planet.id) |> Planets.preload_all()
     end
 
     test "get_planet/1 returns the planet with given id" do
       planet = planet_fixture()
-      assert Planets.get_planet(planet.id) == {:ok, planet}
+      assert {:ok, returned_planet} = Planets.get_planet(planet.id)
+      assert ^planet = Planets.preload_all(returned_planet)
     end
 
     test "get_planet/1 returns error when given id does not exist" do
-      assert Planets.get_planet(42) == {:error, :not_found}
+      assert {:error, :not_found} = Planets.get_planet(42)
     end
 
     test "create_planet/1 with valid data creates a planet" do
@@ -65,16 +68,18 @@ defmodule SWAPI.PlanetsTest do
         surface_water: "some surface_water"
       }
 
-      assert {:ok, %Planet{} = planet} = Planets.create_planet(valid_attrs)
-      assert planet.name == "some name"
-      assert planet.diameter == "some diameter"
-      assert planet.rotation_period == "some rotation_period"
-      assert planet.orbital_period == "some orbital_period"
-      assert planet.gravity == "some gravity"
-      assert planet.population == "some population"
-      assert planet.climate == "some climate"
-      assert planet.terrain == "some terrain"
-      assert planet.surface_water == "some surface_water"
+      assert {:ok,
+              %Planet{
+                name: "some name",
+                diameter: "some diameter",
+                rotation_period: "some rotation_period",
+                orbital_period: "some orbital_period",
+                gravity: "some gravity",
+                population: "some population",
+                climate: "some climate",
+                terrain: "some terrain",
+                surface_water: "some surface_water"
+              }} = Planets.create_planet(valid_attrs)
     end
 
     test "create_planet/1 with invalid data returns error changeset" do
@@ -96,22 +101,24 @@ defmodule SWAPI.PlanetsTest do
         surface_water: "some updated surface_water"
       }
 
-      assert {:ok, %Planet{} = planet} = Planets.update_planet(planet, update_attrs)
-      assert planet.name == "some updated name"
-      assert planet.diameter == "some updated diameter"
-      assert planet.rotation_period == "some updated rotation_period"
-      assert planet.orbital_period == "some updated orbital_period"
-      assert planet.gravity == "some updated gravity"
-      assert planet.population == "some updated population"
-      assert planet.climate == "some updated climate"
-      assert planet.terrain == "some updated terrain"
-      assert planet.surface_water == "some updated surface_water"
+      assert {:ok,
+              %Planet{
+                name: "some updated name",
+                diameter: "some updated diameter",
+                rotation_period: "some updated rotation_period",
+                orbital_period: "some updated orbital_period",
+                gravity: "some updated gravity",
+                population: "some updated population",
+                climate: "some updated climate",
+                terrain: "some updated terrain",
+                surface_water: "some updated surface_water"
+              }} = Planets.update_planet(planet, update_attrs)
     end
 
     test "update_planet/2 with invalid data returns error changeset" do
       planet = planet_fixture()
       assert {:error, %Ecto.Changeset{}} = Planets.update_planet(planet, @invalid_attrs)
-      assert planet == Planets.get_planet!(planet.id)
+      assert ^planet = Planets.get_planet!(planet.id) |> Planets.preload_all()
     end
 
     test "delete_planet/1 deletes the planet" do

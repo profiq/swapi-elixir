@@ -56,13 +56,13 @@ defmodule SWAPIWeb.FilmController do
     query = parse_search_query(query)
 
     with {:ok, {films, meta}} <- Films.search_films(query, params) do
-      render(conn, :index, films: films, meta: meta)
+      render(conn, :index, films: Films.preload_all(films), meta: meta)
     end
   end
 
   def index(conn, params) do
     with {:ok, {films, meta}} <- Films.list_films(params) do
-      render(conn, :index, films: films, meta: meta)
+      render(conn, :index, films: Films.preload_all(films), meta: meta)
     end
   end
 
@@ -78,7 +78,7 @@ defmodule SWAPIWeb.FilmController do
 
   def show(conn, %{"id" => id}) do
     with {:ok, film} <- Films.get_film(id) do
-      render(conn, :show, film: film)
+      render(conn, :show, film: Films.preload_all(film))
     end
   end
 end

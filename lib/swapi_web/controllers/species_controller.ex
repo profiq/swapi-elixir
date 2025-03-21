@@ -56,13 +56,13 @@ defmodule SWAPIWeb.SpeciesController do
     query = parse_search_query(query)
 
     with {:ok, {species, meta}} <- Species.search_species(query, params) do
-      render(conn, :index, species: species, meta: meta)
+      render(conn, :index, species: Species.preload_all(species), meta: meta)
     end
   end
 
   def index(conn, params) do
     with {:ok, {species, meta}} <- Species.list_species(params) do
-      render(conn, :index, species: species, meta: meta)
+      render(conn, :index, species: Species.preload_all(species), meta: meta)
     end
   end
 
@@ -78,7 +78,7 @@ defmodule SWAPIWeb.SpeciesController do
 
   def show(conn, %{"id" => id}) do
     with {:ok, species} <- Species.get_species(id) do
-      render(conn, :show, species: species)
+      render(conn, :show, species: Species.preload_all(species))
     end
   end
 end
