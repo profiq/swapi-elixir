@@ -3,7 +3,7 @@ defmodule SWAPI.Schemas.Person do
   Person schema
   """
 
-  use Ecto.Schema
+  use TypedEctoSchema
   import Ecto.Changeset
 
   alias SWAPI.Schemas.Film
@@ -24,7 +24,7 @@ defmodule SWAPI.Schemas.Person do
   ]
   @optional_fields [:id, :homeworld_id, :created, :edited]
 
-  schema "people" do
+  typed_schema "people" do
     field :name, :string
     field :birth_year, :string
     field :eye_color, :string
