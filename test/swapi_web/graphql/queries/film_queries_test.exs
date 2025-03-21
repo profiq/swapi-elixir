@@ -42,13 +42,13 @@ defmodule SWAPIWeb.GraphQL.QueriesTests do
       conn = get(conn, "/api/graphql", query: query)
 
       assert %{
-              "data" => %{
-                "allFilms" => [
-                  %{"id" => film1_id},
-                  %{"id" => film2_id}
-                ]
-              }
-            } = json_response(conn, 200)
+               "data" => %{
+                 "allFilms" => [
+                   %{"id" => film1_id},
+                   %{"id" => film2_id}
+                 ]
+               }
+             } = json_response(conn, 200)
 
       assert ^film1_id = "#{film1.id}"
       assert ^film2_id = "#{film2.id}"
@@ -70,12 +70,12 @@ defmodule SWAPIWeb.GraphQL.QueriesTests do
       conn = get(conn, "/api/graphql", query: query)
 
       assert %{
-                "data" => %{
-                  "searchFilms" => [
-                    %{"id" => film_id}
-                  ]
-                }
-              } = json_response(conn, 200)
+               "data" => %{
+                 "searchFilms" => [
+                   %{"id" => film_id}
+                 ]
+               }
+             } = json_response(conn, 200)
 
       assert ^film_id = "#{film.id}"
     end
@@ -94,10 +94,10 @@ defmodule SWAPIWeb.GraphQL.QueriesTests do
       conn = get(conn, "/api/graphql", query: query)
 
       assert %{
-              "data" => %{
-                "film" => %{"id" => film_id}
-              }
-            } = json_response(conn, 200)
+               "data" => %{
+                 "film" => %{"id" => film_id}
+               }
+             } = json_response(conn, 200)
 
       assert ^film_id = "#{film.id}"
     end
@@ -129,17 +129,17 @@ defmodule SWAPIWeb.GraphQL.QueriesTests do
       conn = get(conn, "/api/graphql", query: query)
 
       assert %{
-              "data" => %{
-                "film" => %{
-                    "id" => film_id,
-                    "species" => [%{"id" => species_id}],
-                    "starships" => [%{"id" => starship_id}],
-                    "vehicles" => [%{"id" => vehicle_id}],
-                    "characters" => [%{"id" => person_id}],
-                    "planets" => [%{"id" => planet_id}]
-                  }
-              }
-            } = json_response(conn, 200)
+               "data" => %{
+                 "film" => %{
+                   "id" => film_id,
+                   "species" => [%{"id" => species_id}],
+                   "starships" => [%{"id" => starship_id}],
+                   "vehicles" => [%{"id" => vehicle_id}],
+                   "characters" => [%{"id" => person_id}],
+                   "planets" => [%{"id" => planet_id}]
+                 }
+               }
+             } = json_response(conn, 200)
 
       assert ^film_id = "#{film.id}"
       assert ^species_id = "#{List.first(film.species).id}"
@@ -167,13 +167,13 @@ defmodule SWAPIWeb.GraphQL.QueriesTests do
       conn = get(conn, "/api/graphql", query: query)
 
       assert %{
-              "data" => %{
-                "film" => %{
-                    "id" => film_id,
-                    "characters" => [%{"id" => person_id, "films" => [%{"id" => film_id}]}]
-                  }
-              }
-            } = json_response(conn, 200)
+               "data" => %{
+                 "film" => %{
+                   "id" => film_id,
+                   "characters" => [%{"id" => person_id, "films" => [%{"id" => film_id}]}]
+                 }
+               }
+             } = json_response(conn, 200)
 
       assert ^film_id = "#{film.id}"
       assert ^person_id = "#{List.first(film.characters).id}"
