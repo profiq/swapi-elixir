@@ -3,7 +3,7 @@ defmodule SWAPI.Schemas.Film do
   Film schema
   """
 
-  use Ecto.Schema
+  use TypedEctoSchema
   import Ecto.Changeset
 
   alias SWAPI.Schemas.Person
@@ -15,7 +15,7 @@ defmodule SWAPI.Schemas.Film do
   @required_fields [:title, :episode_id, :opening_crawl, :director, :producer, :release_date]
   @optional_fields [:id, :created, :edited]
 
-  schema "films" do
+  typed_schema "films" do
     field :title, :string
     field :episode_id, :integer
     field :opening_crawl, :string

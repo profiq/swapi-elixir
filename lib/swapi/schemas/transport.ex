@@ -3,7 +3,7 @@ defmodule SWAPI.Schemas.Transport do
   Transport schema
   """
 
-  use Ecto.Schema
+  use TypedEctoSchema
   import Ecto.Changeset
 
   @required_fields [
@@ -20,7 +20,7 @@ defmodule SWAPI.Schemas.Transport do
   ]
   @optional_fields [:id, :created, :edited]
 
-  schema "transport" do
+  typed_schema "transport" do
     field :name, :string
     field :model, :string
     field :manufacturer, :string

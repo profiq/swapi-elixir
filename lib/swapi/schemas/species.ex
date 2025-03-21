@@ -3,7 +3,7 @@ defmodule SWAPI.Schemas.Species do
   Species schema
   """
 
-  use Ecto.Schema
+  use TypedEctoSchema
   import Ecto.Changeset
 
   alias SWAPI.Schemas.Film
@@ -23,7 +23,7 @@ defmodule SWAPI.Schemas.Species do
   ]
   @optional_fields [:id, :homeworld_id, :created, :edited]
 
-  schema "species" do
+  typed_schema "species" do
     field :name, :string
     field :classification, :string
     field :designation, :string
