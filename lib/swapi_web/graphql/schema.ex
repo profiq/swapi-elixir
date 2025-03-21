@@ -11,7 +11,7 @@ defmodule SWAPIWeb.GraphQL.Schema do
   def context(ctx) do
     loader =
       Dataloader.new()
-      |> Dataloader.add_source(SWAPI, SWAPI.data())
+      |> Dataloader.add_source(SWAPI.Dataloader, SWAPI.Dataloader.data())
 
     Map.put(ctx, :loader, loader)
   end

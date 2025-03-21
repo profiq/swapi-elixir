@@ -34,27 +34,27 @@ defmodule SWAPIWeb.GraphQL.Types.Person do
 
     @desc "The planet that this person was born on or inhabits."
     field :homeworld, :planet do
-      resolve(dataloader(SWAPI))
+      resolve(dataloader(SWAPI.Dataloader))
     end
 
     @desc "A list of films that this person has been in."
     field :films, list_of(:film) do
-      resolve(dataloader(SWAPI))
+      resolve(dataloader(SWAPI.Dataloader))
     end
 
     @desc "A list of species that this person belongs to."
     field :species, list_of(:species) do
-      resolve(dataloader(SWAPI))
+      resolve(dataloader(SWAPI.Dataloader))
     end
 
     @desc "A list of starships that this person has piloted."
     field :starships, list_of(:starship) do
-      resolve(dataloader(SWAPI))
+      resolve(dataloader(SWAPI.Dataloader))
     end
 
     @desc "A list of vehicles that this person has piloted."
     field :vehicles, list_of(:vehicle) do
-      resolve(dataloader(SWAPI))
+      resolve(dataloader(SWAPI.Dataloader))
     end
 
     @desc "The time that this resource was created."

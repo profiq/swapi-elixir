@@ -28,27 +28,27 @@ defmodule SWAPIWeb.GraphQL.Types.Film do
 
     @desc "A list of species that are in this film."
     field :species, list_of(:species) do
-      resolve(dataloader(SWAPI))
+      resolve(dataloader(SWAPI.Dataloader))
     end
 
     @desc "A list of starships that are in this film."
     field :starships, list_of(:starship) do
-      resolve(dataloader(SWAPI))
+      resolve(dataloader(SWAPI.Dataloader))
     end
 
     @desc "A list of vehicles that are in this film."
     field :vehicles, list_of(:vehicle) do
-      resolve(dataloader(SWAPI))
+      resolve(dataloader(SWAPI.Dataloader))
     end
 
     @desc "A list of people that are in this film."
     field :characters, list_of(:person) do
-      resolve(dataloader(SWAPI))
+      resolve(dataloader(SWAPI.Dataloader))
     end
 
     @desc "A list of planets that are in this film."
     field :planets, list_of(:planet) do
-      resolve(dataloader(SWAPI))
+      resolve(dataloader(SWAPI.Dataloader))
     end
 
     @desc "The time that this resource was created."

@@ -37,17 +37,17 @@ defmodule SWAPIWeb.GraphQL.Types.Species do
 
     @desc "The planet that this species originates from."
     field :homeworld, :planet do
-      resolve(dataloader(SWAPI))
+      resolve(dataloader(SWAPI.Dataloader))
     end
 
     @desc "A list of people that are a part of this species."
     field :people, list_of(:person) do
-      resolve(dataloader(SWAPI))
+      resolve(dataloader(SWAPI.Dataloader))
     end
 
     @desc "A list of films that this species has appeared in."
     field :films, list_of(:film) do
-      resolve(dataloader(SWAPI))
+      resolve(dataloader(SWAPI.Dataloader))
     end
 
     @desc "The time that this resource was created."
