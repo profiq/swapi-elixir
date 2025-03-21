@@ -23,16 +23,21 @@ defmodule SWAPI.Starships do
       [%Starship{}, ...]
 
   """
-  def list_starships do
-    Starship
-    |> Repo.all()
-    |> preload_all()
-  end
+  def list_starships, do: Repo.all(Starship)
 
-  def list_starships(params) do
-    with {:ok, {starships, meta}} <- paginate(Starship, params) do
-      {:ok, {preload_all(starships), meta}}
-    end
+  def list_starships(params), do: paginate(Starship, params)
+
+  def search_starships(terms) do
+    query =
+      Starship
+      |> join(:left, [s], t in Transport, on: s.id == t.id)
+
+    terms
+    |> Enum.reduce(query, fn term, query ->
+      query
+      |> where([s, t], like(t.name, ^"%#{term}%") or like(t.model, ^"%#{term}%"))
+    end)
+    |> Repo.all()
   end
 
   def search_starships(terms, params) do
@@ -40,15 +45,12 @@ defmodule SWAPI.Starships do
       Starship
       |> join(:left, [s], t in Transport, on: s.id == t.id)
 
-    starships =
-      Enum.reduce(terms, query, fn term, query ->
-        query
-        |> where([s, t], like(t.name, ^"%#{term}%") or like(t.model, ^"%#{term}%"))
-      end)
-
-    with {:ok, {starships, meta}} <- paginate(starships, params) do
-      {:ok, {preload_all(starships), meta}}
-    end
+    terms
+    |> Enum.reduce(query, fn term, query ->
+      query
+      |> where([s, t], like(t.name, ^"%#{term}%") or like(t.model, ^"%#{term}%"))
+    end)
+    |> paginate(params)
   end
 
   @doc """
@@ -65,16 +67,12 @@ defmodule SWAPI.Starships do
       ** (Ecto.NoResultsError)
 
   """
-  def get_starship!(id) do
-    Starship
-    |> Repo.get!(id)
-    |> preload_all()
-  end
+  def get_starship!(id), do: Repo.get!(Starship, id)
 
   def get_starship(id) do
     case Repo.get(Starship, id) do
       %Starship{} = starship ->
-        {:ok, preload_all(starship)}
+        {:ok, starship}
 
       _ ->
         {:error, :not_found}
