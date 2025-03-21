@@ -4,6 +4,7 @@ defmodule SWAPIWeb.GraphQL.Resolvers.PersonResolver do
   """
 
   alias SWAPI.People
+  alias SWAPI.Schemas.Person
 
   @spec all(map, map) :: {:ok, list(Person.t())} | {:error, any}
   def all(_args, _info) do

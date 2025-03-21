@@ -3,6 +3,7 @@ defmodule SWAPIWeb.GraphQL.Resolvers.VehicleResolver do
   Vehicle resolver.
   """
 
+  alias SWAPI.Schemas.Vehicle
   alias SWAPI.Vehicles
 
   @spec all(map, map) :: {:ok, list(Vehicle.t())} | {:error, any}

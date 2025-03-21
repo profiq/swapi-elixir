@@ -3,6 +3,7 @@ defmodule SWAPIWeb.GraphQL.Resolvers.StarshipResolver do
   Starship resolver.
   """
 
+  alias SWAPI.Schemas.Starship
   alias SWAPI.Starships
 
   @spec all(map, map) :: {:ok, list(Starship.t())} | {:error, any}

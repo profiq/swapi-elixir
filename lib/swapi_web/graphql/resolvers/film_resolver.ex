@@ -4,6 +4,7 @@ defmodule SWAPIWeb.GraphQL.Resolvers.FilmResolver do
   """
 
   alias SWAPI.Films
+  alias SWAPI.Schemas.Film
 
   @spec all(map, map) :: {:ok, list(Film.t())} | {:error, any}
   def all(_args, _info) do

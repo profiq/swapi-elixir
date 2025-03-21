@@ -4,6 +4,7 @@ defmodule SWAPIWeb.GraphQL.Resolvers.PlanetResolver do
   """
 
   alias SWAPI.Planets
+  alias SWAPI.Schemas.Planet
 
   @spec all(map, map) :: {:ok, list(Planet.t())} | {:error, any}
   def all(_args, _info) do
