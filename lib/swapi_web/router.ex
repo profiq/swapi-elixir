@@ -40,6 +40,7 @@ defmodule SWAPIWeb.Router do
     get "/", PageController, :home
     get "/postman", PageController, :postman
     get "/swaggerui", OpenApiSpex.Plug.SwaggerUI, path: "/api/openapi"
+    get "/graphiql", Absinthe.Plug.GraphiQL, schema: SWAPIWeb.GraphQL.Schema, default_url: "/api/graphql", interface: :playground
   end
 
   scope "/api" do
@@ -57,7 +58,7 @@ defmodule SWAPIWeb.Router do
     get "/openapi", OpenApiSpex.Plug.RenderSpec, []
   end
 
-  scope "/graphql" do
+  scope "/api/graphql" do
     pipe_through :graphql
 
     forward "/", Absinthe.Plug, schema: SWAPIWeb.GraphQL.Schema
