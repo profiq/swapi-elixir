@@ -3,7 +3,7 @@ defmodule SWAPI.Schemas.Planet do
   Planet schema
   """
 
-  use Ecto.Schema
+  use TypedEctoSchema
   import Ecto.Changeset
 
   alias SWAPI.Schemas.Film
@@ -22,7 +22,7 @@ defmodule SWAPI.Schemas.Planet do
   ]
   @optional_fields [:id, :created, :edited]
 
-  schema "planets" do
+  typed_schema "planets" do
     field :name, :string
     field :diameter, :string
     field :rotation_period, :string

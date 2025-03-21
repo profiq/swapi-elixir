@@ -3,7 +3,7 @@ defmodule SWAPI.Schemas.Vehicle do
   Vehicle schema
   """
 
-  use Ecto.Schema
+  use TypedEctoSchema
   import Ecto.Changeset
 
   alias SWAPI.Schemas.Film
@@ -15,7 +15,7 @@ defmodule SWAPI.Schemas.Vehicle do
 
   @primary_key false
 
-  schema "vehicles" do
+  typed_schema "vehicles" do
     belongs_to :transport, Transport, foreign_key: :id, primary_key: true, on_replace: :update
 
     field :vehicle_class, :string
