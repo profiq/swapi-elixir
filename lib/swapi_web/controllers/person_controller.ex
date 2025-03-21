@@ -56,13 +56,13 @@ defmodule SWAPIWeb.PersonController do
     query = parse_search_query(query)
 
     with {:ok, {people, meta}} <- People.search_people(query, params) do
-      render(conn, :index, people: people, meta: meta)
+      render(conn, :index, people: People.preload_all(people), meta: meta)
     end
   end
 
   def index(conn, params) do
     with {:ok, {people, meta}} <- People.list_people(params) do
-      render(conn, :index, people: people, meta: meta)
+      render(conn, :index, people: People.preload_all(people), meta: meta)
     end
   end
 
@@ -78,7 +78,7 @@ defmodule SWAPIWeb.PersonController do
 
   def show(conn, %{"id" => id}) do
     with {:ok, person} <- People.get_person(id) do
-      render(conn, :show, person: person)
+      render(conn, :show, person: People.preload_all(person))
     end
   end
 end

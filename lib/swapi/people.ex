@@ -22,28 +22,26 @@ defmodule SWAPI.People do
       [%Person{}, ...]
 
   """
-  def list_people do
-    Person
-    |> Repo.all()
-    |> preload_all()
-  end
+  def list_people, do: Repo.all(Person)
 
-  def list_people(params) do
-    with {:ok, {people, meta}} <- paginate(Person, params) do
-      {:ok, {preload_all(people), meta}}
-    end
+  def list_people(params), do: paginate(Person, params)
+
+  def search_people(terms) do
+    terms
+    |> Enum.reduce(Person, fn term, query ->
+      query
+      |> where([p], like(p.name, ^"%#{term}%"))
+    end)
+    |> Repo.all()
   end
 
   def search_people(terms, params) do
-    people =
-      Enum.reduce(terms, Person, fn term, query ->
-        query
-        |> where([p], like(p.name, ^"%#{term}%"))
-      end)
-
-    with {:ok, {people, meta}} <- paginate(people, params) do
-      {:ok, {preload_all(people), meta}}
-    end
+    terms
+    |> Enum.reduce(Person, fn term, query ->
+      query
+      |> where([p], like(p.name, ^"%#{term}%"))
+    end)
+    |> paginate(params)
   end
 
   @doc """
@@ -60,16 +58,12 @@ defmodule SWAPI.People do
       ** (Ecto.NoResultsError)
 
   """
-  def get_person!(id) do
-    Person
-    |> Repo.get!(id)
-    |> preload_all()
-  end
+  def get_person!(id), do: Repo.get!(Person, id)
 
   def get_person(id) do
     case Repo.get(Person, id) do
       %Person{} = person ->
-        {:ok, preload_all(person)}
+        {:ok, person}
 
       _ ->
         {:error, :not_found}

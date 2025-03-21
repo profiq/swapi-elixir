@@ -28,12 +28,13 @@ defmodule SWAPI.StarshipsTest do
 
     test "list_starships/0 returns all starships" do
       starship = starship_fixture()
-      assert Starships.list_starships() == [starship]
+      assert [^starship] = Starships.list_starships() |> Enum.map(&Starships.preload_all/1)
     end
 
     test "list_starships/1 returns all starships" do
       starship = starship_fixture()
-      assert {:ok, {[^starship], _}} = Starships.list_starships(%{})
+      assert {:ok, {starships, _}} = Starships.list_starships(%{})
+      assert [^starship] = Enum.map(starships, &Starships.preload_all/1)
     end
 
     test "search_starships/1 returns only matching starships" do
@@ -46,6 +47,8 @@ defmodule SWAPI.StarshipsTest do
       starship_fixture(%{transport: %{model: "bar"}})
 
       {:ok, {starships, _}} = Starships.search_starships(["foo", "bar", "baz"], %{})
+      starships = Enum.map(starships, &Starships.preload_all/1)
+
       assert length(starships) == 2
       assert starship1 in starships
       assert starship2 in starships
@@ -53,16 +56,17 @@ defmodule SWAPI.StarshipsTest do
 
     test "get_starship!/1 returns the starship with given id" do
       starship = starship_fixture()
-      assert Starships.get_starship!(starship.id) == starship
+      assert ^starship = Starships.get_starship!(starship.id) |> Starships.preload_all()
     end
 
     test "get_starship/1 returns the starship with given id" do
       starship = starship_fixture()
-      assert Starships.get_starship(starship.id) == {:ok, starship}
+      assert {:ok, returned_starship} = Starships.get_starship(starship.id)
+      assert ^starship = Starships.preload_all(returned_starship)
     end
 
     test "get_starship/1 returns error when given id does not exist" do
-      assert Starships.get_starship(42) == {:error, :not_found}
+      assert {:error, :not_found} = Starships.get_starship(42)
     end
 
     test "create_starship/1 with valid data creates a starship" do
@@ -84,20 +88,25 @@ defmodule SWAPI.StarshipsTest do
         mglt: "some mglt"
       }
 
-      assert {:ok, %Starship{} = starship} = Starships.create_starship(valid_attrs)
-      assert starship.transport.name == "some name"
-      assert starship.transport.model == "some model"
-      assert starship.transport.manufacturer == "some manufacturer"
-      assert starship.transport.length == "some length"
-      assert starship.transport.cost_in_credits == "some cost_in_credits"
-      assert starship.transport.crew == "some crew"
-      assert starship.transport.passengers == "some passengers"
-      assert starship.transport.max_atmosphering_speed == "some max_atmosphering_speed"
-      assert starship.transport.cargo_capacity == "some cargo_capacity"
-      assert starship.transport.consumables == "some consumables"
-      assert starship.starship_class == "some starship_class"
-      assert starship.hyperdrive_rating == "some hyperdrive_rating"
-      assert starship.mglt == "some mglt"
+      assert {:ok, starship} = Starships.create_starship(valid_attrs)
+
+      assert %Starship{
+               transport: %{
+                 name: "some name",
+                 model: "some model",
+                 manufacturer: "some manufacturer",
+                 length: "some length",
+                 cost_in_credits: "some cost_in_credits",
+                 crew: "some crew",
+                 passengers: "some passengers",
+                 max_atmosphering_speed: "some max_atmosphering_speed",
+                 cargo_capacity: "some cargo_capacity",
+                 consumables: "some consumables"
+               },
+               starship_class: "some starship_class",
+               hyperdrive_rating: "some hyperdrive_rating",
+               mglt: "some mglt"
+             } = Starships.preload_all(starship)
     end
 
     test "create_starship/1 with invalid data returns error changeset" do
@@ -126,25 +135,30 @@ defmodule SWAPI.StarshipsTest do
       }
 
       assert {:ok, %Starship{} = starship} = Starships.update_starship(starship, update_attrs)
-      assert starship.transport.name == "some updated name"
-      assert starship.transport.model == "some updated model"
-      assert starship.transport.manufacturer == "some updated manufacturer"
-      assert starship.transport.length == "some updated length"
-      assert starship.transport.cost_in_credits == "some updated cost_in_credits"
-      assert starship.transport.crew == "some updated crew"
-      assert starship.transport.passengers == "some updated passengers"
-      assert starship.transport.max_atmosphering_speed == "some updated max_atmosphering_speed"
-      assert starship.transport.cargo_capacity == "some updated cargo_capacity"
-      assert starship.transport.consumables == "some updated consumables"
-      assert starship.starship_class == "some updated starship_class"
-      assert starship.hyperdrive_rating == "some updated hyperdrive_rating"
-      assert starship.mglt == "some updated mglt"
+
+      assert %Starship{
+               transport: %{
+                 name: "some updated name",
+                 model: "some updated model",
+                 manufacturer: "some updated manufacturer",
+                 length: "some updated length",
+                 cost_in_credits: "some updated cost_in_credits",
+                 crew: "some updated crew",
+                 passengers: "some updated passengers",
+                 max_atmosphering_speed: "some updated max_atmosphering_speed",
+                 cargo_capacity: "some updated cargo_capacity",
+                 consumables: "some updated consumables"
+               },
+               starship_class: "some updated starship_class",
+               hyperdrive_rating: "some updated hyperdrive_rating",
+               mglt: "some updated mglt"
+             } = Starships.preload_all(starship)
     end
 
     test "update_starship/2 with invalid data returns error changeset" do
       starship = starship_fixture()
       assert {:error, %Ecto.Changeset{}} = Starships.update_starship(starship, @invalid_attrs)
-      assert starship == Starships.get_starship!(starship.id)
+      assert ^starship = Starships.get_starship!(starship.id) |> Starships.preload_all()
     end
 
     test "delete_starship/1 deletes the starship" do
