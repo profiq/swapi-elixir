@@ -39,7 +39,7 @@ defmodule SWAPIWeb.GraphQL.QueriesTests do
         }
       """
 
-      conn = get(conn, "/graphql", query: query)
+      conn = get(conn, "/api/graphql", query: query)
 
       assert %{
               "data" => %{
@@ -67,7 +67,7 @@ defmodule SWAPIWeb.GraphQL.QueriesTests do
         }
       """
 
-      conn = get(conn, "/graphql", query: query)
+      conn = get(conn, "/api/graphql", query: query)
 
       assert %{
                 "data" => %{
@@ -91,7 +91,7 @@ defmodule SWAPIWeb.GraphQL.QueriesTests do
         }
       """
 
-      conn = get(conn, "/graphql", query: query)
+      conn = get(conn, "/api/graphql", query: query)
 
       assert %{
               "data" => %{
@@ -126,7 +126,7 @@ defmodule SWAPIWeb.GraphQL.QueriesTests do
         }
       """
 
-      conn = get(conn, "/graphql", query: query)
+      conn = get(conn, "/api/graphql", query: query)
 
       assert %{
               "data" => %{
@@ -164,7 +164,7 @@ defmodule SWAPIWeb.GraphQL.QueriesTests do
         }
       """
 
-      conn = get(conn, "/graphql", query: query)
+      conn = get(conn, "/api/graphql", query: query)
 
       assert %{
               "data" => %{
