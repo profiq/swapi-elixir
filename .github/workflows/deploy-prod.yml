@@ -31,11 +31,3 @@ jobs:
       - name: "Install deps"
         working-directory: ./cdn-config
         run: npm install
-      - name: "Deploy CND Config"
-        working-directory: ./cdn-config
-        # Deploys new config and also purges cache
-        run: npx edgio deploy --property=swapi-elixir-profiq --organization=profiq --environment=production --token ${{ secrets.EDGIO_DEPLOY_TOKEN }}
-      - name: "Purge homepage"
-        working-directory: ./cdn-config
-        run: npx edgio cache-clear --property=swapi-elixir-profiq --organization=profiq --environment=production --token ${{ secrets.EDGIO_DEPLOY_TOKEN }} --path=/
-        
