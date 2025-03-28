@@ -18,13 +18,13 @@ defmodule SWAPIWeb.GraphQL.Types.Person do
     @desc "The birth year of the person, using the in-universe standard of **BBY** or **ABY** - Before the Battle of Yavin or After the Battle of Yavin. The Battle of Yavin is a battle that occurs at the end of Star Wars episode IV: A New Hope."
     field :birth_year, :string
 
-    @desc "The eye color of this person. Will be \"unknown\" if not known or \"n/a\" if the person does not have an eye."
+    @desc ~S(The eye color of this person. Will be "unknown" if not known or "n/a" if the person does not have an eye.)
     field :eye_color, :string
 
-    @desc "The gender of this person. Either \"Male\", \"Female\" or \"unknown\", \"n/a\" if the person does not have a gender."
+    @desc ~S(The gender of this person. Either "Male", "Female" or "unknown", "n/a" if the person does not have a gender.)
     field :gender, :string
 
-    @desc "The hair color of this person. Will be \"unknown\" if not known or \"n/a\" if the person does not have hair."
+    @desc ~S(The hair color of this person. Will be "unknown" if not known or "n/a" if the person does not have hair.)
     field :hair_color, :string
 
     @desc "The height of the person in centimeters."

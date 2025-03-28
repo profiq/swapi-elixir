@@ -24,7 +24,7 @@ defmodule SWAPIWeb.GraphQL.Types.Planet do
     @desc "The number of standard days it takes for this planet to complete a single orbit of its local star."
     field :orbital_period, :string
 
-    @desc "A number denoting the gravity of this planet, where \"1\" is normal or 1 standard G. \"2\" is twice or 2 standard Gs. \"0.5\" is half or 0.5 standard Gs."
+    @desc ~S(A number denoting the gravity of this planet, where "1" is normal or 1 standard G. "2" is twice or 2 standard Gs. "0.5" is half or 0.5 standard Gs.)
     field :gravity, :string
 
     @desc "The average population of sentient beings inhabiting this planet."

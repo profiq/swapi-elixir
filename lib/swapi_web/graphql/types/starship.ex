@@ -18,12 +18,12 @@ defmodule SWAPIWeb.GraphQL.Types.Starship do
       resolve(dataloader(SWAPI.Dataloader, :transport, callback: &transport_field_callback/4))
     end
 
-    @desc "The model or official name of this starship. Such as \"T-65 X-wing\" or \"DS-1 Orbital Battle Station\"."
+    @desc ~S(The model or official name of this starship. Such as "T-65 X-wing" or "DS-1 Orbital Battle Station".)
     field :model, :string do
       resolve(dataloader(SWAPI.Dataloader, :transport, callback: &transport_field_callback/4))
     end
 
-    @desc "The class of this starship, such as \"Starfighter\" or \"Deep Space Mobile Battlestation\""
+    @desc ~S(The class of this starship, such as "Starfighter" or "Deep Space Mobile Battlestation")
     field :starship_class, :string
 
     @desc "The manufacturer of this starship. Comma separated if more than one."

@@ -13,7 +13,7 @@ defmodule SWAPIWeb.GraphQL.Types.Vehicle do
     @desc "A unique ID for this vehicle."
     field :id, :id
 
-    @desc "The name of this vehicle. The common name, such as \"Sand Crawler\" or \"Speeder bike\"."
+    @desc ~S(The name of this vehicle. The common name, such as "Sand Crawler" or "Speeder bike".)
     field :name, :string do
       resolve(dataloader(SWAPI.Dataloader, :transport, callback: &transport_field_callback/4))
     end
@@ -23,7 +23,7 @@ defmodule SWAPIWeb.GraphQL.Types.Vehicle do
       resolve(dataloader(SWAPI.Dataloader, :transport, callback: &transport_field_callback/4))
     end
 
-    @desc "The class of this vehicle, such as \"Wheeled\" or \"Repulsorcraft\"."
+    @desc ~S(The class of this vehicle, such as "Wheeled" or "Repulsorcraft".)
     field :vehicle_class, :string
 
     @desc "The manufacturer of this vehicle. Comma separated if more than one."

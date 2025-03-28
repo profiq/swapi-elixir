@@ -15,7 +15,7 @@ defmodule SWAPIWeb.GraphQL.Types.Species do
     @desc "The name of this species."
     field :name, :string
 
-    @desc "The classification of this species, such as \"mammal\" or \"reptile\"."
+    @desc ~S(The classification of this species, such as "mammal" or "reptile".)
     field :classification, :string
 
     @desc "The designation of this species, such as \"sentient\"."
