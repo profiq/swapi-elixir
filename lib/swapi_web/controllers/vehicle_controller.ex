@@ -45,6 +45,15 @@ defmodule SWAPIWeb.VehicleController do
           minimum: 1,
           default: 10
         }
+      ],
+      format: [
+        in: :query,
+        description: "Specifies the encoding to be used for the response",
+        schema: %Schema{
+          type: :string,
+          default: "json",
+          enum: ["json", "wookiee"]
+        }
       ]
     ],
     responses: [
@@ -69,7 +78,16 @@ defmodule SWAPIWeb.VehicleController do
   operation(:show,
     summary: "Get a specific vehicle resource",
     parameters: [
-      id: [in: :path, description: "Vehicle ID", type: :integer]
+      id: [in: :path, description: "Vehicle ID", type: :integer],
+      format: [
+        in: :query,
+        description: "Specifies the encoding to be used for the response",
+        schema: %Schema{
+          type: :string,
+          default: "json",
+          enum: ["json", "wookiee"]
+        }
+      ]
     ],
     responses: [
       ok: {"A vehicle", "application/json", SWAPIWeb.Schemas.Vehicle}

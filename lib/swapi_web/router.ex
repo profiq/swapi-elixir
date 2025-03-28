@@ -17,6 +17,7 @@ defmodule SWAPIWeb.Router do
          "public, max-age=86400, s-max-age=172800, stale-while-revalidate=2678400"
 
     plug OpenApiSpex.Plug.PutApiSpec, module: SWAPIWeb.ApiSpec
+    plug SWAPIWeb.WookieeEncoder
   end
 
   pipeline :browser do

@@ -45,6 +45,15 @@ defmodule SWAPIWeb.FilmController do
           minimum: 1,
           default: 10
         }
+      ],
+      format: [
+        in: :query,
+        description: "Specifies the encoding to be used for the response",
+        schema: %Schema{
+          type: :string,
+          default: "json",
+          enum: ["json", "wookiee"]
+        }
       ]
     ],
     responses: [
@@ -69,7 +78,16 @@ defmodule SWAPIWeb.FilmController do
   operation(:show,
     summary: "Get a specific film resource",
     parameters: [
-      id: [in: :path, description: "Film ID", type: :integer]
+      id: [in: :path, description: "Film ID", type: :integer],
+      format: [
+        in: :query,
+        description: "Specifies the encoding to be used for the response",
+        schema: %Schema{
+          type: :string,
+          default: "json",
+          enum: ["json", "wookiee"]
+        }
+      ]
     ],
     responses: [
       ok: {"A film", "application/json", SWAPIWeb.Schemas.Film}
