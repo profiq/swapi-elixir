@@ -56,13 +56,13 @@ defmodule SWAPIWeb.PlanetController do
     query = parse_search_query(query)
 
     with {:ok, {planets, meta}} <- Planets.search_planets(query, params) do
-      render(conn, :index, planets: planets, meta: meta)
+      render(conn, :index, planets: Planets.preload_all(planets), meta: meta)
     end
   end
 
   def index(conn, params) do
     with {:ok, {planets, meta}} <- Planets.list_planets(params) do
-      render(conn, :index, planets: planets, meta: meta)
+      render(conn, :index, planets: Planets.preload_all(planets), meta: meta)
     end
   end
 
@@ -78,7 +78,7 @@ defmodule SWAPIWeb.PlanetController do
 
   def show(conn, %{"id" => id}) do
     with {:ok, planet} <- Planets.get_planet(id) do
-      render(conn, :show, planet: planet)
+      render(conn, :show, planet: Planets.preload_all(planet))
     end
   end
 end

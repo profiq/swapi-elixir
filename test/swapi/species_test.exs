@@ -22,12 +22,13 @@ defmodule SWAPI.SpeciesTest do
 
     test "list_species/0 returns all species" do
       species = species_fixture()
-      assert Species.list_species() == [species]
+      assert [^species] = Species.list_species() |> Enum.map(&Species.preload_all/1)
     end
 
     test "list_species/1 returns all species" do
       species = species_fixture()
-      assert {:ok, {[^species], _}} = Species.list_species(%{})
+      assert {:ok, {species_list, _}} = Species.list_species(%{})
+      assert [^species] = species_list |> Enum.map(&Species.preload_all/1)
     end
 
     test "search_species/1 returns only matching species" do
@@ -35,21 +36,23 @@ defmodule SWAPI.SpeciesTest do
       species_fixture(%{name: "foo bar"})
       species_fixture(%{name: "foo"})
 
-      assert {:ok, {[^species], _}} = Species.search_species(["foo", "bar", "baz"], %{})
+      assert {:ok, {species_list, _}} = Species.search_species(["foo", "bar", "baz"], %{})
+      assert [^species] = species_list |> Enum.map(&Species.preload_all/1)
     end
 
     test "get_species!/1 returns the species with given id" do
       species = species_fixture()
-      assert Species.get_species!(species.id) == species
+      assert ^species = Species.get_species!(species.id) |> Species.preload_all()
     end
 
     test "get_species/1 returns the species with given id" do
       species = species_fixture()
-      assert Species.get_species(species.id) == {:ok, species}
+      assert {:ok, returned_species} = Species.get_species(species.id)
+      assert ^species = Species.preload_all(returned_species)
     end
 
     test "get_species/1 returns error when given id does not exist" do
-      assert Species.get_species(42) == {:error, :not_found}
+      assert {:error, :not_found} = Species.get_species(42)
     end
 
     test "create_species/1 with valid data creates a species" do
@@ -65,16 +68,18 @@ defmodule SWAPI.SpeciesTest do
         language: "some language"
       }
 
-      assert {:ok, %SpeciesSchema{} = species} = Species.create_species(valid_attrs)
-      assert species.name == "some name"
-      assert species.classification == "some classification"
-      assert species.designation == "some designation"
-      assert species.average_height == "some average_height"
-      assert species.average_lifespan == "some average_lifespan"
-      assert species.eye_colors == "some eye_colors"
-      assert species.hair_colors == "some hair_colors"
-      assert species.skin_colors == "some skin_colors"
-      assert species.language == "some language"
+      assert {:ok,
+              %SpeciesSchema{
+                name: "some name",
+                classification: "some classification",
+                designation: "some designation",
+                average_height: "some average_height",
+                average_lifespan: "some average_lifespan",
+                eye_colors: "some eye_colors",
+                hair_colors: "some hair_colors",
+                skin_colors: "some skin_colors",
+                language: "some language"
+              }} = Species.create_species(valid_attrs)
     end
 
     test "create_species/1 with invalid data returns error changeset" do
@@ -96,22 +101,24 @@ defmodule SWAPI.SpeciesTest do
         language: "some updated language"
       }
 
-      assert {:ok, %SpeciesSchema{} = species} = Species.update_species(species, update_attrs)
-      assert species.name == "some updated name"
-      assert species.classification == "some updated classification"
-      assert species.designation == "some updated designation"
-      assert species.average_height == "some updated average_height"
-      assert species.average_lifespan == "some updated average_lifespan"
-      assert species.eye_colors == "some updated eye_colors"
-      assert species.hair_colors == "some updated hair_colors"
-      assert species.skin_colors == "some updated skin_colors"
-      assert species.language == "some updated language"
+      assert {:ok,
+              %SpeciesSchema{
+                name: "some updated name",
+                classification: "some updated classification",
+                designation: "some updated designation",
+                average_height: "some updated average_height",
+                average_lifespan: "some updated average_lifespan",
+                eye_colors: "some updated eye_colors",
+                hair_colors: "some updated hair_colors",
+                skin_colors: "some updated skin_colors",
+                language: "some updated language"
+              }} = Species.update_species(species, update_attrs)
     end
 
     test "update_species/2 with invalid data returns error changeset" do
       species = species_fixture()
       assert {:error, %Ecto.Changeset{}} = Species.update_species(species, @invalid_attrs)
-      assert species == Species.get_species!(species.id)
+      assert ^species = Species.get_species!(species.id) |> Species.preload_all()
     end
 
     test "delete_species/1 deletes the species" do

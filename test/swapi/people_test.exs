@@ -21,12 +21,13 @@ defmodule SWAPI.PeopleTest do
 
     test "list_people/0 returns all people" do
       person = person_fixture()
-      assert People.list_people() == [person]
+      assert [^person] = People.list_people() |> Enum.map(&People.preload_all/1)
     end
 
     test "list_people/1 returns all people" do
       person = person_fixture()
-      assert {:ok, {[^person], _}} = People.list_people(%{})
+      assert {:ok, {people, _}} = People.list_people(%{})
+      assert [^person] = Enum.map(people, &People.preload_all/1)
     end
 
     test "search_people/1 returns only matching people" do
@@ -34,21 +35,23 @@ defmodule SWAPI.PeopleTest do
       person_fixture(%{name: "foo bar"})
       person_fixture(%{name: "foo"})
 
-      assert {:ok, {[^person], _}} = People.search_people(["foo", "bar", "baz"], %{})
+      assert {:ok, {people, _}} = People.search_people(["foo", "bar", "baz"], %{})
+      assert [^person] = Enum.map(people, &People.preload_all/1)
     end
 
     test "get_person!/1 returns the person with given id" do
       person = person_fixture()
-      assert People.get_person!(person.id) == person
+      assert ^person = People.get_person!(person.id) |> People.preload_all()
     end
 
     test "get_person/1 returns the person with given id" do
       person = person_fixture()
-      assert People.get_person(person.id) == {:ok, person}
+      assert {:ok, returned_person} = People.get_person(person.id)
+      assert ^person = People.preload_all(returned_person)
     end
 
     test "get_person/1 returns error when given id does not exist" do
-      assert People.get_person(42) == {:error, :not_found}
+      assert {:error, :not_found} = People.get_person(42)
     end
 
     test "create_person/1 with valid data creates a person" do
@@ -63,15 +66,17 @@ defmodule SWAPI.PeopleTest do
         skin_color: "some skin_color"
       }
 
-      assert {:ok, %Person{} = person} = People.create_person(valid_attrs)
-      assert person.name == "some name"
-      assert person.birth_year == "some birth_year"
-      assert person.eye_color == "some eye_color"
-      assert person.gender == "some gender"
-      assert person.hair_color == "some hair_color"
-      assert person.height == "some height"
-      assert person.mass == "some mass"
-      assert person.skin_color == "some skin_color"
+      assert {:ok,
+              %Person{
+                name: "some name",
+                birth_year: "some birth_year",
+                eye_color: "some eye_color",
+                gender: "some gender",
+                hair_color: "some hair_color",
+                height: "some height",
+                mass: "some mass",
+                skin_color: "some skin_color"
+              }} = People.create_person(valid_attrs)
     end
 
     test "create_person/1 with invalid data returns error changeset" do
@@ -92,21 +97,23 @@ defmodule SWAPI.PeopleTest do
         skin_color: "some updated skin_color"
       }
 
-      assert {:ok, %Person{} = person} = People.update_person(person, update_attrs)
-      assert person.name == "some updated name"
-      assert person.birth_year == "some updated birth_year"
-      assert person.eye_color == "some updated eye_color"
-      assert person.gender == "some updated gender"
-      assert person.hair_color == "some updated hair_color"
-      assert person.height == "some updated height"
-      assert person.mass == "some updated mass"
-      assert person.skin_color == "some updated skin_color"
+      assert {:ok,
+              %Person{
+                name: "some updated name",
+                birth_year: "some updated birth_year",
+                eye_color: "some updated eye_color",
+                gender: "some updated gender",
+                hair_color: "some updated hair_color",
+                height: "some updated height",
+                mass: "some updated mass",
+                skin_color: "some updated skin_color"
+              }} = People.update_person(person, update_attrs)
     end
 
     test "update_person/2 with invalid data returns error changeset" do
       person = person_fixture()
       assert {:error, %Ecto.Changeset{}} = People.update_person(person, @invalid_attrs)
-      assert person == People.get_person!(person.id)
+      assert ^person = People.get_person!(person.id) |> People.preload_all()
     end
 
     test "delete_person/1 deletes the person" do
