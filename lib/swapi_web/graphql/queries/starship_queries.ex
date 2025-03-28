@@ -1,4 +1,8 @@
 defmodule SWAPIWeb.GraphQL.Queries.StarshipQueries do
+  @moduledoc """
+  GraphQL queries for starships
+  """
+
   use Absinthe.Schema.Notation
 
   alias SWAPIWeb.GraphQL.Resolvers.StarshipResolver

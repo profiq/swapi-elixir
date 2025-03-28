@@ -1,4 +1,8 @@
 defmodule SWAPIWeb.GraphQL.Types.Species do
+  @moduledoc """
+  GraphQL schema for species
+  """
+
   use Absinthe.Schema.Notation
 
   import Absinthe.Resolution.Helpers

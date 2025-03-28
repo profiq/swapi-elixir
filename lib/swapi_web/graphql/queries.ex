@@ -1,4 +1,8 @@
 defmodule SWAPIWeb.GraphQL.Queries do
+  @moduledoc """
+  GraphQL queries
+  """
+
   use Absinthe.Schema.Notation
 
   import_types(SWAPIWeb.GraphQL.Queries.FilmQueries)

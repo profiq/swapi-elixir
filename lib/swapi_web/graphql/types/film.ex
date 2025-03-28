@@ -1,4 +1,8 @@
 defmodule SWAPIWeb.GraphQL.Types.Film do
+  @moduledoc """
+  GraphQL schema for films
+  """
+
   use Absinthe.Schema.Notation
 
   import Absinthe.Resolution.Helpers

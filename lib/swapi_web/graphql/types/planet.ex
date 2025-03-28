@@ -1,4 +1,8 @@
 defmodule SWAPIWeb.GraphQL.Types.Planet do
+  @moduledoc """
+  GraphQL schema for planets
+  """
+
   use Absinthe.Schema.Notation
 
   import Absinthe.Resolution.Helpers

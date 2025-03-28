@@ -1,4 +1,8 @@
 defmodule SWAPIWeb.GraphQL.Queries.VehicleQueries do
+  @moduledoc """
+  GraphQL queries for vehicles
+  """
+
   use Absinthe.Schema.Notation
 
   alias SWAPIWeb.GraphQL.Resolvers.VehicleResolver

@@ -1,4 +1,8 @@
 defmodule SWAPIWeb.GraphQL.Util do
+  @moduledoc """
+  Utility functions for the GraphQL API
+  """
+
   def transport_field_callback(transport, _parent, _args, %{path: [field | _]}) do
     case Map.get(transport, field.schema_node.identifier) do
       nil -> {:error, "Invalid transport field"}

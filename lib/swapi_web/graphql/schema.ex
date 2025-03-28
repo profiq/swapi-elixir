@@ -1,4 +1,8 @@
 defmodule SWAPIWeb.GraphQL.Schema do
+  @moduledoc """
+  GraphQL schema
+  """
+
   use Absinthe.Schema
 
   import_types(SWAPIWeb.GraphQL.Types)

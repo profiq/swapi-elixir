@@ -1,4 +1,8 @@
 defmodule SWAPIWeb.GraphQL.Queries.PlanetQueries do
+  @moduledoc """
+  GraphQL queries for planets
+  """
+
   use Absinthe.Schema.Notation
 
   alias SWAPIWeb.GraphQL.Resolvers.PlanetResolver

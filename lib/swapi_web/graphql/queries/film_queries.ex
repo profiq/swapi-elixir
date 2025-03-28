@@ -1,4 +1,8 @@
 defmodule SWAPIWeb.GraphQL.Queries.FilmQueries do
+  @moduledoc """
+  GraphQL queries for films
+  """
+
   use Absinthe.Schema.Notation
 
   alias SWAPIWeb.GraphQL.Resolvers.FilmResolver

@@ -1,4 +1,8 @@
 defmodule SWAPIWeb.GraphQL.Queries.PersonQueries do
+  @moduledoc """
+  GraphQL queries for people
+  """
+
   use Absinthe.Schema.Notation
 
   alias SWAPIWeb.GraphQL.Resolvers.PersonResolver

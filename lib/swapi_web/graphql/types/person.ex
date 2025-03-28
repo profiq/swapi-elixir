@@ -1,4 +1,8 @@
 defmodule SWAPIWeb.GraphQL.Types.Person do
+  @moduledoc """
+  GraphQL schema for people
+  """
+
   use Absinthe.Schema.Notation
 
   import Absinthe.Resolution.Helpers

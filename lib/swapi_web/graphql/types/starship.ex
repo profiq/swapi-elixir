@@ -1,4 +1,8 @@
 defmodule SWAPIWeb.GraphQL.Types.Starship do
+  @moduledoc """
+  GraphQL schema for starships
+  """
+
   use Absinthe.Schema.Notation
 
   import Absinthe.Resolution.Helpers

@@ -1,4 +1,8 @@
 defmodule SWAPIWeb.GraphQL.Types.Vehicle do
+  @moduledoc """
+  GraphQL schema for vehicles
+  """
+
   use Absinthe.Schema.Notation
 
   import Absinthe.Resolution.Helpers
