@@ -3,8 +3,8 @@ defmodule SWAPIWeb.GraphQL.Resolvers.SpeciesResolver do
   Species resolver.
   """
 
-  alias SWAPI.Species
   alias SWAPI.Schemas.Species, as: SpeciesSchema
+  alias SWAPI.Species
 
   @spec all(map, map) :: {:ok, list(SpeciesSchema.t())} | {:error, any}
   def all(_args, _info) do
