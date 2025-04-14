@@ -45,6 +45,15 @@ defmodule SWAPIWeb.PlanetController do
           minimum: 1,
           default: 10
         }
+      ],
+      format: [
+        in: :query,
+        description: "Specifies the encoding to be used for the response",
+        schema: %Schema{
+          type: :string,
+          default: "json",
+          enum: ["json", "wookiee"]
+        }
       ]
     ],
     responses: [
@@ -69,7 +78,16 @@ defmodule SWAPIWeb.PlanetController do
   operation(:show,
     summary: "Get a specific planet resource",
     parameters: [
-      id: [in: :path, description: "Planet ID", type: :integer]
+      id: [in: :path, description: "Planet ID", type: :integer],
+      format: [
+        in: :query,
+        description: "Specifies the encoding to be used for the response",
+        schema: %Schema{
+          type: :string,
+          default: "json",
+          enum: ["json", "wookiee"]
+        }
+      ]
     ],
     responses: [
       ok: {"A planet", "application/json", SWAPIWeb.Schemas.Planet}

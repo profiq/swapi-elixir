@@ -45,6 +45,15 @@ defmodule SWAPIWeb.SpeciesController do
           minimum: 1,
           default: 10
         }
+      ],
+      format: [
+        in: :query,
+        description: "Specifies the encoding to be used for the response",
+        schema: %Schema{
+          type: :string,
+          default: "json",
+          enum: ["json", "wookiee"]
+        }
       ]
     ],
     responses: [
@@ -69,7 +78,16 @@ defmodule SWAPIWeb.SpeciesController do
   operation(:show,
     summary: "Get a specific species resource",
     parameters: [
-      id: [in: :path, description: "Species ID", type: :integer]
+      id: [in: :path, description: "Species ID", type: :integer],
+      format: [
+        in: :query,
+        description: "Specifies the encoding to be used for the response",
+        schema: %Schema{
+          type: :string,
+          default: "json",
+          enum: ["json", "wookiee"]
+        }
+      ]
     ],
     responses: [
       ok: {"A species", "application/json", SWAPIWeb.Schemas.Species}

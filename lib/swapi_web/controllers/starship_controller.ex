@@ -45,6 +45,15 @@ defmodule SWAPIWeb.StarshipController do
           minimum: 1,
           default: 10
         }
+      ],
+      format: [
+        in: :query,
+        description: "Specifies the encoding to be used for the response",
+        schema: %Schema{
+          type: :string,
+          default: "json",
+          enum: ["json", "wookiee"]
+        }
       ]
     ],
     responses: [
@@ -69,7 +78,16 @@ defmodule SWAPIWeb.StarshipController do
   operation(:show,
     summary: "Get a specific starship resource",
     parameters: [
-      id: [in: :path, description: "Starship ID", type: :integer]
+      id: [in: :path, description: "Starship ID", type: :integer],
+      format: [
+        in: :query,
+        description: "Specifies the encoding to be used for the response",
+        schema: %Schema{
+          type: :string,
+          default: "json",
+          enum: ["json", "wookiee"]
+        }
+      ]
     ],
     responses: [
       ok: {"A starship", "application/json", SWAPIWeb.Schemas.Starship}
