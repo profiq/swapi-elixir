@@ -22,16 +22,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-        with:
-          node-version: '20'
-          cache: 'npm'
-          cache-dependency-path: ./cdn-config/package-lock.json
-
       - uses: superfly/flyctl-actions/setup-flyctl@master
       - run: flyctl deploy --remote-only -c fly-dev.toml
         env:
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN_DEV }}
-      - name: "Install deps"
-        working-directory: ./cdn-config
-        run: npm install
