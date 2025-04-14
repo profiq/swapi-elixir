@@ -8,16 +8,16 @@ defmodule SWAPIWeb.WookieeEncoderTest do
   describe "translate_to_wookie/1" do
     test "converts lowercase letters" do
       assert "aoacwo rqhuahoaor rhrcooohwh wwook shhuscakc oohoworc aoacwo anraufro waoorr" =
-               WookieeEncoder.translate_to_wookie("the quick brown fox jumps over the lazy dog")
+               WookieeEncoder.translate_to_wookiee("the quick brown fox jumps over the lazy dog")
     end
 
     test "leaves JSON special characters alone" do
       test_string = "\\{}\"\'[]:"
-      assert ^test_string = WookieeEncoder.translate_to_wookie(test_string)
+      assert ^test_string = WookieeEncoder.translate_to_wookiee(test_string)
     end
 
     test "leaves other non-lowercase characters alone" do
-      assert "Twocao. 12345" = WookieeEncoder.translate_to_wookie("Test. 12345")
+      assert "Twocao. 12345" = WookieeEncoder.translate_to_wookiee("Test. 12345")
     end
   end
 

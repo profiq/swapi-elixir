@@ -36,8 +36,8 @@ defmodule SWAPIWeb.WookieeEncoder do
     ?z => ~c"uf"
   }
 
-  @spec translate_to_wookie(String.t()) :: String.t()
-  def translate_to_wookie(text) do
+  @spec translate_to_wookiee(String.t()) :: String.t()
+  def translate_to_wookiee(text) do
     text
     |> String.to_charlist()
     |> Enum.reverse()
@@ -65,7 +65,7 @@ defmodule SWAPIWeb.WookieeEncoder do
     wookie_body =
       conn.resp_body
       |> flatten_body()
-      |> translate_to_wookie()
+      |> translate_to_wookiee()
 
     resp(conn, conn.status, wookie_body)
   end
