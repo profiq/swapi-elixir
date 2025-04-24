@@ -64,29 +64,11 @@ defmodule SWAPIWeb.WookieeEncoder do
   defp before_send_callback(%{status: 200} = conn) do
     wookie_body =
       conn.resp_body
-      |> flatten_body()
+      |> IO.iodata_to_binary()
       |> translate_to_wookiee()
 
     resp(conn, conn.status, wookie_body)
   end
 
   defp before_send_callback(conn), do: conn
-
-  defp flatten_list_improper(list) do
-    case list do
-      [] -> []
-      [h | t] when is_list(h) -> flatten_list_improper(h) ++ flatten_list_improper(t)
-      [h | t] -> [h | flatten_list_improper(t)]
-      scalar -> [scalar]
-    end
-  end
-
-  defp flatten_body(list) do
-    list
-    |> flatten_list_improper()
-    |> Enum.map_join("", fn
-      x when is_integer(x) -> <<x::utf8>>
-      x -> x
-    end)
-  end
 end
